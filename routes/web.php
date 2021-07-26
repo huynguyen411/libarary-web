@@ -17,5 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pizzas', 'CountryController@index');
-Route::post('/pizzas/test', 'CountryController@show');
+// Route::get('/pizzas', 'CountryController@index');
+// Route::post('/pizzas/test', 'CountryController@show');
