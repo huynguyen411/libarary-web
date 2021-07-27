@@ -16,7 +16,8 @@ class BookSeeder extends Seeder
             "author" => "Mario Puzo",
             "translator" => "huy",
             "price" => "123000",
-            "review" => "mafia Italy"
+            "review" => "mafia Italy",
+            "isbn" => "1123783"
         ],
         [
             "name" => "TMany Lives - Many Times",
@@ -24,7 +25,8 @@ class BookSeeder extends Seeder
             "author" => "John Vũ - Nguyên Phong",
             "translator" => "unknown",
             "price" => "104.800",
-            "review" => "Atlantis "
+            "review" => "Atlantis ",
+            "isbn" => "1678676"
         ],
         [
             "name" => "Chủ Nghĩa Khắc Kỷ - Phong Cách Sống Bản Lĩnh Và Bình Thản",
@@ -32,7 +34,8 @@ class BookSeeder extends Seeder
             "author" => " William B. Irvine",
             "translator" => "unknown",
             "price" => "96.250",
-            "review" => "Kién thức bách khoa"
+            "review" => "Kién thức bách khoa",
+            "isbn" => "18465146"
         ],
         [
             "name" => "Nhà Giả Kim",
@@ -40,7 +43,8 @@ class BookSeeder extends Seeder
             "author" => "Paulo Coelho",
             "translator" => "unknown",
             "price" => "54.000",
-            "review" => "phiêu lưu"
+            "review" => "phiêu lưu",
+            "isbn" => "179846513"
         ],
         [
             "name" => "Đàn Ông Sao Hỏa Đàn Bà Sao Kim",
@@ -48,7 +52,8 @@ class BookSeeder extends Seeder
             "author" => "John Gray",
             "translator" => "unknown",
             "price" => "120.200",
-            "review" => "Tư duy - kỹ năng"
+            "review" => "Tư duy - kỹ năng",
+            "isbn" => "198746532"
         ],
         [
             "name" => "Ba Người Thầy Vĩ Đại",
@@ -56,7 +61,8 @@ class BookSeeder extends Seeder
             "author" => "Robin Sharma",
             "translator" => "unknown",
             "price" => "61.900",
-            "review" => "Tư duy - kỹ năng"
+            "review" => "Tư duy - kỹ năng",
+            "isbn" => "1564511"
         ],
         [
             "name" => "Những Giấc Mơ Ở Hiệu Sách Morisaki",
@@ -64,7 +70,8 @@ class BookSeeder extends Seeder
             "author" => "Yagisawa Satoshi",
             "translator" => "unknown",
             "price" => "42.500",
-            "review" => "Văn học"
+            "review" => "Văn học",
+            "isbn" => "197846513"
         ],
         [
             "name" => "Những Tù Nhân Của Địa Lý",
@@ -72,7 +79,8 @@ class BookSeeder extends Seeder
             "author" => "Tim Marshall",
             "translator" => "unknown",
             "price" => "154.900",
-            "review" => "tình hình thế giới"
+            "review" => "tình hình thế giới",
+            "isbn" => "16654651"
         ],
         [
             "name" => "Yêu - Being In Love",
@@ -80,7 +88,8 @@ class BookSeeder extends Seeder
             "author" => "Osho",
             "translator" => "unknown",
             "price" => "104.900",
-            "review" => "yêu"
+            "review" => "yêu",
+            "isbn" => "112654"
         ],
 
     ];
@@ -91,7 +100,7 @@ class BookSeeder extends Seeder
      */
 
     public function run()
-    {   
+    {
         //
         foreach ($this->arrInfoBook as  $value) {
             DB::table('books')->insert([
@@ -100,7 +109,8 @@ class BookSeeder extends Seeder
                 "author" => $value["author"],
                 "translator" => $value["translator"],
                 "price" => $value["price"],
-                "review" => $value["review"]
+                "review" => $value["review"],
+                "isbn" => $value["isbn"],
             ]);
         }
     }

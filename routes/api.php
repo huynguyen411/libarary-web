@@ -1,5 +1,5 @@
 <?php
-
+use App\Models;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +24,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::resource('user', UsersController::class);
     Route::resource('type', TypeController::class);
+    Route::resource('book', BookController::class);
+});
+
+Route::get('test', function (Request $request) {
+    // return $request->get;
+    // return dd($request);
+    return $request->all();
+});
+Route::get('test2', function () {
+    
 });

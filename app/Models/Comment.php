@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'borrower_id', 'user_id');
+    }
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'book_id', 'book_id');
+    }
 }
