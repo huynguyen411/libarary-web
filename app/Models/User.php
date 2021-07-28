@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
+
+    protected $table = "users";
+    protected $primaryKey = 'user_id';
+
     public function borrowing_books()
     {
         return $this->hasMany(BorrowingBook::class, 'borrower_id', 'user_id');

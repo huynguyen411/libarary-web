@@ -85,9 +85,27 @@ class BookSeeder extends Seeder
         [
             "name" => "Yêu - Being In Love",
             "type_id" => "9",
-            "author" => "Osho",
+            "author" => "Osh1o",
             "translator" => "unknown",
             "price" => "104.900",
+            "review" => "yêu",
+            "isbn" => "112654"
+        ],
+        [
+            "name" => "Yêu - Being In Love1",
+            "type_id" => "7",
+            "author" => "Osho",
+            "translator" => "unknown",
+            "price" => "105.900",
+            "review" => "yêu",
+            "isbn" => "112654"
+        ],
+        [
+            "name" => "Yêu - Being In Love2",
+            "type_id" => "8",
+            "author" => "Osho",
+            "translator" => "unknown",
+            "price" => "104.000",
             "review" => "yêu",
             "isbn" => "112654"
         ],

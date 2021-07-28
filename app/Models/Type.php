@@ -9,6 +9,9 @@ class Type extends Model
 {
     use HasFactory;
 
+    protected $table = "types";
+    protected $primaryKey = 'type_id';
+
     public function books()
     {
         return $this->hasMany(Book::class, 'type_id', 'type_id');

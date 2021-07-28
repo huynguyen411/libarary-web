@@ -1,5 +1,7 @@
 <?php
 use App\Models;
+use App\Models\Book;
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,18 @@ Route::get('test', function (Request $request) {
     // return dd($request);
     return $request->all();
 });
-Route::get('test2', function () {
+
+
+Route::prefix('test2')->group(function () {
+    Route::get('model1', function () {
+        $book = Book::find(1)->book_content;
     
+        // print_r($book);
+        return $book;
+    });
+    Route::get('model2', function () {
+        // $type = Type::find(8);
+        $books = Type::find(8)->books;
+        return $books;
+    });
 });

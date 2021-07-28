@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BookContent extends Model
 {
     use HasFactory;
+    protected $table = "book_contents";
 
     public function books()
     {
-        return $this->belongsTo('App\Book', 'book_id', 'book_id');
+        return $this->belongsTo(Book::class, 'book_id', 'book_id');
     }
 }
