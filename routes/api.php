@@ -1,10 +1,17 @@
 <?php
+
 use App\Models;
 use App\Models\Book;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BorrowingBookController;
+
+// use App\Http\Controllers\BookController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +31,51 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
-    Route::resource('user', UsersController::class);
-    Route::resource('type', TypeController::class);
-    Route::resource('book', BookController::class);
+    Route::group([
+        'middleware' => 'api',
+        'prefix' => 'auth'
+
+    ], function ($router) {
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('login', function () {
+            return response()->json(
+                ['error' => 'Unauthorized'],
+                401
+            );
+        });
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/refresh-token', [AuthController::class, 'refresh']);
+        Route::get('/user-profile', [AuthController::class, 'userProfile']);
+        Route::post('/change-password', [AuthController::class, 'changePassword']);
+    });
+
+    //route book
+    
+    Route::prefix('book')->group(function () {
+        Route::apiResource('/', BookController::class);
+        Route::get('/top-borrowing', [App\Http\Controllers\BookController::class, 'topBorrowing']);
+
+    });
+
+
+
+    //route borrowing-book
+    Route::prefix('borrowing-book')->group(function () {
+        Route::get('/', [BorrowingBookController::class, 'index']); // cua admin
+        Route::post('/', [BorrowingBookController::class, 'store']);
+        Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);
+        Route::get('return-book/{id}', [BorrowingBookController::class, 'returnBook']);
+
+
+    });
 });
 
-Route::get('test', function (Request $request) {
-    // return $request->get;
-    // return dd($request);
-    return $request->all();
-});
+// Route::get('test', function (Request $request) {
+//     // return $request->get;
+//     // return dd($request);
+//     return $request->all();
+// });
 
 
 Route::prefix('test2')->group(function () {
@@ -48,4 +90,10 @@ Route::prefix('test2')->group(function () {
         $books = Type::find(8)->books;
         return $books;
     });
+    Route::get('model3', function () {
+        // $type = Type::find(8);
+        $type = Type::find(9);
+        return response()->json([$type,  "hi" => 1]);
+    });
+
 });

@@ -17,7 +17,7 @@ class BorrowingBook extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'borrower_id', 'book_id');
+        return $this->belongsTo(User::class, 'borrower_id', 'id');
     }
 
 

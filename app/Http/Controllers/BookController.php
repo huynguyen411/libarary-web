@@ -11,19 +11,12 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'status' =>'ok'
+        ]);
     }
 
     /**
@@ -34,7 +27,9 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json([
+            'status' =>'ok'
+        ]);
     }
 
     /**
@@ -45,18 +40,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            'status' =>'ok'
+        ]);
     }
 
     /**
@@ -68,7 +54,9 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json([
+            'status' =>'ok'
+        ]);
     }
 
     /**
@@ -79,6 +67,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json([
+            'status' =>'ok'
+        ]);
     }
 }

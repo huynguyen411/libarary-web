@@ -13,7 +13,7 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'borrower_id', 'user_id');
+        return $this->belongsTo(User::class, 'borrower_id', 'id');
     }
     public function book()
     {
