@@ -37,15 +37,15 @@ Route::get('test', function (Request $request) {
 
 
 Route::prefix('test2')->group(function () {
-    Route::get('model1', function () {
-        $book = Book::find(1)->book_content;
+    Route::get('model1', 'BookController@index' 
+        // $book = Book::filter($request->all())->get();;
     
-        // print_r($book);
-        return $book;
-    });
+        // // print_r($book);
+        // return $book;
+    );
     Route::get('model2', function () {
         // $type = Type::find(8);
         $books = Type::find(8)->books;
         return $books;
-    });
+    }); 
 });
