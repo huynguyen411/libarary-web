@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -17,70 +18,67 @@ class BookController extends Controller
         return Book::filter($request->all())->join('types', 'types.type_id', '=', 'books.type_id')
         ->select()->get();
     }
+    public function list(Request $request){
+        // if($request->name_type == null) {
+        //     $request->name_type = defaults;
+        // }
+        // return $request->name_type;
+        $requestData = $request->all();
+        if($request->name_type == null) {
+            $requestData['name_type'] = 'default';
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $total_price=Book::filter($requestData)->sum('price');
+        $list=Book::filter($requestData)->get();
+        return response()->json(['list' => $list, 'total' => $total_price]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function get_latest_book(){
+        return Book::orderBy('publishing_year', 'DESC')->skip(0)->take(10)->get();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function create(Request $request) {
+        $request->validate([
+            'name_book' => 'required',
+            'type_id' => 'required',
+            'price' => 'required',
+        ]);
+
+        Book::create($request->all());
+
+        return 'store complete';
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function update(Request $request) {
+        $requestData = $request->all();
+        if($request->author == null) {
+            $requestData['author'] = 'unknown';
+        } 
+        if($request->translator == null) {
+            $requestData['translator'] = 'unknown';
+        }
+        if($request->review == null) {
+            $requestData['review'] = 'no review';
+        }
+        if($request->image_link == null) {
+            $requestData['image_link'] = 'no image';
+        }
+
+        DB::table('books')->where('book_id', '=', $request->book_id)->update([
+            'name_book' => $requestData['name_book'],
+            'type_id' => $requestData['type_id'],
+            'author' => $requestData['author'],
+            'translator' => $requestData['translator'],
+            'price' => $requestData['price'],
+            'review' => $requestData['review'],
+        ]);
+
+        return 'update complete';
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function delete(Request $request) {
+        DB::table('books')->where('book_id', '=', $request->book_id)->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return 'delete complete';
     }
 }

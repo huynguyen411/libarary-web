@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    use Filterable;
     use HasFactory;
     use Filterable;
     protected $table = "books";
@@ -38,4 +39,8 @@ class Book extends Model
         return $this->belongsToMany(User::class, 'comments');
     }
 
+    public $timestamps = false;
+    protected $fillable = [
+        'book_id', 'name_book', 'type_id', 'author', 'translator', 'price', 'review', 'isbn', 'publishing_year'
+    ];
 }

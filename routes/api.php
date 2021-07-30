@@ -5,7 +5,9 @@ use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TypeController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowingBookController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,5 +49,31 @@ Route::prefix('test2')->group(function () {
         // $type = Type::find(8);
         $books = Type::find(8)->books;
         return $books;
-    }); 
+    });
 });
+
+Route::get('/type/index', [TypeController::class, 'index']);
+
+Route::get('/book/list', [BookController::class, 'list']);
+
+Route::get('book/get-latest-book', [BookController::class, 'get_latest_book']);
+
+Route::post('book/create', [BookController::class, 'create']);
+
+Route::post('/book/update', [BookController::class, 'update']);
+
+Route::post('/book/delete', [BookController::class, 'delete']);
+
+Route::get('/borrowing-book/get-favourites', [BorrowingBookController::class, 'get_favourites']);
+
+Route::get('/borrowing-book/list', [BorrowingBookController::class, 'list']);
+
+Route::get('/borrowing-book/create', [BorrowingBookController::class, 'create']);
+
+Route::get('/borrowing-book/returned-book', [BorrowingBookController::class, 'returned_book']);
+
+Route::get('/borrowing-book/get', [BorrowingBookController::class, 'get']);
+
+Route::get('/borrowing-book/list-returned-books', [BorrowingBookController::class, 'list_returned_books']);
+
+Route::get('/borrowing-book/list-borrowing-books', [BorrowingBookController::class, 'list_borrowing_books']);
