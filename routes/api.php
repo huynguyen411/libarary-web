@@ -80,7 +80,7 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('test2')->group(function () {
     Route::get('model1', function () {
-        $book = Book::find(1)->book_content;
+        $book = Book::select('name_book')->get();
     
         // print_r($book);
         return $book;
