@@ -2,74 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\BorrowingBook;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class BorrowingBookController extends Controller
 {
-    public function list(){
-        return BorrowingBook::all();
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['only' => ['store', 'checkBorrowing', 'returnBook', 'index']]);
     }
 
-    public function create(Request $request) {
-        $request->validate([
-            'book_id' => 'required', 
-            'user_id' => 'required', 
-            'from_date' => 'required', 
-            'promissory_date' => 'required',
+    public function index()
+    {
+        $payload = auth()->payload();
+        $user_id = $payload->get('sub');
+
+        $list = BorrowingBook::where('borrower_id', $user_id)->get();
+        return response()->json([
+            'status' => 'ok',
+            'user_id' => $user_id,
+            'data' => $list
         ]);
-
-        $array_book_id = $request->book_id;
-        for ($i = 0; $i <count($array_book_id); $i++) {
-            $borrowing_book = new BorrowingBook([
-                'book_id'  => $array_book_id[$i],
-                'user_id'  => $request->user_id,
-                'from_date'  => $request->from_date,
-                'promissory_date' => $request->promissory_date,
-            ]);
-            $borrowing_book->save();
-        }
-
-        return 'create complete';
     }
 
-    public function returned_book(Request $request){
-        DB::table('borrowing_books')->where('book_id', '=', $request->book_id)
-                          ->where('user_id','=', $request->user_id)
-                          ->whereNull('to_date')
-        ->update([
-            'to_date' => date('Y-m-d'),
+    public function store(Request $request)
+    {
+        $payload = auth()->payload();
+        $user_id = $payload->get('sub');
+
+        $create_bb = BorrowingBook::create(array_merge(
+            $request->except('status_id', 'borrower_id'),
+            ['status_id' => 1, 'borrower_id' => $user_id]
+        ));
+        return response()->json([
+            'status' => 'ok',
+            'data' => $create_bb
         ]);
-
-        return 'update complete';
     }
 
-    public function get(Request $request){
-        $data = DB::table('borrowing_books')->where('book_id', '=', $request->book_id)
-                                            ->where('user_id','=', $request->user_id)
-                                            ->orderBy('from_date', 'DESC')->take(1)->get();
-        if ($data[0]->to_date === null) {
-            return $data;
-        } else {
-            return null;
-        }
-
+    public function update(Request $request, $id)
+    {
+        return response()->json([
+            'status' => 'ok',
+        ]);
     }
 
-    public function get_favourites(){
-        // return BorrowingBook::selectRaw('book_id, count(*) as count')->groupBy('book_id')->orderBy('count', 'DESC')->take(10)->get();
-        return DB::table('borrowing_books')->selectRaw('count(*) as count, books.*')
-                                    ->join('books','books.book_id','=','borrowing_books.book_id')
-                                    ->groupBy('borrowing_books.book_id')->orderBy('count', 'DESC')->take(10)
-                                    ->get();
+    public function checkBorrowing($id)
+    {
+        $payload = auth()->payload();
+        $user_id = $payload->get('sub');
+
+        $checkBorrowing = BorrowingBook::where([
+            ['borrower_id', '=', $user_id],
+            ['status_id', '=', 1],
+            ['book_id', '=', $id],
+        ])->count();
+
+        return response()->json([
+            'status' => 'ok',
+            'borrowing_quality' => $checkBorrowing,
+            'user_id' => $user_id
+        ]);
     }
 
-    public function list_returned_books(){
-        return BorrowingBook::whereNotNull('to_date')->get();
-    }
+    public function returnBook($id)
+    {
+        $payload = auth()->payload();
+        $user_id = $payload->get('sub');
 
-    public function list_borrowing_books(){
-        return BorrowingBook::whereNull('to_date')->get();
+        $check = BorrowingBook::where([
+            ['borrower_id','=', $user_id],
+            ['borrowing_book_id', '=', $id]
+            ]
+            )->update(['status_id' => 2]);
+        return response()->json([
+            'status' => 'ok',
+            'check' => $check
+        ]);
     }
 }

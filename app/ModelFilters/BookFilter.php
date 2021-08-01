@@ -46,6 +46,11 @@ class BookFilter extends ModelFilter
         return $this->where('translator', $translator);
     }
 
+    public function isbn($isbn){
+        return $this->where('isbn', $isbn);
+    }
+
+
     public function price($price){
         return $this->where('price', $price);
         // if (is_array($price)){
@@ -56,9 +61,5 @@ class BookFilter extends ModelFilter
 
     public function publishing_year($publishing_year){
         return $this->where('publishing_year', $publishing_year);
-    }
-
-    public function isbn($isbn){
-        return $this->where('isbn', $isbn);
     }
 }

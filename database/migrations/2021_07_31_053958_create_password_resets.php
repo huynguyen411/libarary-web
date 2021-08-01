@@ -4,18 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditBorrowingBooks extends Migration
+class CreatePasswordResets extends Migration
+
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+
     public function up()
     {
-        Schema::table('borrowing_books', function (Blueprint $table) {
-            //
-            $table->dateTime('promissory_date');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email',101)->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -26,8 +29,6 @@ class EditBorrowingBooks extends Migration
      */
     public function down()
     {
-        Schema::table('borrowing_books', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('password_resets');
     }
 }

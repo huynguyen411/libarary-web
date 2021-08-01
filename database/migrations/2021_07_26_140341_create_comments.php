@@ -14,11 +14,11 @@ class CreateComments extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->increments('comment_id');
-            $table->integer('book_id');
-            $table->integer('borrower_id');
+            $table->bigIncrements('comment_id');
+            $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('borrower_id');
             $table->string('content', 500);
-            $table->dateTime('created_at')->nullable();
+            $table->dateTime('created_at');
 
             // $table->timestamps();
         });

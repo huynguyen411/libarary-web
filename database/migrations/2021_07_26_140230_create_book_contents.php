@@ -14,8 +14,8 @@ class CreateBookContents extends Migration
     public function up()
     {
         Schema::create('book_contents', function (Blueprint $table) {
-            $table->integer('book_id');
-            $table->integer('quantity');
+            $table->unsignedBigInteger('book_id');
+            $table->unsignedInteger('quantity');
         });
     }
 

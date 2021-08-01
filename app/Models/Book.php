@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use EloquentFilter\Filterable;
 
 class Book extends Model
 {
-    use Filterable;
-    use HasFactory;
-    use Filterable;
+    use HasFactory, Filterable;
+
     protected $table = "books";
     protected $primaryKey = 'book_id';
+    protected $fillable = ['name_book', 'type_id', 'author', 'translator', 'publisher', 'publication_date', 'language', 'price', 'isbn', 'review', 'book_image'];
 
     public function comments()
     {
@@ -39,8 +39,10 @@ class Book extends Model
         return $this->belongsToMany(User::class, 'comments');
     }
 
-    public $timestamps = false;
-    protected $fillable = [
-        'book_id', 'name_book', 'type_id', 'author', 'translator', 'price', 'review', 'isbn', 'publishing_year'
-    ];
+    public function language_book()
+    {
+        return $this->hasMany(LanguageBook::class, 'book_id','book_id');
+    }
+
+
 }

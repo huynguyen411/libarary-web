@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditBorrowingBooks extends Migration
+class CreateBorrowingStatus extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class EditBorrowingBooks extends Migration
      */
     public function up()
     {
-        Schema::table('borrowing_books', function (Blueprint $table) {
-            //
-            $table->dateTime('promissory_date');
+        Schema::create('borrowing_status', function (Blueprint $table) {
+            $table->tinyIncrements('borrowing_status_id');
+            $table->string('status_name',50);
         });
     }
 
@@ -26,8 +26,6 @@ class EditBorrowingBooks extends Migration
      */
     public function down()
     {
-        Schema::table('borrowing_books', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('borrowing_status');
     }
 }

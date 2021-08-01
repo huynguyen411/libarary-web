@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditBooks extends Migration
+class CreateLanguageBook extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class EditBooks extends Migration
      */
     public function up()
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->string('isbn', 20);
+        Schema::create('language_book', function (Blueprint $table) {
+            $table->unsignedBigInteger('book_id');
+            $table->unsignedSmallInteger('language_id');
         });
     }
 
@@ -25,8 +26,6 @@ class EditBooks extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('language_book');
     }
 }
