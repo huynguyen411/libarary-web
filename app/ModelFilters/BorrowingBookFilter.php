@@ -13,4 +13,5 @@ class BorrowingBookFilter extends ModelFilter
     * @var array
     */
     public $relations = [];
+    protected $drop_id = false;
 }

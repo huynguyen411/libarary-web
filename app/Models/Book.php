@@ -9,6 +9,7 @@ use EloquentFilter\Filterable;
 class Book extends Model
 {
     use HasFactory, Filterable;
+
     protected $table = "books";
     protected $primaryKey = 'book_id';
     protected $fillable = ['name_book', 'type_id', 'author', 'translator', 'publisher', 'publication_date', 'language', 'price', 'isbn', 'review', 'book_image'];
@@ -42,5 +43,6 @@ class Book extends Model
     {
         return $this->hasMany(LanguageBook::class, 'book_id','book_id');
     }
+
 
 }

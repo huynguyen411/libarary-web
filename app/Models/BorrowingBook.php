@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BorrowingBook extends Model
 {
+    use Filterable;
     use HasFactory;
     protected $table = 'borrowing_books';
     protected $primaryKey = 'borrowing_book_id';
@@ -25,4 +27,5 @@ class BorrowingBook extends Model
     }
 
    
+
 }

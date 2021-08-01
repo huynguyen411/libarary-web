@@ -72,14 +72,14 @@ class BorrowingBookController extends Controller
         $payload = auth()->payload();
         $user_id = $payload->get('sub');
 
-        BorrowingBook::where(
-            ['borrower_id', $user_id],
-            ['borrowing_book_id', '=', $id],
+        $check = BorrowingBook::where([
+            ['borrower_id','=', $user_id],
+            ['borrowing_book_id', '=', $id]
+            ]
             )->update(['status_id' => 2]);
         return response()->json([
             'status' => 'ok',
-
-
+            'check' => $check
         ]);
     }
 }
