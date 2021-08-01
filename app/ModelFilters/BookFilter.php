@@ -62,8 +62,4 @@ class BookFilter extends ModelFilter
     public function publishing_year($publishing_year){
         return $this->where('publishing_year', $publishing_year);
     }
-
-    public function isbn($isbn){
-        return $this->where('isbn', $isbn);
-    }
 }
