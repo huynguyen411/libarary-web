@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComments extends Migration
+class CreateLanguageBook extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateComments extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('comment_id');
+        Schema::create('language_book', function (Blueprint $table) {
             $table->unsignedBigInteger('book_id');
-            $table->unsignedBigInteger('borrower_id');
-            $table->string('content', 500);
-            $table->dateTime('created_at');
-
-            // $table->timestamps();
+            $table->unsignedSmallInteger('language_id');
         });
     }
 
@@ -31,6 +26,6 @@ class CreateComments extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('language_book');
     }
 }

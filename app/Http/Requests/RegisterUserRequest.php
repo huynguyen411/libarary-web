@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
-class BookRequest extends FormRequest
+class RegisterUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,27 +27,26 @@ class BookRequest extends FormRequest
      */
     public function rules()
     {
-        
+
         return [
-            'type_id' => 'required|min:1|max:999',
-            'name_book' => 'required',
-            'author' => 'required',
-            'publication_date' => 'nullable|date',
-            'price' => 'gt:0',
-                      
+            // 'role_id' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'email' => 'required|unique:users',
+            'dob' => 'required|date',
+            'phone' => 'required',
+            'password' => 'required|min:8|max:20|confirmed'
+
         ];
     }
 
     public function messages()
     {
         return [
-            'type_id.required' => __('Chưa nhập thể loại.'),
-            'type_id.min' => __('Thể loại sách không tồn tại.'),
-            'type_id.max' => __('Thể loại sách không tồn tại.'),
-            'name_book.required' => __('Chưa nhập tên sách.'),
-            'author.required' => __('Chưa nhập tên tác giả.'),
-            'publication_date.date' => __('Kiểu dữ liệu phải là datetime.'),
-            'price.gt' => __('Giá sách phải lớn hơn 0.')
+            // 'role_id.required' => __('Chưa nhập thể loại.'),
+            'name.required' => __('Chưa nhập tên người dùng.'),
+            'address.required' => __('Chưa nhập địa chỉ.'),
+            'email.required' => __('Chưa nhập email.'),
         ];
     }
 

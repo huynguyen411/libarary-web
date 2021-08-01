@@ -51,12 +51,12 @@ Route::prefix('v1')->group(function () {
     });
 
     //route book
-    
     Route::prefix('book')->group(function () {
-        Route::apiResource('/', BookController::class);
+    Route::post('/{book}', [App\Http\Controllers\BookController::class, 'update']);
         Route::get('/top-borrowing', [App\Http\Controllers\BookController::class, 'topBorrowing']);
-
+        Route::get('/get-latest-books', [App\Http\Controllers\BookController::class, 'getLatestBooks']);
     });
+    Route::apiResource('book', BookController::class);
 
 
 
@@ -64,6 +64,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('borrowing-book')->group(function () {
         Route::get('/', [BorrowingBookController::class, 'index']); // cua admin
         Route::post('/', [BorrowingBookController::class, 'store']);
+        Route::post('/{id}', [BorrowingBookController::class, 'update']);
         Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);
         Route::get('return-book/{id}', [BorrowingBookController::class, 'returnBook']);
 

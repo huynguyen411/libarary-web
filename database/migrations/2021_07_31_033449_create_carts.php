@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBorrowingBooks extends Migration
+class CreateCarts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreateBorrowingBooks extends Migration
      */
     public function up()
     {
-        Schema::create('borrowing_books', function (Blueprint $table) {
-            $table->bigIncrements('borrowing_book_id');
+        Schema::create('carts', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             $table->unsignedSmallInteger('quality');
-            $table->unsignedBigInteger('borrower_id');
-            $table->dateTime('form_date');
-            $table->dateTime('to_date')->nullable();
-            $table->unsignedTinyInteger('status_id');
-
-            // $table->timestamps();
         });
     }
 
@@ -33,6 +27,6 @@ class CreateBorrowingBooks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('borrowing_books');
+        Schema::dropIfExists('carts');
     }
 }

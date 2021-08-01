@@ -14,18 +14,18 @@ class CreateBooks extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->increments('book_id');
+            $table->bigIncrements('book_id');
             $table->string('name_book', 100);
-            $table->integer('type_id');
+            $table->unsignedMediumInteger('type_id');
             $table->string('author', 100);
             $table->string('translator', 100)->nullable();
             $table->string('publisher',100)->nullable();
-            $table->dateTime('publication_date')->nullable();
-            $table->string('publication_country', 100)->nullable();
-            $table->string('language', 100)->nullable();
-            $table->decimal('price', $precision = 18, $scale = 4);
-            $table->string('isbn', 20);
-            $table->string('review', 1000);
+            $table->date('publication_date')->nullable();
+            // $table->integer('publication_country_id')->nullable();
+            // $table->unsignedSmallInteger('language_id')->nullable();
+            $table->decimal('price', $precision = 18, $scale = 4)->nullable();
+            $table->string('isbn', 20)->nullable();
+            $table->string('review', 1000)->nullable();
             $table->string('book_image', 100)->nullable();
             $table->timestamps();
 

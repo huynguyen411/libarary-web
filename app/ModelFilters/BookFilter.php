@@ -18,8 +18,8 @@ class BookFilter extends ModelFilter
         return $this->where('book_id', $bookId);
     }
     
-    public function name($name){
-        return $this->where('name', 'LIKE', "%$name%");
+    public function nameBook($name_book){
+        return $this->where('name_book', 'LIKE', "%$name_book%");
     }
 
     public function typeId($typeId){
@@ -33,6 +33,11 @@ class BookFilter extends ModelFilter
     public function translator($translator){
         return $this->where('translator', $translator);
     }
+
+    public function isbn($isbn){
+        return $this->where('isbn', $isbn);
+    }
+
 
     public function price($price){
         if (is_array($price)){

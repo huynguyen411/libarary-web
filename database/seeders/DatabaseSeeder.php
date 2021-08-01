@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
             BookSeeder::class,
             TypeSeeder::class,
             BookContentSeeder::class,
+            LanguagesSeeder::class,
+            RoleSeeder::class,
+            LanguageBookSeeder::class,
+            BorrowingStatusSeeder::class
+
         ]);
     }
 }
