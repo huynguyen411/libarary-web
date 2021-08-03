@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\BorrowingBook;
+use App\Models\Type;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Book as BookResource;
 class BookController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth:api', ['only' => ['store', 'update', 'destroy']]);
@@ -21,11 +22,13 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        $list = Book::filter($request->all())->get();
-        return response()->json([
-            'status' => 'ok',
-            'data' => $list,
-        ]);
+        $books = Book::filter($request->all())->get();
+        $types = Type::all();
+        foreach($books as $book){
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
+        return $books;
     }
 
     /**
@@ -37,16 +40,16 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
 
-        $db = Book::create($request->all());
+        $books = Book::create($request->all());
         // $book = Book::firstOrCreate($request->all());
         // $db = $book->push;
         // Book::filter($request->input('isbn'))->get();
-        return response()->json([
-            'status' => 'ok',
-            // 'data' => $db
-            'request' => $request->all(),
-            'data' => $db
-        ]);
+        $types = Type::all();
+        foreach($books as $book){
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
+        return $books;
     }
 
     /**
@@ -57,12 +60,12 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $list = Book::where('book_id', $id)->get();
-        return response()->json([
-
-            'status' => 'ok',
-            'data' => $list
-        ]);
+        $book = Book::where('book_id', $id)->first();
+        $types = Type::all();
+        $type = $this->getTypeOfBook($book, $types);
+        $book->type = $type;
+        
+        return $book;
     }
 
     /**
@@ -72,22 +75,18 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest $request)
     {
         $url_file = $request->file('book_image')->getRealPath();
         $duoi =  $request->file('book_image')->getClientOriginalExtension();
         $name_file = $request->file('book_image')->getClientOriginalName();
 
-        $book = Book::where('book_id', $id)
+        $book = Book::where('book_id', $request->book_id)
             ->update(
                 $request->except('book_image')
                 // ['name_book' => 'sách bị đổi tên']
             );
-        return response()->json([
-            'status' => 'ok',
-            'message' => 'Cập nhật sách thành công',
-            'data' => $book,
-        ]);
+        return $book;
     }
 
     /**
@@ -99,33 +98,55 @@ class BookController extends Controller
     public function destroy($id)
     {
         $book = Book::find($id)->delete();
-
-        return response()->json([
-            'status' => 'ok',
-            'message' => 'Đã xoá sách thành công',
-            'data' => $book
-        ]);
+        $types = Type::all();
+        $type = $this->getTypeOfBook($book, $types);
+        $book->type = $type;
+        return $book;
     }
 
 
     // lấy sách phát hành theo ngày mới nhất
     public function getLatestBooks(Request $request)
     {
-        $list = Book::filter($request->all())->get();
-        return response()->json([
-            'status' => 'ok',
-            'data' => $list
-        ]);
+        $books = Book::filter($request->all())->get();
+        $books = $books->sortBy('created_at');
+        $types = Type::all();
+        foreach($books as $book){
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
+        return $books;
     }
 
 
     // lấy list book đc mượn nhiều nhất
     public function topBorrowing(Request $request)
     {
-        $list = Book::filter($request->all())->get();
-        return response()->json([
-            'status' => '200',
-            'data' => $list
-        ]);
+        $books = BorrowingBook::select(BorrowingBook::raw('COUNT(borrowing_books.book_id) as count, borrowing_books.book_id'))
+                ->groupBy('borrowing_books.book_id')
+                ->orderBy('count')
+                ->get();
+        return $books;
+    }
+
+    public function getTypeOfBook($book, $types)
+    {
+        $type3 = $types->find($book->type_id);
+        $type2 = $types->where('code', intdiv ($type3->code, 10) * 10)->first();
+        $type1 = $types->where(intdiv($type3->code, 100) * 100)->first();
+        $type = (object) [];
+        if ($type3->code % 100 == 0){
+            $type->level_1 = $type3;
+        }
+        elseif ($type3->code % 10 == 0){
+            $type->level_1 = $type2;
+            $type->level_2 = $type3;
+        }
+        else {
+            $type->level_1 = $type1;
+            $type->level_2 = $type2;
+            $type->level_3 = $type3;
+        }
+        return $type;
     }
 }
