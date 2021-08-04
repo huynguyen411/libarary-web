@@ -18,7 +18,7 @@ class CreateBorrowingBooks extends Migration
             $table->unsignedBigInteger('book_id');
             $table->unsignedSmallInteger('quality');
             $table->unsignedBigInteger('borrower_id');
-            $table->dateTime('form_date');
+            $table->dateTime('from_date');
             $table->dateTime('to_date')->nullable();
             $table->unsignedTinyInteger('status_id');
 

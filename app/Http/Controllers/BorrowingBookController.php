@@ -11,7 +11,7 @@ class BorrowingBookController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['store', 'checkBorrowing', 'returnBook', 'index']]);
+        $this->middleware('auth:api', ['only' => ['store', 'checkBorrowing', 'returnBook', 'index', 'adminVerify']]);
     }
 
     public function index()
@@ -44,8 +44,10 @@ class BorrowingBookController extends Controller
 
     public function update(Request $request, $id)
     {
+        // $update_bb = BorrowingBook::where('borrowing_book_id',$id)
+        //     ->update($request->all());
         return response()->json([
-            'status' => 'ok',
+            'status' => 'ok'
         ]);
     }
 
@@ -75,11 +77,27 @@ class BorrowingBookController extends Controller
         $check = BorrowingBook::where([
             ['borrower_id','=', $user_id],
             ['borrowing_book_id', '=', $id]
-            ]
-            )->update(['status_id' => 2]);
+            ])
+            ->update(['status_id' => 2]);
         return response()->json([
             'status' => 'ok',
             'check' => $check
+        ]);
+    }
+
+
+    public function adminVerify($id)
+    {
+        $payload = auth()->payload();
+        $user_id = $payload->get('sub');
+
+        $verify = BorrowingBook::where([
+            ['borrowing_book_id', '=', $id]
+            ])
+            ->update(['status_id' => 3, 'to_date' => date('Y-m-d')]);
+        return response()->json([
+            'status' => 'ok',
+            'check' => $verify
         ]);
     }
 }

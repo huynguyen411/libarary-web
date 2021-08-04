@@ -77,6 +77,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/{id}', [CommentController::class, 'show']);
         Route::post('/{id}', [CommentController::class, 'update']);
         Route::delete('delete/{id}', [CommentController::class, 'destroy']);
+        Route::get('admin-verify/{id}', [BorrowingBookController::class, 'adminVerify']); //cua admin
     });
     
 });
