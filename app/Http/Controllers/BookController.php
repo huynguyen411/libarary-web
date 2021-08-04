@@ -30,7 +30,7 @@ class BookController extends Controller
         }
         return $books;
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      *

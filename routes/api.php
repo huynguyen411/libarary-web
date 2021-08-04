@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BorrowingBookController;
+use App\Http\Controllers\CommentController;
 
 // use App\Http\Controllers\BookController;
 
@@ -68,15 +69,17 @@ Route::prefix('v1')->group(function () {
         Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);
         Route::get('return-book/{id}', [BorrowingBookController::class, 'returnBook']);
 
-
     });
-});
 
-// Route::get('test', function (Request $request) {
-//     // return $request->get;
-//     // return dd($request);
-//     return $request->all();
-// });
+    Route::prefix('comment')->group(function () {
+        Route::get('/', [CommentController::class, 'index']); 
+        Route::post('/', [CommentController::class, 'store']);
+        Route::get('/{id}', [CommentController::class, 'show']);
+        Route::post('/{id}', [CommentController::class, 'update']);
+        Route::delete('delete/{id}', [CommentController::class, 'destroy']);
+    });
+    
+});
 
 
 Route::prefix('test2')->group(function () {
