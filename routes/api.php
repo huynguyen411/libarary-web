@@ -67,8 +67,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/{id}', [BorrowingBookController::class, 'update']);
         Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);
         Route::get('return-book/{id}', [BorrowingBookController::class, 'returnBook']);
-
-
+        Route::get('admin-verify/{id}', [BorrowingBookController::class, 'adminVerify']); //cua admin
     });
 });
 
