@@ -8,7 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BorrowingBookController;
-use App\Http\Controllers\CommentController;
+
+// use App\Http\Controllers\CommentController;
+
+use App\Http\Controllers\MannageUserController;
+use App\Http\Controllers\TypeController;
+
+// use App\Http\Controllers\CartController;
+
 
 // use App\Http\Controllers\BookController;
 
@@ -44,6 +51,7 @@ Route::prefix('v1')->group(function () {
                 401
             );
         });
+
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/refresh-token', [AuthController::class, 'refresh']);
@@ -53,7 +61,7 @@ Route::prefix('v1')->group(function () {
 
     //route book
     Route::prefix('book')->group(function () {
-    Route::post('/{book}', [App\Http\Controllers\BookController::class, 'update']);
+        Route::post('/{book}', [App\Http\Controllers\BookController::class, 'update']);
         Route::get('/top-borrowing', [App\Http\Controllers\BookController::class, 'topBorrowing']);
         Route::get('/get-latest-books', [App\Http\Controllers\BookController::class, 'getLatestBooks']);
     });
@@ -61,44 +69,24 @@ Route::prefix('v1')->group(function () {
 
 
 
-    //route borrowing-book
+    //borrowing-book
     Route::prefix('borrowing-book')->group(function () {
-        Route::get('/', [BorrowingBookController::class, 'index']); // cua admin
-        Route::post('/', [BorrowingBookController::class, 'store']);
-        Route::post('/{id}', [BorrowingBookController::class, 'update']);
-        Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);
-        Route::get('return-book/{id}', [BorrowingBookController::class, 'returnBook']);
-
+        Route::get('check-borrowing/{id}', [BorrowingBookController::class, 'checkBorrowing']);
     });
 
-    Route::prefix('comment')->group(function () {
-        Route::get('/', [CommentController::class, 'index']); 
-        Route::post('/', [CommentController::class, 'store']);
-        Route::get('/{id}', [CommentController::class, 'show']);
-        Route::post('/{id}', [CommentController::class, 'update']);
-        Route::delete('delete/{id}', [CommentController::class, 'destroy']);
-        Route::get('admin-verify/{id}', [BorrowingBookController::class, 'adminVerify']); //cua admin
-    });
-    
-});
 
 
-Route::prefix('test2')->group(function () {
-    Route::get('model1', function () {
-        $book = Book::select('name_book')->get();
-    
-        // print_r($book);
-        return $book;
-    });
-    Route::get('model2', function () {
-        // $type = Type::find(8);
-        $books = Type::find(8)->books;
-        return $books;
-    });
-    Route::get('model3', function () {
-        // $type = Type::find(8);
-        $type = Type::find(9);
-        return response()->json([$type,  "hi" => 1]);
+    //admin
+    Route::middleware(['auth', 'check-role'])->prefix('manage')->group(function () {
+        Route::get('get-user', [MannageUserController::class, 'getUser']);
+        Route::get('get-borrowing', [MannageUserController::class, 'getBorrowing']);
+        
+        Route::prefix('borrowing-book')->group(function () {
+            Route::get('/', [BorrowingBookController::class, 'index']);
+            Route::post('/', [BorrowingBookController::class, 'store']);
+            Route::get('return-book/{borrowing_book_id}', [BorrowingBookController::class, 'returnBook']);
+        });
     });
 
+    Route::get('type', [TypeController::class, 'index']);
 });

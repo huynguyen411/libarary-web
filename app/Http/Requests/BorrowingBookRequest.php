@@ -24,21 +24,18 @@ class BorrowingBookRequest extends FormRequest
      */
     public function rules()
     {
-        $users = User::select('user_id')->get();
-        $books = Book::select('book_id')->get();
         return [
-            'borrower_id' => 'required',
-            'book_id' => 'required',
+            'book_id' => 'required|integer|min:1',
             'from_date' => 'required|date',
-            'to_date' => 'nullable|date|after_or_equal:from_date',
             'promissory_date' => 'required|date|after_or_equal:from_date',
+            'borrower_id' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'borrower_id.required' => __('Chưa nhập người mượn.'),
+            
             'book_id.required' => __('Chưa nhập sách mượn.'),
             'from_date.required' => __('Chưa nhập ngày mượn.'),
             'from_date.date' => __('Kiểu dữ liệu phải là datetime.'),

@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\BorrowingBook;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\BorrowingBookRequest;
 
 class BorrowingBookController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['store', 'checkBorrowing', 'returnBook', 'index', 'adminVerify']]);
+        $this->middleware('auth:api', ['only' => ['store', 'checkBorrowing', 'returnBook', 'index']]);
     }
 
+    //user
     public function index()
     {
         $payload = auth()->payload();
@@ -27,77 +29,60 @@ class BorrowingBookController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    //admin
+    public function store(BorrowingBookRequest $request) 
     {
-        $payload = auth()->payload();
-        $user_id = $payload->get('sub');
-
         $create_bb = BorrowingBook::create(array_merge(
-            $request->except('status_id', 'borrower_id'),
-            ['status_id' => 1, 'borrower_id' => $user_id]
+            $request->only('book_id', 'from_date', 'promissory_date', 'borrower_id'),
+            ['status_id' => 1]
         ));
         return response()->json([
             'status' => 'ok',
-            'data' => $create_bb
+            'data' => $create_bb,
         ]);
     }
 
-    public function update(Request $request, $id)
+    // user,admin
+    public function checkBorrowing($book_id)
     {
-        // $update_bb = BorrowingBook::where('borrowing_book_id',$id)
-        //     ->update($request->all());
-        return response()->json([
-            'status' => 'ok'
-        ]);
-    }
-
-    public function checkBorrowing($id)
-    {
-        $payload = auth()->payload();
-        $user_id = $payload->get('sub');
-
         $checkBorrowing = BorrowingBook::where([
-            ['borrower_id', '=', $user_id],
             ['status_id', '=', 1],
-            ['book_id', '=', $id],
+            ['book_id', '=', $book_id],
         ])->count();
 
         return response()->json([
             'status' => 'ok',
-            'borrowing_quality' => $checkBorrowing,
-            'user_id' => $user_id
+            'borrowing' => $checkBorrowing,
         ]);
     }
 
-    public function returnBook($id)
+    public function returnBook($borrowing_book_id)
     {
-        $payload = auth()->payload();
-        $user_id = $payload->get('sub');
-
         $check = BorrowingBook::where([
-            ['borrower_id','=', $user_id],
-            ['borrowing_book_id', '=', $id]
-            ])
-            ->update(['status_id' => 2]);
+            ['borrowing_book_id', '=', $borrowing_book_id]
+        ])->update(['status_id' => 2, 'to_date' =>date('Y/m/d h:i:s', time())]);
+
+        if (!$check) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Trả sách thất bại'
+            ],400);
+        }
+
         return response()->json([
             'status' => 'ok',
-            'check' => $check
-        ]);
+            'messenger' => 'Trả sách thành công'
+        ],200);
     }
 
-
-    public function adminVerify($id)
+    // danh sách ng mượn
+    public function getBorrower(Request $request)
     {
-        $payload = auth()->payload();
-        $user_id = $payload->get('sub');
+        $list = BorrowingBook::filter($request->all());
 
-        $verify = BorrowingBook::where([
-            ['borrowing_book_id', '=', $id]
-            ])
-            ->update(['status_id' => 3, 'to_date' => date('Y-m-d')]);
         return response()->json([
-            'status' => 'ok',
-            'check' => $verify
+            'data' => $list,
         ]);
     }
+
 }

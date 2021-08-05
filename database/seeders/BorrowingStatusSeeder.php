@@ -14,9 +14,6 @@ class BorrowingStatusSeeder extends Seeder
             'status_name' => 'Đang mượn',
         ],
         [
-            'status_name' => 'Người dùng xác nhận trả sách',
-        ],
-        [
             'status_name' => 'Xác nhận đã trả sách',
         ],
        

@@ -17,6 +17,10 @@ class CreateTypes extends Migration
             $table->mediumIncrements('type_id');
             $table->string('code',5);
             $table->string('name', 200);
+            $table->unsignedMediumInteger('parent_id')->nullable();
+            $table->unsignedTinyInteger('level')->nullable();
+
+
         });
     }
 

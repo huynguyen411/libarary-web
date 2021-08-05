@@ -92,7 +92,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             // 'id' => $this->id,
-            'role_id' => $this->role_id
+            // 'code_role' => Role::find($this->role_id)->value('code'),
+            'role_id' =>$this->role_id
         ];
     }
 }

@@ -12,10 +12,22 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('depth') && $request->has('depth') == '1') {
+            return response()->json([
+                'types'=> Type::where('code', 'like', '_00')->get(),
+            ],200);
+        }
+        // if($request->has('depth') && $request->has('depth') == '2') {
+        //     return response()->json([
+        //         'types'=> Type::where('code', 'like', '__0')->get(),
+        //     ],200);
+        // }
         
-        return response()->json(Type::all());
+        return response()->json([
+            'types'=> Type::all(),
+        ],200);
     }
 
     /**

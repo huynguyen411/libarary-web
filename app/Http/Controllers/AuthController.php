@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 // use App\Http\Requests\TestLoginRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
-
+use Illuminate\Support\Facades\Hash;
 
 
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    
+
     public function login(LoginRequest $request)
     {
         if (!$token = auth()->attempt($request->validated())) {
@@ -110,6 +110,13 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
+        if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
+            return response()->json([
+                'status' => 'error',
+                'old_password' => 'mật khẩu hiện tại không đúng',
+            ], 401);
+        }
+
 
         $userId = auth()->user()->id;
 
@@ -118,8 +125,8 @@ class AuthController extends Controller
         );
 
         return response()->json([
-            'message' => 'User changed password',
-            'user' => $user
+            'message' => 'Đã đổi mật khẩu thành công',
+            'user' => $user,
         ], 201);
     }
 

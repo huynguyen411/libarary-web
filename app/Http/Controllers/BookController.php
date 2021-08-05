@@ -9,144 +9,263 @@ use App\Models\Type;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Book as BookResource;
+use Illuminate\Support\Facades\File;
+
+use GuzzleHttp\Client;
+
+
 class BookController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['store', 'update', 'destroy']]);
+        $this->middleware(['auth:api', 'check-role'], ['only' => ['store', 'update', 'destroy']]);
+        // $this->middleware('check-role', ['only' => ['index']]);
+
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
-        $books = Book::filter($request->all())->get();
+        $limit = 10;
+        $books = Book::filter($request->all());
+        if ($request->has('limit') && $request->get('limit') != '') {
+            $limit = $request->get('limit');
+            $books = $books->limit($limit);
+        }
+        $books = $books->get();
         $types = Type::all();
-        foreach($books as $book){
+        foreach ($books as $book) {
             $type = $this->getTypeOfBook($book, $types);
             $book->type = $type;
         }
         return $books;
     }
- 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(BookRequest $request)
     {
+        $urlBookImage = 'https://i.ibb.co/rdhND5D/image-book.png';
+        if ($request->hasFile('book_image')) {
+            $file = $request->book_image;
+            $urlFile = $file->getRealPath();
+            $arrImage = $this->uploadImage($urlFile);
 
-        $books = Book::create($request->all());
+            if ($arrImage['status'] == 'ok') {
+                $urlBookImage = $arrImage['url'];
+            }
+        } else {
+            // echo 'loi';
+        }
+
+        $books = Book::create(array_merge(
+            $request->except('book_image'),
+            ['book_image' => $urlBookImage]
+        ));
         // $book = Book::firstOrCreate($request->all());
         // $db = $book->push;
         // Book::filter($request->input('isbn'))->get();
-        $types = Type::all();
-        foreach($books as $book){
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
-        }
-        return $books;
+        // $types = Type::all();
+        // foreach ($books as $book) {
+        //     $type = $this->getTypeOfBook($book, $types);
+        //     $book->type = $type;
+        // }
+        return response()->json([
+            'book' => $books,
+            // 're' => $request->all()
+        ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $book = Book::where('book_id', $id)->first();
         $types = Type::all();
         $type = $this->getTypeOfBook($book, $types);
         $book->type = $type;
-        
+
         return $book;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(BookRequest $request)
+    public function update(BookRequest $request, $id)
     {
-        $url_file = $request->file('book_image')->getRealPath();
-        $duoi =  $request->file('book_image')->getClientOriginalExtension();
-        $name_file = $request->file('book_image')->getClientOriginalName();
 
-        $book = Book::where('book_id', $request->book_id)
-            ->update(
-                $request->except('book_image')
-                // ['name_book' => 'sách bị đổi tên']
-            );
-        return $book;
+        $book = false;
+        if ($request->hasFile('book_image')) {
+            $file = $request->book_image;
+            $urlFile = $file->getRealPath();
+            $arrImage = $this->uploadImage($urlFile);
+            // echo $urlFile;
+            if ($arrImage['status'] == 'ok') {
+                $urlBookImage = $arrImage['url'];
+
+                $book = Book::where('book_id', $id)
+                    ->update(
+                        array_merge($request->only(
+                            'name_book',
+                            'type_id',
+                            'author',
+                            'translator',
+                            'publisher',
+                            'publication_date',
+                            'price',
+                            'isbn',
+                            'review',
+                            'book_image'
+                        ), ['book_image' => $urlBookImage])
+
+                    );
+            }
+        } else {
+            $book = Book::where('book_id', $id)
+                ->update(
+                    $request->only(
+                        'name_book',
+                        'type_id',
+                        'author',
+                        'translator',
+                        'publisher',
+                        'publication_date',
+                        'price',
+                        'isbn',
+                        'review',
+                        'book_image'
+                    )
+                );
+        }
+
+        if (!$book) {
+            return response()->json([
+                'messenger' => "Cập nhật sách thất bại",
+                // 'request' =>$request->all()
+            ], 400);
+        }
+        return response()->json([
+            'messenger' => "Cập nhật sách thành công",
+            // 'request' => $request->all()
+        ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function destroy($id)
     {
-        $book = Book::find($id)->delete();
-        $types = Type::all();
-        $type = $this->getTypeOfBook($book, $types);
-        $book->type = $type;
-        return $book;
+        $countBook = Book::where('book_id', $id)->count();
+        if ($countBook == 0) {
+            return response()->json([
+                'messenger' => 'Sách không tồn tại'
+            ], 400);
+        }
+
+        // $types = Type::all();
+        // $type = $this->getTypeOfBook($book, $types);
+        // $book->type = $type;
+
+        return response()->json([
+            'messenger' => 'Xoá sách thành công'
+        ], 200);
     }
 
 
     // lấy sách phát hành theo ngày mới nhất
     public function getLatestBooks(Request $request)
     {
-        $books = Book::filter($request->all())->get();
-        $books = $books->sortBy('created_at');
-        $types = Type::all();
-        foreach($books as $book){
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
+        $limit = 10;
+        if ($request->has('limit')) {
+            $limit = $request->get('limit');
         }
-        return $books;
+
+        $books = Book::filter($request->all())->limit($limit)->get();
+        $books = $books->sortBy('created_at');
+
+        // $types = Type::all();
+        // foreach ($books as $book) {
+        //     $type = $this->getTypeOfBook($book, $types);
+        //     $book->type = $type;
+        // }
+
+        return response()->json([
+            'books'=>$books],
+            200
+        );
     }
 
 
     // lấy list book đc mượn nhiều nhất
     public function topBorrowing(Request $request)
     {
+        $limit = 10;
+        if ($request->has('limit')) {
+            $limit = $request->get('limit');
+        }
         $books = BorrowingBook::select(BorrowingBook::raw('COUNT(borrowing_books.book_id) as count, borrowing_books.book_id'))
-                ->groupBy('borrowing_books.book_id')
-                ->orderBy('count')
-                ->get();
-        return $books;
+            ->groupBy('borrowing_books.book_id')
+            ->orderByDesc('count')
+            ->limit($limit)->get();
+        return response()->json(
+            [
+                'orderBy' => 'desc',
+                "books" => $books,
+            ],
+            200
+        );
     }
 
     public function getTypeOfBook($book, $types)
     {
         $type3 = $types->find($book->type_id);
-        $type2 = $types->where('code', intdiv ($type3->code, 10) * 10)->first();
+        $type2 = $types->where('code', intdiv($type3->code, 10) * 10)->first();
         $type1 = $types->where(intdiv($type3->code, 100) * 100)->first();
         $type = (object) [];
-        if ($type3->code % 100 == 0){
+        if ($type3->code % 100 == 0) {
             $type->level_1 = $type3;
-        }
-        elseif ($type3->code % 10 == 0){
+        } elseif ($type3->code % 10 == 0) {
             $type->level_1 = $type2;
             $type->level_2 = $type3;
-        }
-        else {
+        } else {
             $type->level_1 = $type1;
             $type->level_2 = $type2;
             $type->level_3 = $type3;
         }
         return $type;
+    }
+
+    public function uploadImage($urlFile)
+    {
+        //....Clases and functions ...
+
+        $url = "https://api.imgbb.com/1/upload";
+        // $file = file_get_contents('C:\Users\Truongnam\Downloads\_MCR0003.jpg');
+        $file = file_get_contents($urlFile);
+
+        $filebase64 =  base64_encode($file);
+
+        $client = new Client();
+        $res = $client->request('POST', $url, [
+            'header' => ['user', 'pass'],
+            'form_params' => [
+                'key' => 'ba4b149d644934850a218ea3aa6ede0b',
+                'image' => $filebase64,
+            ]
+        ]);
+        // echo $res->getStatusCode();
+        // "200"
+        // echo $res->getHeader('content-type')[0];
+        // 'application/json; charset=utf8'
+        if ($res->getStatusCode() == 200) {
+            if (File::exists($urlFile)) {
+                File::delete($urlFile);
+            } else {
+                // dd('File does not exists.');
+            }
+            return [
+                'status' => 'ok',
+                'url' => json_decode($res->getBody())->data->url,
+                // 'res' => $res->getBody()
+            ];
+        }
+
+        return ['status' => 'error'];
+
+
+        // echo json_encode($json);
+        // {"type":"User"...'
     }
 }

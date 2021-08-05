@@ -17,10 +17,10 @@ class CreateUsers extends Migration
             $table->bigIncrements('id');
             $table->unsignedTinyInteger('role_id')->default(1);
             $table->string('name', 101);
-            $table->string('phone', 20)->nullable();
+            // $table->string('phone', 20)->nullable();
             $table->string('address', 101)->default('unknown');
             $table->string('email', 101)->unique();
-            $table->date('dob')->default('1970-01-01');
+            // $table->date('dob')->default('1970-01-01');
             // $table->dateTime('created_at')->nullable();
             // $table->dateTime('update_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
