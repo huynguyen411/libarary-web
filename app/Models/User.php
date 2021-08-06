@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Filterable;
 
     protected $table = "users";
     protected $primaryKey = 'id';
