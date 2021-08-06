@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 // use App\Http\Requests\TestLoginRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\ChangePasswordRequest;
+
 use Illuminate\Support\Facades\Hash;
 
 
@@ -36,8 +38,8 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $emailRequest = mb_strtolower($request->get('email'), 'UTF-8');
-        if (User::where('email', $emailRequest)->count() == 0) {
+        $email = $request->get('email');
+        if (User::where('email', $email)->count() == 0) {
             return response()->json([
                 'errors' => 
                     ['email' => ['email không tồn tại']]
@@ -100,22 +102,12 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    public function changePassword(Request $request)
+    public function changePassword(ChangePasswordRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required|string|min:8',
-            'new_password' => 'required|string|confirmed|min:8',
-
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
-        }
         if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
-            return response()->json([
-                'status' => 'error',
-                'old_password' => 'mật khẩu hiện tại không chính xác',
-            ], 401);
+            return response()->json([                
+                'errors' =>['old_password' => 'mật khẩu hiện tại không chính xác',]
+            ], 422);
         }
 
 
@@ -126,8 +118,8 @@ class AuthController extends Controller
         );
 
         return response()->json([
+            'status' => 'ok',
             'message' => 'Đã đổi mật khẩu thành công',
-            'user' => $user,
         ], 201);
     }
 

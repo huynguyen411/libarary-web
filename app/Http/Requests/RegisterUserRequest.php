@@ -50,6 +50,14 @@ class RegisterUserRequest extends FormRequest
         ];
     }
 
+    public function filters()
+    {
+        return [
+            'email' => 'trim|lowercase',
+            'name' => 'trim|capitalize|escape'
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();

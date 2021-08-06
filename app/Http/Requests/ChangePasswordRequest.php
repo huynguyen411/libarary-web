@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
-class BookRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,29 +27,24 @@ class BookRequest extends FormRequest
      */
     public function rules()
     {
-        
+
         return [
-            'type_id' => 'required|min:1|max:999',
-            'name_book' => 'required',
-            'author' => 'required',
-            'publication_date' => 'date',
-            'price' => 'gt:0',
-            'book_image' => 'image|mimes:jpeg,png|max:2048',
-            'country_id' => 'integer|min:1|max:195'
-                      
+            'old_password' => 'required|min:8|max:20',
+            'new_password' => 'required|confirmed|min:8:max:20',
+
         ];
     }
 
     public function messages()
     {
         return [
-            'type_id.required' => __('Chưa nhập thể loại.'),
-            'type_id.min' => __('Thể loại sách không tồn tại.'),
-            'type_id.max' => __('Thể loại sách không tồn tại.'),
-            'name_book.required' => __('Chưa nhập tên sách.'),
-            'author.required' => __('Chưa nhập tên tác giả.'),
-            'publication_date.date' => __('Kiểu dữ liệu phải là datetime.'),
-            'price.gt' => __('Giá sách phải lớn hơn 0.')
+            'old_password.required' => 'Bạn chưa nhập mật khẩu cũ',
+            'old_password.min' => 'Mật khẩu tối thiểu có 8 ký tự',
+            'old_password.max' => 'Mật khẩu tối đa có 20 ký tự',
+            'new_password.min' => 'Mật khẩu tối thiểu có 8 ký tự',
+            'new_password.max' => 'Mật khẩu tối đa có 20 ký tự',
+            'new_password.confirmed' => 'Xác nhận mật khẩu không trùng khớp',
+
         ];
     }
 

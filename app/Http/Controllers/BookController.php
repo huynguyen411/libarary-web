@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\File;
 use mysqli;
 use SplQueue;
 use GuzzleHttp\Client;
-use mysqli;
-use SplQueue;
 
 use function GuzzleHttp\Promise\queue;
 
@@ -29,23 +27,14 @@ class BookController extends Controller
 
     }
 
-    public function index(BookRequest $request)
+    public function index(Request $request)
     {
-        $limit = 10;
         $books = Book::filter($request->all());
-        if ($request->has('limit') && $request->get('limit') != '') {
-            $limit = $request->get('limit');
-            $books = $books->limit($limit);
-        }
         $books = $books->get();
 
-
-      
         return response()->json([
-            'book' => $books,
+            'books' => $books,
         ]);
-
-
     }
 
     public function store(BookRequest $request)
@@ -113,6 +102,7 @@ class BookController extends Controller
                             'translator',
                             'publisher',
                             'publication_date',
+                            'country_id',
                             'price',
                             'isbn',
                             'review',
@@ -134,7 +124,6 @@ class BookController extends Controller
                         'price',
                         'isbn',
                         'review',
-                        'book_image'
                     )
                 );
         }
@@ -147,6 +136,7 @@ class BookController extends Controller
             ], 400);
         }
         return response()->json([
+            'status' => 'ok',
             'messenger' => "Cập nhật sách thành công",
             // 'request' => $request->all()
         ], 200);
@@ -183,8 +173,8 @@ class BookController extends Controller
             $limit = $request->get('limit');
         }
 
-        $books = Book::filter($request->all())->limit($limit)->get();
-        $books = $books->sortBy('created_at');
+        $books = Book::filter($request->all())->get();
+        $books = $books->sortByDesc('created_at')->splice($limit);
 
         // $types = Type::all();
         // foreach ($books as $book) {
@@ -194,6 +184,7 @@ class BookController extends Controller
 
         return response()->json(
             [
+                'orderBy' =>'desc',
                 'books' => $books
             ],
             200
@@ -210,8 +201,11 @@ class BookController extends Controller
         }
         $books = BorrowingBook::select(BorrowingBook::raw('COUNT(borrowing_books.book_id) as count, borrowing_books.book_id'))
             ->groupBy('borrowing_books.book_id')
-            ->orderByDesc('count')
-            ->limit($limit)->get();
+            ->orderByDesc('count')->get();
+            // ->limit($limit);
+
+
+        // $book1 = BorrowingBook::groupBy('book_id')
         return response()->json(
             [
                 'orderBy' => 'desc',
@@ -294,24 +288,21 @@ class BookController extends Controller
         $arr = [];
         array_push($arr, $_type);
         $queue->enqueue($_type->type_id);
-        while($queue != null){
+        while ($queue != null) {
             $_type = $queue->dequeue();
-            foreach($types as $type){
-                if ($type->parent_id == $_type->id){
+            foreach ($types as $type) {
+                if ($type->parent_id == $_type->id) {
                     $queue->enqueue($type);
                     array_push($arr, $type);
-                }    
+                }
             }
         }
         $result = [];
-        foreach($arr as $element){
-            if ($element->level == 3){
+        foreach ($arr as $element) {
+            if ($element->level == 3) {
                 array_push($result, $element);
             }
         }
         return $result;
     }
 }
-
-
-
