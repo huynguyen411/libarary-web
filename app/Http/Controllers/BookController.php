@@ -12,7 +12,10 @@ use App\Http\Resources\Book as BookResource;
 use Illuminate\Support\Facades\File;
 
 use GuzzleHttp\Client;
+use mysqli;
+use SplQueue;
 
+use function GuzzleHttp\Promise\queue;
 
 class BookController extends Controller
 {
@@ -23,21 +26,40 @@ class BookController extends Controller
 
     }
 
-    public function index(Request $request)
+    public function index(BookRequest $request)
     {
-        $limit = 10;
-        $books = Book::filter($request->all());
-        if ($request->has('limit') && $request->get('limit') != '') {
-            $limit = $request->get('limit');
-            $books = $books->limit($limit);
-        }
-        $books = $books->get();
+        //$limit = 10;
+        // $books = Book::filter($request->all());
+        // if ($request->has('limit') && $request->get('limit') != '') {
+        //     $limit = $request->get('limit');
+        //     $books = $books->limit($limit);
+        // }
+        // $books = $books->get();
+        // $types = Type::all();
+
+        // return $books;
+        $_type = Type::where('type_id', $request->type_id)->first();
         $types = Type::all();
-        foreach ($books as $book) {
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
+        $queue = new SplQueue();
+        $arr = [];
+        array_push($arr, $_type);
+        $queue->enqueue($_type->type_id);
+        while($queue != null){
+            $_type = $queue->dequeue();
+            foreach($types as $type){
+                if ($type->parent_id == $_type->id){
+                    $queue->enqueue($type);
+                    array_push($arr, $type);
+                }    
+            }
         }
-        return $books;
+        $result = [];
+        foreach($arr as $element){
+            if ($element->level == 3){
+                array_push($result, $element);
+            }
+        }
+        return $result;
     }
 
     public function store(BookRequest $request)
@@ -267,5 +289,30 @@ class BookController extends Controller
 
         // echo json_encode($json);
         // {"type":"User"...'
+    }
+
+    public function filterByType(BookRequest $Request){
+        $_type = Type::where('type_id', $Request->type_id);
+        $types = Type::all();
+        $queue = new SplQueue();
+        $arr = [];
+        array_push($arr, $_type);
+        $queue->enqueue($_type->type_id);
+        while($queue != null){
+            $_type = $queue->dequeue();
+            foreach($types as $type){
+                if ($type->parent_id == $_type->id){
+                    $queue->enqueue($type);
+                    array_push($arr, $type);
+                }    
+            }
+        }
+        $result = [];
+        foreach($arr as $element){
+            if ($element->level == 3){
+                array_push($result, $element);
+            }
+        }
+        return $result;
     }
 }
