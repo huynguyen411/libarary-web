@@ -7,10 +7,13 @@ use App\Models\Book;
 use App\Models\BorrowingBook;
 use App\Models\Type;
 use App\Http\Requests\BookRequest;
+use App\Http\Requests\BookUpdateRequest;
+
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Book as BookResource;
 use Illuminate\Support\Facades\File;
-
+use mysqli;
+use SplQueue;
 use GuzzleHttp\Client;
 
 
@@ -32,12 +35,13 @@ class BookController extends Controller
             $books = $books->limit($limit);
         }
         $books = $books->get();
-        $types = Type::all();
-        foreach ($books as $book) {
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
-        }
-        return $books;
+
+
+      
+        return response()->json([
+            'book' => $books,
+        ]);
+
     }
 
     public function store(BookRequest $request)
@@ -84,7 +88,7 @@ class BookController extends Controller
         return $book;
     }
 
-    public function update(BookRequest $request, $id)
+    public function update(BookUpdateRequest $request, $id)
     {
 
         $book = false;
@@ -133,6 +137,7 @@ class BookController extends Controller
 
         if (!$book) {
             return response()->json([
+                'status' => 'error',
                 'messenger' => "Cập nhật sách thất bại",
                 // 'request' =>$request->all()
             ], 400);
@@ -150,6 +155,7 @@ class BookController extends Controller
         $countBook = Book::where('book_id', $id)->count();
         if ($countBook == 0) {
             return response()->json([
+                'status' => 'error',
                 'messenger' => 'Sách không tồn tại'
             ], 400);
         }
@@ -157,8 +163,9 @@ class BookController extends Controller
         // $types = Type::all();
         // $type = $this->getTypeOfBook($book, $types);
         // $book->type = $type;
-
+        Book::where('book_id', $id)->delete();
         return response()->json([
+            'status' => 'ok',
             'messenger' => 'Xoá sách thành công'
         ], 200);
     }
@@ -181,8 +188,10 @@ class BookController extends Controller
         //     $book->type = $type;
         // }
 
-        return response()->json([
-            'books'=>$books],
+        return response()->json(
+            [
+                'books' => $books
+            ],
             200
         );
     }
@@ -267,5 +276,33 @@ class BookController extends Controller
 
         // echo json_encode($json);
         // {"type":"User"...'
+    }
+
+
+
+    public function filterByType(BookRequest $Request)
+    {
+        $_type = Type::where('type_id', $Request->type_id);
+        $types = Type::all();
+        $queue = new SplQueue();
+        $arr = [];
+        array_push($arr, $_type);
+        $queue->enqueue($_type->type_id);
+        while ($queue != null) {
+            $_type = $queue->dequeue();
+            foreach ($types as $type) {
+                if ($type->parent_id == $_type->id) {
+                    $queue->enqueue($type);
+                    array_push($arr, $type);
+                }
+            }
+        }
+        $result = [];
+        foreach ($arr as $element) {
+            if ($element->level == 3) {
+                array_push($result, $element);
+            }
+        }
+        return $result;
     }
 }

@@ -4,18 +4,15 @@ use App\Models;
 use App\Models\Book;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Country;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BorrowingBookController;
 
-// use App\Http\Controllers\CommentController;
-
-use App\Http\Controllers\MannageUserController;
+use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\TypeController;
-
-// use App\Http\Controllers\CartController;
-
 
 // use App\Http\Controllers\BookController;
 
@@ -78,8 +75,8 @@ Route::prefix('v1')->group(function () {
 
     //admin
     Route::middleware(['auth', 'check-role'])->prefix('manage')->group(function () {
-        Route::get('get-user', [MannageUserController::class, 'getUser']);
-        Route::get('get-borrowing', [MannageUserController::class, 'getBorrowing']);
+        Route::get('get-user', [ManageUserController::class, 'getUser']);
+        Route::get('get-borrowing', [ManageUserController::class, 'getBorrowing']);
         
         Route::prefix('borrowing-book')->group(function () {
             Route::get('/', [BorrowingBookController::class, 'index']);
@@ -89,4 +86,12 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('type', [TypeController::class, 'index']);
+    route::get('country', function() {
+        $countries = Country::all();
+        return response()->json([
+            'countries' => $countries
+        ]);
+    });
+
 });
+

@@ -4,3057 +4,1015 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Type;
 
 class TypeSeeder extends Seeder
 {
     protected $arr = [
-        [
-            "code" => "000",
-            "name" => "Generalities",
-        ],
-        [
-            "code" => "100",
-            "name" => "Philosophy and Psychology",
-        ],
-        [
-            "code" => "200",
-            "name" => "Religion",
-        ],
-        [
-            "code" => "300",
-            "name" => "Social Sciences",
-        ],
-        [
-            "code" => "400",
-            "name" => "Language",
-        ],
-        [
-            "code" => "500",
-            "name" => "Natural Sciences and Math",
-        ],
-        [
-            "code" => "600",
-            "name" => "Technology",
-        ],
-        [
-            "code" => "700",
-            "name" => "The Arts",
-        ],
-        [
-            "code" => "800",
-            "name" => "Literature",
-        ],
-        [
-            "code" => "900",
-            "name" => "Geography, History and Biography",
-        ],
+        
+        ['code' => '0', 'name' => 'Generalities', 'parent_id' => null, 'level' => '1',],
+        ['code' => '1', 'name' => 'Knowledge', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '2', 'name' => 'The book', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '3', 'name' => 'Systems', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '4', 'name' => 'Data processing Computer science', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '5', 'name' => 'Computer programming, programs, data', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '6', 'name' => 'Special computer methods', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '7', 'name' => 'Not assigned or no longer used', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '8', 'name' => 'Not assigned or no longer used', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '9', 'name' => 'Not assigned or no longer used', 'parent_id' => '1', 'level' => '3',],
+        ['code' => '10', 'name' => 'Bibliography', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '11', 'name' => 'Bibliographies', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '12', 'name' => 'Bibliographies of individuals', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '13', 'name' => 'Bibliographies of works by specific classes of authors', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '14', 'name' => 'Bibliographies of anonymous and pseudonymous works', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '15', 'name' => 'Bibliographies of works from specific places', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '16', 'name' => 'Bibliographies of works from specific subjects', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '17', 'name' => 'General subject catalogs', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '18', 'name' => 'Catalogs arranged by author & date', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '19', 'name' => 'Dictionary catalogs', 'parent_id' => '11', 'level' => '3',],
+        ['code' => '20', 'name' => 'Library & information sciences', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '21', 'name' => 'Library relationships', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '22', 'name' => 'Administration of the physical plant', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '23', 'name' => 'Personnel administration', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '24', 'name' => 'Not assigned or no longer used', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '25', 'name' => 'Library operations', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '26', 'name' => 'Libraries for specific subjects', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '27', 'name' => 'General libraries', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '28', 'name' => 'Reading, use of other information media', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '29', 'name' => 'Not assigned or no longer used', 'parent_id' => '21', 'level' => '3',],
+        ['code' => '30', 'name' => 'General encyclopedic works', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '31', 'name' => 'General encyclopedic works � American', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '32', 'name' => 'General encyclopedic works in English', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '33', 'name' => 'General encyclopedic works in other Germanic languages', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '34', 'name' => 'General encyclopedic works in French, Provencal, Catalan', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '35', 'name' => 'General encyclopedic works in Italian, Romanian, Rhaeto-Romanic', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '36', 'name' => 'General encyclopedic works in Spanish & Portuguese', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '37', 'name' => 'General encyclopedic works in Slavic languages', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '38', 'name' => 'General encyclopedic works in Scandinavian languages', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '39', 'name' => 'General encyclopedic works in other languages', 'parent_id' => '31', 'level' => '3',],
+        ['code' => '40', 'name' => 'Not assigned or no longer used', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '41', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '42', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '43', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '44', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '45', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '46', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '47', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '48', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '49', 'name' => 'Not assigned or no longer used', 'parent_id' => '41', 'level' => '3',],
+        ['code' => '50', 'name' => 'General serials & their indexes', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '51', 'name' => 'General serials & their indexes American', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '52', 'name' => 'General serials & their indexes In English', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '53', 'name' => 'General serials & their indexes In other Germanic languages', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '54', 'name' => 'General serials & their indexes In French, Provencal, Catalan', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '55', 'name' => 'General serials & their indexes In Italian, Romanian, Rhaeto-Romanic', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '56', 'name' => 'General serials & their indexes In Spanish & Portuguese', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '57', 'name' => 'General serials & their indexes In Slavic languages', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '58', 'name' => 'General serials & their indexes In Scandinavian languages', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '59', 'name' => 'General serials & their indexes In other languages', 'parent_id' => '51', 'level' => '3',],
+        ['code' => '60', 'name' => 'General organization & museology', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '61', 'name' => 'General organization & museology In North America', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '62', 'name' => 'General organization & museology In British Isles In England', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '63', 'name' => 'General organization & museology In central Europe In Germany', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '64', 'name' => 'General organization & museology In France & Monaco', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '65', 'name' => 'General organization & museology In Italy & adjacent territories', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '66', 'name' => 'General organization & museology In Iberian Peninsula & adjacent islands', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '67', 'name' => 'General organization & museology In eastern Europe In Soviet Union', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '68', 'name' => 'General organization & museology In other areas', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '69', 'name' => 'Museology (Museum science)', 'parent_id' => '61', 'level' => '3',],
+        ['code' => '70', 'name' => 'News media, journalism, publishing', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '71', 'name' => 'News media, journalism, publishing In North America', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '72', 'name' => 'News media, journalism, publishing In British Isles In England', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '73', 'name' => 'News media, journalism, publishing In central Europe In Germany', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '74', 'name' => 'News media, journalism, publishing In France & Monaco', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '75', 'name' => 'News media, journalism, publishing In Italy & adjacent territories', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '76', 'name' => 'News media, journalism, publishing In Iberian Peninsula & adjacent islands', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '77', 'name' => 'News media, journalism, publishing In eastern Europe In Soviet Union', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '78', 'name' => 'News media, journalism, publishing In Scandinavia', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '79', 'name' => 'News media, journalism, publishing In other languages', 'parent_id' => '71', 'level' => '3',],
+        ['code' => '80', 'name' => 'General collections', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '81', 'name' => 'General collections American', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '82', 'name' => 'General collections In English', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '83', 'name' => 'General collections In other Germanic languages', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '84', 'name' => 'General collections In French, Provencal, Catalan', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '85', 'name' => 'General collections In Italian, Romanian, Rhaeto-Romanic', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '86', 'name' => 'General collections In Spanish & Portuguese', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '87', 'name' => 'General collections In Slavic languages', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '88', 'name' => 'General collections In Scandinavian languages', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '89', 'name' => 'General collections In other languages', 'parent_id' => '81', 'level' => '3',],
+        ['code' => '90', 'name' => 'Manuscripts & rare books', 'parent_id' => '1', 'level' => '2',],
+        ['code' => '91', 'name' => 'Manuscripts', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '92', 'name' => 'Block books', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '93', 'name' => 'Incunabula', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '94', 'name' => 'Printed books', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '95', 'name' => 'Books notable for bindings', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '96', 'name' => 'Books notable for illustrations', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '97', 'name' => 'Books notable for ownership or origin', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '98', 'name' => 'Prohibited works, forgeries, hoaxes', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '99', 'name' => 'Books notable for format', 'parent_id' => '91', 'level' => '3',],
+        ['code' => '100', 'name' => 'Philosophy & psychology', 'parent_id' => null, 'level' => '1',],
+        ['code' => '101', 'name' => 'Theory of philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '102', 'name' => 'Miscellany of philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '103', 'name' => 'Dictionaries of philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '104', 'name' => 'Not assigned or no longer used', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '105', 'name' => 'Serial publications of philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '106', 'name' => 'Organizations of philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '107', 'name' => 'Education, research in philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '108', 'name' => 'Kinds of persons in philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '109', 'name' => 'Historical treatment of philosophy', 'parent_id' => '101', 'level' => '3',],
+        ['code' => '110', 'name' => 'Metaphysics', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '111', 'name' => 'Ontology', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '112', 'name' => 'Not assigned or no longer used', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '113', 'name' => 'Cosmology (Philosophy of nature)', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '114', 'name' => 'Space', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '115', 'name' => 'Time', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '116', 'name' => 'Change', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '117', 'name' => 'Structure', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '118', 'name' => 'Force & Energy', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '119', 'name' => 'Number & quantity', 'parent_id' => '111', 'level' => '3',],
+        ['code' => '120', 'name' => 'Epistemology, causation, humankind', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '121', 'name' => 'Epistemology (Theory of knowledge)', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '122', 'name' => 'Causation', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '123', 'name' => 'Determinism & indeterminism', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '124', 'name' => 'Teleology', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '125', 'name' => 'Not assigned or no longer used', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '126', 'name' => 'The self', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '127', 'name' => 'The unconscious & the subconscious', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '128', 'name' => 'Humankind', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '129', 'name' => 'Origin & destiny of individual souls', 'parent_id' => '121', 'level' => '3',],
+        ['code' => '130', 'name' => 'Paranormal phenomena', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '131', 'name' => 'Occult methods for achieving well-being', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '132', 'name' => 'Not assigned or no longer used', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '133', 'name' => 'Parapsychology & occultism', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '134', 'name' => 'Not assigned or no longer used', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '135', 'name' => 'Dreams & mysteries', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '136', 'name' => 'Not assigned or no longer used', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '137', 'name' => 'Divinatory graphology', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '138', 'name' => 'Physiognomy', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '139', 'name' => 'Phrenology', 'parent_id' => '131', 'level' => '3',],
+        ['code' => '140', 'name' => 'Specific philosophical schools', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '141', 'name' => 'Idealism & related systems', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '142', 'name' => 'Critical philosophy', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '143', 'name' => 'Intuitionism & Bergsonism', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '144', 'name' => 'Humanism & related systems', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '145', 'name' => 'Sensationalism', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '146', 'name' => 'Naturalism & related systems', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '147', 'name' => 'Pantheism & related systems', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '148', 'name' => 'Liberalism, eclecticism, traditionalism', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '149', 'name' => 'Other philosophical systems', 'parent_id' => '141', 'level' => '3',],
+        ['code' => '150', 'name' => 'Psychology', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '151', 'name' => 'Not assigned or no longer used', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '152', 'name' => 'Perception, movement, emotions, drives', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '153', 'name' => 'Mental processes & intelligence', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '154', 'name' => 'Subconscious & altered states', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '155', 'name' => 'Differential & developmental psychology', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '156', 'name' => 'Comparative psychology', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '157', 'name' => 'Not assigned or no longer used', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '158', 'name' => 'Applied psychology', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '159', 'name' => 'Not assigned or no longer used', 'parent_id' => '151', 'level' => '3',],
+        ['code' => '160', 'name' => 'Logic', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '161', 'name' => 'Induction', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '162', 'name' => 'Deduction', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '163', 'name' => 'Not assigned or no longer used', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '164', 'name' => 'Not assigned or no longer used', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '165', 'name' => 'Fallacies & sources of error', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '166', 'name' => 'Syllogisms', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '167', 'name' => 'Hypotheses', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '168', 'name' => 'Argument & persuasion', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '169', 'name' => 'Analogy', 'parent_id' => '161', 'level' => '3',],
+        ['code' => '170', 'name' => 'Ethics (Moral philosophy)', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '171', 'name' => 'Systems & doctrines', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '172', 'name' => 'Political ethics', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '173', 'name' => 'Ethics of family relationships', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '174', 'name' => 'Economic & professional ethics', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '175', 'name' => 'Ethics of recreation & leisure', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '176', 'name' => 'Ethics of sex & reproduction', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '177', 'name' => 'Ethics of social relations', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '178', 'name' => 'Ethics of consumption', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '179', 'name' => 'Other ethical norms', 'parent_id' => '171', 'level' => '3',],
+        ['code' => '180', 'name' => 'Ancient, medieval, Oriental philosophy', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '181', 'name' => 'Oriental philosophy', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '182', 'name' => 'Pre-Socratic Greek philosophies', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '183', 'name' => 'Sophistic & Socratic philosophies', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '184', 'name' => 'Platonic philosophy', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '185', 'name' => 'Aristotelian philosophy', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '186', 'name' => 'Skeptic and Neoplatonic philosophies', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '187', 'name' => 'Epicurean philosophy', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '188', 'name' => 'Stoic philosophy', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '189', 'name' => 'Medieval Western philosophy', 'parent_id' => '181', 'level' => '3',],
+        ['code' => '190', 'name' => 'Modern Western philosophy', 'parent_id' => '101', 'level' => '2',],
+        ['code' => '191', 'name' => 'Modern Western philosophy United States & Canada', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '192', 'name' => 'Modern Western philosophy British Isles', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '193', 'name' => 'Modern Western philosophy Germany & Austria', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '194', 'name' => 'Modern Western philosophy France', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '195', 'name' => 'Modern Western philosophy Italy', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '196', 'name' => 'Modern Western philosophy Spain & Portugal', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '197', 'name' => 'Modern Western philosophy Soviet Union', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '198', 'name' => 'Modern Western philosophy Scandinavia', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '199', 'name' => 'Modern Western philosophy Other geographical areas', 'parent_id' => '191', 'level' => '3',],
+        ['code' => '200', 'name' => 'Religion', 'parent_id' => null, 'level' => '1',],
+        ['code' => '201', 'name' => 'Philosophy of Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '202', 'name' => 'Miscellany of Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '203', 'name' => 'Dictionaries of Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '204', 'name' => 'Special topics', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '205', 'name' => 'Serial publications of Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '206', 'name' => 'Organizations of Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '207', 'name' => 'Education, research in Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '208', 'name' => 'Kinds of persons in Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '209', 'name' => 'History & geography of Christianity', 'parent_id' => '201', 'level' => '3',],
+        ['code' => '210', 'name' => 'Natural theology', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '211', 'name' => 'Concepts of God', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '212', 'name' => 'Existence, attributes of God', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '213', 'name' => 'Creation', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '214', 'name' => 'Theodicy', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '215', 'name' => 'Science & religion', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '216', 'name' => 'Good & evil', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '217', 'name' => 'Not assigned or no longer used', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '218', 'name' => 'Humankind', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '219', 'name' => 'Not assigned or no longer used', 'parent_id' => '211', 'level' => '3',],
+        ['code' => '220', 'name' => 'Bible', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '221', 'name' => 'Old Testament', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '222', 'name' => 'Historical books of Old Testament', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '223', 'name' => 'Poetic books of Old Testament', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '224', 'name' => 'Prophetic books of Old Testament', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '225', 'name' => 'New Testament', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '226', 'name' => 'Gospels & Acts', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '227', 'name' => 'Epistles', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '228', 'name' => 'Revelation (Apocalypse)', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '229', 'name' => 'Apocrypha & pseudepigrapha', 'parent_id' => '221', 'level' => '3',],
+        ['code' => '230', 'name' => 'Christian theology', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '231', 'name' => 'God', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '232', 'name' => 'Jesus Christ & his family', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '233', 'name' => 'Humankind', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '234', 'name' => 'Salvation (Soteriology) & grace', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '235', 'name' => 'Spiritual beings', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '236', 'name' => 'Eschatology', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '237', 'name' => 'Not assigned or no longer used', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '238', 'name' => 'Creeds & catechisms', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '239', 'name' => 'Apologetics & polemics', 'parent_id' => '231', 'level' => '3',],
+        ['code' => '240', 'name' => 'Christian moral & devotional theology', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '241', 'name' => 'Moral theology', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '242', 'name' => 'Devotional literature', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '243', 'name' => 'Evangelistic writings for individuals', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '244', 'name' => 'Not assigned or no longer used', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '245', 'name' => 'Texts of hymns', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '246', 'name' => 'Use of art in Christianity', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '247', 'name' => 'Church furnishings & articles', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '248', 'name' => 'Christian experience, practice, life', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '249', 'name' => 'Christian observances in family life', 'parent_id' => '241', 'level' => '3',],
+        ['code' => '250', 'name' => 'Christian orders & local church', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '251', 'name' => 'Preaching (Homiletics)', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '252', 'name' => 'Texts of sermons', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '253', 'name' => 'Pastoral office (Pastoral theology)', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '254', 'name' => 'Parish government & administration', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '255', 'name' => 'Religious congregations & orders', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '256', 'name' => 'Not assigned or no longer used', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '257', 'name' => 'Not assigned or no longer used', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '258', 'name' => 'Not assigned or no longer used', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '259', 'name' => 'Activities of the local church', 'parent_id' => '251', 'level' => '3',],
+        ['code' => '260', 'name' => 'Christian social theology', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '261', 'name' => 'Social theology', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '262', 'name' => 'Ecclesiology', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '263', 'name' => 'Times, places of religious observance', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '264', 'name' => 'Public worship', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '265', 'name' => 'Sacraments, other rites & acts', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '266', 'name' => 'Missions', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '267', 'name' => 'Associations for religious work', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '268', 'name' => 'Religious education', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '269', 'name' => 'Spiritual renewal', 'parent_id' => '261', 'level' => '3',],
+        ['code' => '270', 'name' => 'Christian church history', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '271', 'name' => 'Religious orders in church history', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '272', 'name' => 'Persecutions in church history', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '273', 'name' => 'Heresies in church history', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '274', 'name' => 'Christian church in Europe', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '275', 'name' => 'Christian church in Asia', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '276', 'name' => 'Christian church in Africa', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '277', 'name' => 'Christian church in North America', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '278', 'name' => 'Christian church in South America', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '279', 'name' => 'Christian church in other areas', 'parent_id' => '271', 'level' => '3',],
+        ['code' => '280', 'name' => 'Christian denominations & sects', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '281', 'name' => 'Early church & Eastern churches', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '282', 'name' => 'Roman Catholic Church', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '283', 'name' => 'Anglican churches', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '284', 'name' => 'Protestants of Continental origin', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '285', 'name' => 'Presbyterian, Reformed, Congregational', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '286', 'name' => 'Baptist, Disciples of Christ, Adventist', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '287', 'name' => 'Methodist & related churches', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '288', 'name' => 'Not assigned or no longer used', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '289', 'name' => 'Other denominations & sects', 'parent_id' => '281', 'level' => '3',],
+        ['code' => '290', 'name' => 'Other & comparative religions', 'parent_id' => '201', 'level' => '2',],
+        ['code' => '291', 'name' => 'Comparative religion', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '292', 'name' => 'Classical (Greek & Roman) religion', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '293', 'name' => 'Germanic religion', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '294', 'name' => 'Religions of Indic origin', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '295', 'name' => 'Zoroastrianism (Mazdaism, Parseeism)', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '296', 'name' => 'Judaism', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '297', 'name' => 'Islam & religions originating in it', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '298', 'name' => 'Not assigned or no longer used', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '299', 'name' => 'Other religions', 'parent_id' => '291', 'level' => '3',],
+        ['code' => '300', 'name' => 'Social sciences', 'parent_id' => null, 'level' => '1',],
+        ['code' => '301', 'name' => 'Sociology & anthropology', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '302', 'name' => 'Social interaction', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '303', 'name' => 'Social processes', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '304', 'name' => 'Factors affecting social behavior', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '305', 'name' => 'Social groups', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '306', 'name' => 'Culture & institutions', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '307', 'name' => 'Communities', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '308', 'name' => 'Not assigned or no longer used', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '309', 'name' => 'Not assigned or no longer used', 'parent_id' => '301', 'level' => '3',],
+        ['code' => '310', 'name' => 'General statistics', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '311', 'name' => 'Not assigned or no longer used', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '312', 'name' => 'Not assigned or no longer used', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '313', 'name' => 'Not assigned or no longer used', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '314', 'name' => 'General statistics Of Europe', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '315', 'name' => 'General statistics Of Asia', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '316', 'name' => 'General statistics Of Africa', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '317', 'name' => 'General statistics Of North America', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '318', 'name' => 'General statistics Of South America', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '319', 'name' => 'General statistics Of other parts of the world', 'parent_id' => '311', 'level' => '3',],
+        ['code' => '320', 'name' => 'Political science', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '321', 'name' => 'Systems of governments & states', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '322', 'name' => 'Relation of state to organized groups', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '323', 'name' => 'Civil & political rights', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '324', 'name' => 'The political process', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '325', 'name' => 'International migration & colonization', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '326', 'name' => 'Slavery & emancipation', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '327', 'name' => 'International relations', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '328', 'name' => 'The legislative process', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '329', 'name' => 'Not assigned or no longer used', 'parent_id' => '321', 'level' => '3',],
+        ['code' => '330', 'name' => 'Economics', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '331', 'name' => 'Labor economics', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '332', 'name' => 'Financial economics', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '333', 'name' => 'Land economics', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '334', 'name' => 'Cooperatives', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '335', 'name' => 'Socialism & related systems', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '336', 'name' => 'Public finance', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '337', 'name' => 'International economics', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '338', 'name' => 'Production', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '339', 'name' => 'Macroeconomics & related topics', 'parent_id' => '331', 'level' => '3',],
+        ['code' => '340', 'name' => 'Law', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '341', 'name' => 'International law', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '342', 'name' => 'Constitutional & administrative law', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '343', 'name' => 'Military, tax, trade, industrial law', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '344', 'name' => 'Social, labor, welfare, & related law', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '345', 'name' => 'Criminal law', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '346', 'name' => 'Private law', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '347', 'name' => 'Civil procedure & courts', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '348', 'name' => 'Law (Statutes), regulations, cases', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '349', 'name' => 'Law of specific jurisdictions & areas', 'parent_id' => '341', 'level' => '3',],
+        ['code' => '350', 'name' => 'Public administration', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '351', 'name' => 'Of central governments', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '352', 'name' => 'Of local governments', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '353', 'name' => 'of U.S. federal & state governments', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '354', 'name' => 'Of specific central governments', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '355', 'name' => 'Military science', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '356', 'name' => 'Foot forces & warfare', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '357', 'name' => 'Mounted forces & warfare', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '358', 'name' => 'Other specialized forces & services', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '359', 'name' => 'Sea (Naval) forces & warfare', 'parent_id' => '351', 'level' => '3',],
+        ['code' => '360', 'name' => 'Social services; association', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '361', 'name' => 'General social problems & services', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '362', 'name' => 'Social welfare problems & services', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '363', 'name' => 'Other social problems & services', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '364', 'name' => 'Criminology', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '365', 'name' => 'Penal & related institutions', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '366', 'name' => 'Association', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '367', 'name' => 'General clubs', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '368', 'name' => 'Insurance', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '369', 'name' => 'Miscellaneous kinds of associations', 'parent_id' => '361', 'level' => '3',],
+        ['code' => '370', 'name' => 'Education', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '371', 'name' => 'School management; special education', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '372', 'name' => 'Elementary education', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '373', 'name' => 'Secondary education', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '374', 'name' => 'Adult education', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '375', 'name' => 'Curriculums', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '376', 'name' => 'Education of women', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '377', 'name' => 'Schools & religion', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '378', 'name' => 'Higher education', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '379', 'name' => 'Government regulation, control, support', 'parent_id' => '371', 'level' => '3',],
+        ['code' => '380', 'name' => 'Commerce, communications, transport', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '381', 'name' => 'Internal commerce (Domestic trade)', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '382', 'name' => 'International commerce (Foreign trade)', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '383', 'name' => 'Postal communication', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '384', 'name' => 'Communications Telecommunication', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '385', 'name' => 'Railroad transportation', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '386', 'name' => 'Inland waterway & ferry transportation', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '387', 'name' => 'Water, air, space transportation', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '388', 'name' => 'Transportation Ground transportation', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '389', 'name' => 'Metrology & standardization', 'parent_id' => '381', 'level' => '3',],
+        ['code' => '390', 'name' => 'Customs, etiquette, folklore', 'parent_id' => '301', 'level' => '2',],
+        ['code' => '391', 'name' => 'Costume & personal appearance', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '392', 'name' => 'Customs of life cycle & domestic life', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '393', 'name' => 'Death customs', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '394', 'name' => 'General customs', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '395', 'name' => 'Etiquette (Manners)', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '396', 'name' => 'Not assigned or no longer used', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '397', 'name' => 'Not assigned or no longer used', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '398', 'name' => 'Folklore', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '399', 'name' => 'Customs of war & diplomacy', 'parent_id' => '391', 'level' => '3',],
+        ['code' => '400', 'name' => 'Language', 'parent_id' => null, 'level' => '1',],
+        ['code' => '401', 'name' => 'Philosophy & theory', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '402', 'name' => 'Miscellany', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '403', 'name' => 'Dictionaries & encyclopedias', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '404', 'name' => 'Special topics', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '405', 'name' => 'Serial publications', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '406', 'name' => 'Organizations & management', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '407', 'name' => 'Education, research, related topics', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '408', 'name' => 'With respect to kinds of persons', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '409', 'name' => 'Geographical & persons treatment', 'parent_id' => '401', 'level' => '3',],
+        ['code' => '410', 'name' => 'Linguistics', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '411', 'name' => 'Writing systems', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '412', 'name' => 'Etymology', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '413', 'name' => 'Dictionaries', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '414', 'name' => 'Phonology', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '415', 'name' => 'Structural systems (Grammar)', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '416', 'name' => 'Not assigned or no longer used', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '417', 'name' => 'Dialectology & historical linguistics', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '418', 'name' => 'Standard usage Applied linguistics', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '419', 'name' => 'Verbal language not spoken or written', 'parent_id' => '411', 'level' => '3',],
+        ['code' => '420', 'name' => 'English & Old English', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '421', 'name' => 'English writing system & phonology', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '422', 'name' => 'English etymology', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '423', 'name' => 'English dictionaries', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '424', 'name' => 'Not assigned or no longer used', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '425', 'name' => 'English grammar', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '426', 'name' => 'Not assigned or no longer used', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '427', 'name' => 'English language variations', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '428', 'name' => 'Standard English usage', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '429', 'name' => 'Old English (Anglo-Saxon)', 'parent_id' => '421', 'level' => '3',],
+        ['code' => '430', 'name' => 'Germanic languages German', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '431', 'name' => 'German writing system & phonology', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '432', 'name' => 'German etymology', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '433', 'name' => 'German dictionaries', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '434', 'name' => 'Not assigned or no longer used', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '435', 'name' => 'German grammar', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '436', 'name' => 'Not assigned or no longer used', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '437', 'name' => 'German language variations', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '438', 'name' => 'Standard German usage', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '439', 'name' => 'Other Germanic languages', 'parent_id' => '431', 'level' => '3',],
+        ['code' => '440', 'name' => 'Romance languages French', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '441', 'name' => 'French writing system & phonology', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '442', 'name' => 'French etymology', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '443', 'name' => 'French dictionaries', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '444', 'name' => 'Not assigned or no longer used', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '445', 'name' => 'French grammar', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '446', 'name' => 'Not assigned or no longer used', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '447', 'name' => 'French language variations', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '448', 'name' => 'Standard French usage', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '449', 'name' => 'Provencal & Catalan', 'parent_id' => '441', 'level' => '3',],
+        ['code' => '450', 'name' => 'Italian, Romanian, Rhaeto-Romantic', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '451', 'name' => 'Italian writing system & phonology', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '452', 'name' => 'Italian etymology', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '453', 'name' => 'Italian dictionaries', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '454', 'name' => 'Not assigned or no longer used', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '455', 'name' => 'Italian grammar', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '456', 'name' => 'Not assigned or no longer used', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '457', 'name' => 'Italian language variations', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '458', 'name' => 'Standard Italian usage', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '459', 'name' => 'Romanian & Rhaeto-Romanic', 'parent_id' => '451', 'level' => '3',],
+        ['code' => '460', 'name' => 'Spanish & Portugese languages', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '461', 'name' => 'Spanish writing system & phonology', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '462', 'name' => 'Spanish etymology', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '463', 'name' => 'Spanish dictionaries', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '464', 'name' => 'Not assigned or no longer used', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '465', 'name' => 'Spanish grammar', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '466', 'name' => 'Not assigned or no longer used', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '467', 'name' => 'Spanish language variations', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '468', 'name' => 'Standard Spanish usage', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '469', 'name' => 'Portuguese', 'parent_id' => '461', 'level' => '3',],
+        ['code' => '470', 'name' => 'Italic Latin', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '471', 'name' => 'Classical Latin writing & phonology', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '472', 'name' => 'Classical Latin etymology & phonology', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '473', 'name' => 'Classical Latin dictionaries', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '474', 'name' => 'Not assigned or no longer used', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '475', 'name' => 'Classical Latin grammar', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '476', 'name' => 'Not assigned or no longer used', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '477', 'name' => 'Old, Postclassical, Vulgar Latin', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '478', 'name' => 'Classical Latin usage', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '479', 'name' => 'Other Italic languages', 'parent_id' => '471', 'level' => '3',],
+        ['code' => '480', 'name' => 'Hellenic languages Classical Greek', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '481', 'name' => 'Classical Greek writing & phonology', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '482', 'name' => 'Classical Greek etymology', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '483', 'name' => 'Classical Greek dictionaries', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '484', 'name' => 'Not assigned or no longer used', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '485', 'name' => 'Classical Greek grammar', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '486', 'name' => 'Not assigned or no longer used', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '487', 'name' => 'Preclassical & postclassical Greek', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '488', 'name' => 'Classical Greek usage', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '489', 'name' => 'Other Hellenic languages', 'parent_id' => '481', 'level' => '3',],
+        ['code' => '490', 'name' => 'Other languages', 'parent_id' => '401', 'level' => '2',],
+        ['code' => '491', 'name' => 'East Indo-European & Celtic languages', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '492', 'name' => 'Afro-Asiatic languages Semitic', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '493', 'name' => 'Non-Semitic Afro-Asiatic languages', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '494', 'name' => 'Ural-Altaic, Paleosiberian, Dravidian', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '495', 'name' => 'Languages of East & Southeast Asia', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '496', 'name' => 'African languages', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '497', 'name' => 'North American native languages', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '498', 'name' => 'South American native languages', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '499', 'name' => 'Miscellaneous languages', 'parent_id' => '491', 'level' => '3',],
+        ['code' => '500', 'name' => 'Natural sciences & mathematics', 'parent_id' => null, 'level' => '1',],
+        ['code' => '501', 'name' => 'Philosophy & theory', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '502', 'name' => 'Miscellany', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '503', 'name' => 'Dictionaries & encyclopedias', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '504', 'name' => 'Not assigned or no longer used', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '505', 'name' => 'Serial publications', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '506', 'name' => 'Organizations & management', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '507', 'name' => 'Education, research, related topics', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '508', 'name' => 'Natural history', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '509', 'name' => 'Historical, areas, persons treatment', 'parent_id' => '501', 'level' => '3',],
+        ['code' => '510', 'name' => 'Mathematics', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '511', 'name' => 'General principles', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '512', 'name' => 'Algebra & number theory', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '513', 'name' => 'Arithmetic', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '514', 'name' => 'Topology', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '515', 'name' => 'Analysis', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '516', 'name' => 'Geometry', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '517', 'name' => 'Not assigned or no longer used', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '518', 'name' => 'Not assigned or no longer used', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '519', 'name' => 'Probabilities & applied mathematics', 'parent_id' => '511', 'level' => '3',],
+        ['code' => '520', 'name' => 'Astronomy & allied sciences', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '521', 'name' => 'Celestial mechanics', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '522', 'name' => 'Techniques, equipment, materials', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '523', 'name' => 'Specific celestial bodies & phenomena', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '524', 'name' => 'Not assigned or no longer used', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '525', 'name' => 'Earth (Astronomical geography)', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '526', 'name' => 'Mathematical geography', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '527', 'name' => 'Celestial navigation', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '528', 'name' => 'Ephemerides', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '529', 'name' => 'Chronology', 'parent_id' => '521', 'level' => '3',],
+        ['code' => '530', 'name' => 'Physics', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '531', 'name' => 'Classical mechanics Solid mechanics', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '532', 'name' => 'Fluid mechanics Liquid mechanics', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '533', 'name' => 'Gas mechanics', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '534', 'name' => 'Sound & related vibrations', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '535', 'name' => 'Light & paraphotic phenomena', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '536', 'name' => 'Heat', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '537', 'name' => 'Electricity & electronics', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '538', 'name' => 'Magnetism', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '539', 'name' => 'Modern physics', 'parent_id' => '531', 'level' => '3',],
+        ['code' => '540', 'name' => 'Chemistry & allied sciences', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '541', 'name' => 'Physical & theoretical chemistry', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '542', 'name' => 'Techniques, equipment, materials', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '543', 'name' => 'Analytical chemistry', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '544', 'name' => 'Qualitative analysis', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '545', 'name' => 'Quantitative analysis', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '546', 'name' => 'Inorganic chemistry', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '547', 'name' => 'Organic chemistry', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '548', 'name' => 'Crystallography', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '549', 'name' => 'Mineralogy', 'parent_id' => '541', 'level' => '3',],
+        ['code' => '550', 'name' => 'Earth sciences', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '551', 'name' => 'Geology, hydrology, meteorology', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '552', 'name' => 'Petrology', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '553', 'name' => 'Economic geology', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '554', 'name' => 'Earth sciences of Europe', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '555', 'name' => 'Earth sciences of Asia', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '556', 'name' => 'Earth sciences of Africa', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '557', 'name' => 'Earth sciences of North America', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '558', 'name' => 'Earth sciences of South America', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '559', 'name' => 'Earth sciences of other areas', 'parent_id' => '551', 'level' => '3',],
+        ['code' => '560', 'name' => 'Paleontology Paleozoology', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '561', 'name' => 'Paleobotany', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '562', 'name' => 'Fossil invertebrates', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '563', 'name' => 'Fossil primitive phyla', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '564', 'name' => 'Fossil Mollusca & Molluscoidea', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '565', 'name' => 'Other fossil invertebrates', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '566', 'name' => 'Fossil Vertebrata (Fossil Craniata)', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '567', 'name' => 'Fossil cold-blooded vertebrates', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '568', 'name' => 'Fossil Aves (Fossil birds)', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '569', 'name' => 'Fossil Mammalia', 'parent_id' => '561', 'level' => '3',],
+        ['code' => '570', 'name' => 'Life sciences', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '571', 'name' => 'Not assigned or no longer used', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '572', 'name' => 'Biochemistry', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '573', 'name' => 'Physical anthropology', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '574', 'name' => 'Biology', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '575', 'name' => 'Evolution & genetics', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '576', 'name' => 'Microbiology', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '577', 'name' => 'General nature of life', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '578', 'name' => 'Microscopy in biology', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '579', 'name' => 'Collection and preservation', 'parent_id' => '571', 'level' => '3',],
+        ['code' => '580', 'name' => 'Botanical sciences', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '581', 'name' => 'Botany', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '582', 'name' => 'Spermatophyta (Seed-bearing plants)', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '583', 'name' => 'Dicotyledones', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '584', 'name' => 'Monocotyledones', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '585', 'name' => 'Gymnospermae (Pinophyta)', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '586', 'name' => 'Cryptogamia (Seedless plants)', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '587', 'name' => 'Pteridophyta (Vascular cryptograms)', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '588', 'name' => 'Bryophyta', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '589', 'name' => 'Thallobionta & Prokaryotae', 'parent_id' => '581', 'level' => '3',],
+        ['code' => '590', 'name' => 'Zoological sciences', 'parent_id' => '501', 'level' => '2',],
+        ['code' => '591', 'name' => 'Zoology', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '592', 'name' => 'Invertebrates', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '593', 'name' => 'Protozoa, Echinodermata, related phyla', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '594', 'name' => 'Mollusca & Molluscoidea', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '595', 'name' => 'Other invertebrates', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '596', 'name' => 'Vertebrata (Craniata, Vertebrates)', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '597', 'name' => 'Cold-blooded vertebrates Fishes', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '598', 'name' => 'Aves (Birds)', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '599', 'name' => 'Mammalia (Mammals)', 'parent_id' => '591', 'level' => '3',],
+        ['code' => '600', 'name' => 'Technology (Applied sciences)', 'parent_id' => null, 'level' => '1',],
+        ['code' => '601', 'name' => 'Philosophy & theory', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '602', 'name' => 'Miscellany', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '603', 'name' => 'Dictionaries & encyclopedias', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '604', 'name' => 'Special topics', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '605', 'name' => 'Serial publications', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '606', 'name' => 'Organizations', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '607', 'name' => 'Education, research, related topics', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '608', 'name' => 'Invention & patents', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '609', 'name' => 'Historical, areas, persons treatment', 'parent_id' => '601', 'level' => '3',],
+        ['code' => '610', 'name' => 'Medical sciences Medicine', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '611', 'name' => 'Human anatomy, cytology, histology', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '612', 'name' => 'Human physiology', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '613', 'name' => 'Promotion of health', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '614', 'name' => 'Incidence & prevention of disease', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '615', 'name' => 'Pharmacology & theraputics', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '616', 'name' => 'Diseases', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '617', 'name' => 'Surgery & related medical specialities', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '618', 'name' => 'Gynecology & other medical specialities', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '619', 'name' => 'Experimental medicine', 'parent_id' => '611', 'level' => '3',],
+        ['code' => '620', 'name' => 'Engineering & allied operations', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '621', 'name' => 'Applied physics', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '622', 'name' => 'Mining & related operations', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '623', 'name' => 'Military & nautical engineering', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '624', 'name' => 'Civil engineering', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '625', 'name' => 'Engineering of railroads, roads', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '626', 'name' => 'Not assigned or no longer used', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '627', 'name' => 'Hydraulic engineering', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '628', 'name' => 'Sanitary & municipal engineering', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '629', 'name' => 'Other branches of engineering', 'parent_id' => '621', 'level' => '3',],
+        ['code' => '630', 'name' => 'Agriculture', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '631', 'name' => 'Techniques, equipment, materials', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '632', 'name' => 'Plant injuries, diseases, pests', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '633', 'name' => 'Field & plantation crops', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '634', 'name' => 'Orchards, fruits, forestry', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '635', 'name' => 'Garden crops (Horticulture)', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '636', 'name' => 'Animal husbandry', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '637', 'name' => 'Processing dairy & related products', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '638', 'name' => 'Insect culture', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '639', 'name' => 'Hunting, fishing, conservation', 'parent_id' => '631', 'level' => '3',],
+        ['code' => '640', 'name' => 'Home economics & family living', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '641', 'name' => 'Food & drink', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '642', 'name' => 'Meals & table service', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '643', 'name' => 'Housing & household equipment', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '644', 'name' => 'Household utilities', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '645', 'name' => 'Household furnishings', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '646', 'name' => 'Sewing, clothing, personal living', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '647', 'name' => 'Management of public households', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '648', 'name' => 'Housekeeping', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '649', 'name' => 'Child rearing & home care of sick', 'parent_id' => '641', 'level' => '3',],
+        ['code' => '650', 'name' => 'Management & auxiliary services', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '651', 'name' => 'Office services', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '652', 'name' => 'Processes of written communication', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '653', 'name' => 'Shorthand', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '654', 'name' => 'Not assigned or no longer used', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '655', 'name' => 'Not assigned or no longer used', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '656', 'name' => 'Not assigned or no longer used', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '657', 'name' => 'Accounting', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '658', 'name' => 'General management', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '659', 'name' => 'Advertising & public relations', 'parent_id' => '651', 'level' => '3',],
+        ['code' => '660', 'name' => 'Chemical engineering', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '661', 'name' => 'Industrial chemicals technology', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '662', 'name' => 'Explosives, fuels technology', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '663', 'name' => 'Beverage technology', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '664', 'name' => 'Food technology', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '665', 'name' => 'Industrial oils, fats, waxes, gases', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '666', 'name' => 'Ceramic & allied technologies', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '667', 'name' => 'Cleaning, color, related technologies', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '668', 'name' => 'Technology of other organic products', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '669', 'name' => 'Metallurgy', 'parent_id' => '661', 'level' => '3',],
+        ['code' => '670', 'name' => 'Manufacturing', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '671', 'name' => 'Metalworking & metal products', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '672', 'name' => 'Iron, steel, other iron alloys', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '673', 'name' => 'Nonferrous metals', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '674', 'name' => 'Lumber processing, wood products, cork', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '675', 'name' => 'Leather & fur processing', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '676', 'name' => 'Pulp & paper technology', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '677', 'name' => 'Textiles', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '678', 'name' => 'Elastomers & elastomer products', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '679', 'name' => 'Other products of specific materials', 'parent_id' => '671', 'level' => '3',],
+        ['code' => '680', 'name' => 'Manufacture for specific uses', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '681', 'name' => 'Precision instruments & other devices', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '682', 'name' => 'Small forge work (Blacksmithing)', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '683', 'name' => 'Hardware & household appliances', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '684', 'name' => 'Furnishings & home workshops', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '685', 'name' => 'Leather, fur, related products', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '686', 'name' => 'Printing & related activities', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '687', 'name' => 'Clothing', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '688', 'name' => 'Other final products & packaging', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '689', 'name' => 'Not assigned or no longer used', 'parent_id' => '681', 'level' => '3',],
+        ['code' => '690', 'name' => 'Buildings', 'parent_id' => '601', 'level' => '2',],
+        ['code' => '691', 'name' => 'Building materials', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '692', 'name' => 'Auxiliary construction practices', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '693', 'name' => 'Specific materials & purposes', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '694', 'name' => 'Wood construction Carpentry', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '695', 'name' => 'Roof covering', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '696', 'name' => 'Utilities', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '697', 'name' => 'Heating, ventilating, air-conditioning', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '698', 'name' => 'Detail finishing', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '699', 'name' => 'Not assigned or no longer used', 'parent_id' => '691', 'level' => '3',],
+        ['code' => '700', 'name' => 'The arts', 'parent_id' => null, 'level' => '1',],
+        ['code' => '701', 'name' => 'Philosophy & theory', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '702', 'name' => 'Miscellany', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '703', 'name' => 'Dictionaries & encyclopedias', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '704', 'name' => 'Special topics', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '705', 'name' => 'Serial publications', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '706', 'name' => 'Organizations & management', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '707', 'name' => 'Education, research, related topics', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '708', 'name' => 'Galleries, museums, private collections', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '709', 'name' => 'Historical, areas, persons treatment', 'parent_id' => '701', 'level' => '3',],
+        ['code' => '710', 'name' => 'Civic & landscape art', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '711', 'name' => 'Area planning (Civic art)', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '712', 'name' => 'Landscape architecture', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '713', 'name' => 'Landscape architecture of trafficways', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '714', 'name' => 'Water features', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '715', 'name' => 'Woody plants', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '716', 'name' => 'Herbaceous plants', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '717', 'name' => 'Structures', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '718', 'name' => 'Landscape design of cemeteries', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '719', 'name' => 'Natural landscapes', 'parent_id' => '711', 'level' => '3',],
+        ['code' => '720', 'name' => 'Architecture', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '721', 'name' => 'Architectural structure', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '722', 'name' => 'Architecture to ca. 300', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '723', 'name' => 'Architecture from ca. 300 to 1399', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '724', 'name' => 'Architecture from 1400', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '725', 'name' => 'Public structures', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '726', 'name' => 'Buildings for religious purposes', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '727', 'name' => 'Buildings for education & research', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '728', 'name' => 'Residential & related buildings', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '729', 'name' => 'Design & decoration', 'parent_id' => '721', 'level' => '3',],
+        ['code' => '730', 'name' => 'Plastic arts Sculpture', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '731', 'name' => 'Processes, forms, subjects of sculpture', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '732', 'name' => 'Sculpture to ca. 500', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '733', 'name' => 'Greek, Etruscan, Roman sculpture', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '734', 'name' => 'Sculpture from ca. 500 to 1399', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '735', 'name' => 'Sculpture from 1400', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '736', 'name' => 'Carving & carvings', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '737', 'name' => 'Numismatics & sigillography', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '738', 'name' => 'Ceramic arts', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '739', 'name' => 'Art metalwork', 'parent_id' => '731', 'level' => '3',],
+        ['code' => '740', 'name' => 'Drawing & decorative arts', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '741', 'name' => 'Drawing & drawings', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '742', 'name' => 'Perspective', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '743', 'name' => 'Drawing & drawings by subject', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '744', 'name' => 'Not assigned or no longer used', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '745', 'name' => 'Decorative arts', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '746', 'name' => 'Textile arts', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '747', 'name' => 'Interior decoration', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '748', 'name' => 'Glass', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '749', 'name' => 'Furniture & accessories', 'parent_id' => '741', 'level' => '3',],
+        ['code' => '750', 'name' => 'Painting & paintings', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '751', 'name' => 'Techniques, equipment, forms', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '752', 'name' => 'Color', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '753', 'name' => 'Symbolism, allegory, mythology, legend', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '754', 'name' => 'Genre paintings', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '755', 'name' => 'Religion & religious symbolism', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '756', 'name' => 'Not assigned or no longer used', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '757', 'name' => 'Human figures & their parts', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '758', 'name' => 'Other subjects', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '759', 'name' => 'Historical, areas, persons treatment', 'parent_id' => '751', 'level' => '3',],
+        ['code' => '760', 'name' => 'Graphic arts Printmaking & prints', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '761', 'name' => 'Relief processes (Block printing)', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '762', 'name' => 'Not assigned or no longer used', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '763', 'name' => 'Lithographic (Planographic) processes', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '764', 'name' => 'Chromolithography & serigraphy', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '765', 'name' => 'Metal engraving', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '766', 'name' => 'Mezzotinting & related processes', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '767', 'name' => 'Etching & drypoint', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '768', 'name' => 'Not assigned or no longer used', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '769', 'name' => 'Prints', 'parent_id' => '761', 'level' => '3',],
+        ['code' => '770', 'name' => 'Photography & photographs', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '771', 'name' => 'Techniques, equipment, materials', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '772', 'name' => 'Metallic salt processes', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '773', 'name' => 'Pigment processes of printing', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '774', 'name' => 'Holography', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '775', 'name' => 'Not assigned or no longer used', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '776', 'name' => 'Not assigned or no longer used', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '777', 'name' => 'Not assigned or no longer used', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '778', 'name' => 'Fields & kinds of photography', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '779', 'name' => 'Photographs', 'parent_id' => '771', 'level' => '3',],
+        ['code' => '780', 'name' => 'Music', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '781', 'name' => 'General principles & musical forms', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '782', 'name' => 'Vocal music', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '783', 'name' => 'Music for single voices The voice', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '784', 'name' => 'Instruments & Instrumental ensembles', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '785', 'name' => 'Chamber music', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '786', 'name' => 'Keyboard & other instruments', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '787', 'name' => 'Stringed instruments (Chordophones)', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '788', 'name' => 'Wind instruments (Aerophones)', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '789', 'name' => 'Not assigned or no longer used', 'parent_id' => '781', 'level' => '3',],
+        ['code' => '790', 'name' => 'Recreational & performing arts', 'parent_id' => '701', 'level' => '2',],
+        ['code' => '791', 'name' => 'Public performances', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '792', 'name' => 'Stage presentations', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '793', 'name' => 'Indoor games & amusements', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '794', 'name' => 'Indoor games of skill', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '795', 'name' => 'Games of chance', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '796', 'name' => 'Athletic & outdoor sports & games', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '797', 'name' => 'Aquatic & air sports', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '798', 'name' => 'Equestrian sports & animal racing', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '799', 'name' => 'Fishing, hunting, shooting', 'parent_id' => '791', 'level' => '3',],
+        ['code' => '800', 'name' => 'Literature & rhetoric', 'parent_id' => null, 'level' => '1',],
+        ['code' => '801', 'name' => 'Philosophy & theory', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '802', 'name' => 'Miscellany', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '803', 'name' => 'Dictionaries & encyclopedias', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '804', 'name' => 'Not assigned or no longer used', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '805', 'name' => 'Serial publications', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '806', 'name' => 'Organizations', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '807', 'name' => 'Education, research, related topics', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '808', 'name' => 'Rhetoric & collections of literature', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '809', 'name' => 'Literary history & criticism', 'parent_id' => '801', 'level' => '3',],
+        ['code' => '810', 'name' => 'American literature in English', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '811', 'name' => 'Poetry', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '812', 'name' => 'Drama', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '813', 'name' => 'Fiction', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '814', 'name' => 'Essays', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '815', 'name' => 'Speeches', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '816', 'name' => 'Letters', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '817', 'name' => 'Satire & humor', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '818', 'name' => 'Miscellaneous writings', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '819', 'name' => 'Not used', 'parent_id' => '811', 'level' => '3',],
+        ['code' => '820', 'name' => 'English & Old English literatures', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '821', 'name' => 'English poetry', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '822', 'name' => 'English drama', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '823', 'name' => 'English fiction', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '824', 'name' => 'English essays', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '825', 'name' => 'English speeches', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '826', 'name' => 'English letters', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '827', 'name' => 'English satire & humor', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '828', 'name' => 'English miscellaneous writings', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '829', 'name' => 'Old English (Anglo-Saxon)', 'parent_id' => '821', 'level' => '3',],
+        ['code' => '830', 'name' => 'Literatures of Germanic languages', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '831', 'name' => 'Early to 1517', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '832', 'name' => 'Reformation, etc.� 1517-1750', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '833', 'name' => 'Classic period,� 1750-1830', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '834', 'name' => 'Post classic & modern,� 1830-1940/50', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '835', 'name' => 'Contemporary authors not already established in the UIUC catalog,� 1940/50-', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '836', 'name' => 'German dialect literature', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '837', 'name' => 'German-American', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '838', 'name' => 'German miscellaneous writings', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '839', 'name' => 'Other Germanic literatures', 'parent_id' => '831', 'level' => '3',],
+        ['code' => '840', 'name' => 'Literatures of Romance languages', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '841', 'name' => 'Old and early French to 1400', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '842', 'name' => 'Transition & renaissance periods, 1400-1600', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '843', 'name' => 'Classical period, 1600-1715', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '844', 'name' => '18�th�Century, 1715-1789', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '845', 'name' => 'Revolution to present, 1789-1940/50', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '846', 'name' => 'Contemporary authors not already established in the UIUC Catalog, 1940/50-', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '847', 'name' => 'French Canadian', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '848', 'name' => 'Provencal', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '849', 'name' => 'French dialect literature', 'parent_id' => '841', 'level' => '3',],
+        ['code' => '850', 'name' => 'Italian, Romanian, Rhaeto-Romanic', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '851', 'name' => 'Early period to 1375', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '852', 'name' => 'Classical learning, 1375-1492', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '853', 'name' => '1492-1585', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '854', 'name' => '1585-1814', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '855', 'name' => '1814-1940/50', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '856', 'name' => 'Works�in�and/or�about�Italian dialects', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '857', 'name' => 'Sardinian', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '858', 'name' => 'Romanian (including Wallachian)', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '859', 'name' => 'Rumansh, Rhastian, Rhaeto-Romanic, Moldavian', 'parent_id' => '851', 'level' => '3',],
+        ['code' => '860', 'name' => 'Spanish & Portuguese literatures', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '861', 'name' => 'Early to 1400', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '862', 'name' => '1400-1553', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '863', 'name' => 'Golden age, 1554-1700', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '864', 'name' => '1700-1800', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '865', 'name' => '1800-', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '866', 'name' => 'Works in and/or about Iberian dialects other than Castilian, Catalan and Portuguese, including Asturian/Bable, Aragonese, Navarrese, Ladino, Sephardic, Morisco, Aljamia', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '867', 'name' => 'Catalan', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '868', 'name' => 'Portuguese', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '869', 'name' => 'South/Central American Literature', 'parent_id' => '861', 'level' => '3',],
+        ['code' => '870', 'name' => 'General works on Latin literature', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '871', 'name' => 'Latin Authors', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '872', 'name' => 'Collections of Latin prose or poetry', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '873', 'name' => 'Not Used', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '874', 'name' => 'Not Used', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '875', 'name' => 'Medieval and modern Latin literature, 500 A.D. � date', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '876', 'name' => 'Not Used', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '877', 'name' => 'Not Used', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '878', 'name' => 'Not Used', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '879', 'name' => 'Classical literature-History and criticism', 'parent_id' => '871', 'level' => '3',],
+        ['code' => '880', 'name' => 'Hellenic literatures Classical Greek', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '881', 'name' => 'Greek Authors', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '882', 'name' => 'Collections of Greek prose or poetry', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '883', 'name' => 'Not Used', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '884', 'name' => 'Not Used', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '885', 'name' => 'Modern Literature in the Ancient Greek Language', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '886', 'name' => 'Not Used', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '887', 'name' => 'Not Used', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '888', 'name' => 'Not Used', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '889', 'name' => 'Literature in Medieval and Modern Greek', 'parent_id' => '881', 'level' => '3',],
+        ['code' => '890', 'name' => 'Literatures of other languages', 'parent_id' => '801', 'level' => '2',],
+        ['code' => '891', 'name' => 'East Indo-European & Celtic literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '892', 'name' => 'Afro-Asiatic literatures; Semitic literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '893', 'name' => 'Non-Semitic Afro-Asiatic literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '894', 'name' => 'Altaic, Uralic, Hyperborean & Dravidian', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '895', 'name' => 'Literatures of East & Southeast Asia', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '896', 'name' => 'African literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '897', 'name' => 'North American native literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '898', 'name' => 'South American native literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '899', 'name' => 'Austronesian & other literatures', 'parent_id' => '891', 'level' => '3',],
+        ['code' => '900', 'name' => 'Geography & history', 'parent_id' => null, 'level' => '1',],
+        ['code' => '901', 'name' => 'Philosophy & theory', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '902', 'name' => 'Miscellany', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '903', 'name' => 'Dictionaries & encyclopedias', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '904', 'name' => 'Collected accounts of events', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '905', 'name' => 'Serial publications', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '906', 'name' => 'Organizations & management', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '907', 'name' => 'Education, research, related topics', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '908', 'name' => 'With respect to kinds of persons', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '909', 'name' => 'World history', 'parent_id' => '901', 'level' => '3',],
+        ['code' => '910', 'name' => 'Geography & travel', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '911', 'name' => 'Historical geography', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '912', 'name' => 'Graphic representations of earth', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '913', 'name' => 'Ancient world', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '914', 'name' => 'Europe', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '915', 'name' => 'Asia', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '916', 'name' => 'Africa', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '917', 'name' => 'North America', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '918', 'name' => 'South America', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '919', 'name' => 'Other areas', 'parent_id' => '911', 'level' => '3',],
+        ['code' => '920', 'name' => 'Biography, genealogy, insignia', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '921', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '922', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '923', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '924', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '925', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '926', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '927', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '928', 'name' => 'Not assigned or no longer used', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '929', 'name' => 'Genealogy, names, insignia', 'parent_id' => '921', 'level' => '3',],
+        ['code' => '930', 'name' => 'History of ancient world', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '931', 'name' => 'History of ancient world China', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '932', 'name' => 'History of ancient world Egypt', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '933', 'name' => 'History of ancient world Palestine', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '934', 'name' => 'History of ancient world India', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '935', 'name' => 'History of ancient world Mesopotamia & Iranian Plateau', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '936', 'name' => 'History of ancient world Europe north & west of Italy', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '937', 'name' => 'History of ancient world Italy & adjacent territories', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '938', 'name' => 'History of ancient world Greece', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '939', 'name' => 'History of ancient world Other parts of ancient world', 'parent_id' => '931', 'level' => '3',],
+        ['code' => '940', 'name' => 'General history of Europe', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '941', 'name' => 'General history of Europe British Isles', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '942', 'name' => 'General history of Europe England & Wales', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '943', 'name' => 'General history of Europe Central Europe Germany', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '944', 'name' => 'General history of Europe France & Monaco', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '945', 'name' => 'General history of Europe Italian Peninsula & adjacent islands', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '946', 'name' => 'General history of Europe Iberian Peninsula & adjacent islands', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '947', 'name' => 'General history of Europe Eastern Europe Soviet Union', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '948', 'name' => 'General history of Europe Northern Europe Scandinavia', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '949', 'name' => 'General history of Europe Other parts of Europe', 'parent_id' => '941', 'level' => '3',],
+        ['code' => '950', 'name' => 'General history of Asia Far East', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '951', 'name' => 'General history of Asia China & adjacent areas', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '952', 'name' => 'General history of Asia Japan', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '953', 'name' => 'General history of Asia Arabian Peninsula & adjacent areas', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '954', 'name' => 'General history of Asia South Asia India', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '955', 'name' => 'General history of Asia Iran', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '956', 'name' => 'General history of Asia Middle East (Near East)', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '957', 'name' => 'General history of Asia Siberia (Asiatic Russia)', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '958', 'name' => 'General history of Asia Central Asia', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '959', 'name' => 'General history of Asia Southeast Asia', 'parent_id' => '951', 'level' => '3',],
+        ['code' => '960', 'name' => 'General history of Africa', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '961', 'name' => 'General history of Africa Tunisia & Libya', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '962', 'name' => 'General history of Africa Egypt & Sudan', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '963', 'name' => 'General history of Africa Ethiopia', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '964', 'name' => 'General history of Africa Morocco & Canary Islands', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '965', 'name' => 'General history of Africa Algeria', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '966', 'name' => 'General history of Africa West Africa & offshore islands', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '967', 'name' => 'General history of Africa Central Africa & offshore islands', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '968', 'name' => 'General history of Africa Southern Africa', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '969', 'name' => 'General history of Africa South Indian Ocean islands', 'parent_id' => '961', 'level' => '3',],
+        ['code' => '970', 'name' => 'General history of North America', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '971', 'name' => 'General history of North America Canada', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '972', 'name' => 'General history of North America Middle America Mexico', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '973', 'name' => 'General history of North America United States', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '974', 'name' => 'General history of North America Northeastern United States', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '975', 'name' => 'General history of North America Southeastern United States', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '976', 'name' => 'General history of North America South central United States', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '977', 'name' => 'General history of North America North central United States', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '978', 'name' => 'General history of North America Western United States', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '979', 'name' => 'General history of North America Great Basin & Pacific Slope', 'parent_id' => '971', 'level' => '3',],
+        ['code' => '980', 'name' => 'General history of South America', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '981', 'name' => 'General history of South America Brazil', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '982', 'name' => 'General history of South America Argentina', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '983', 'name' => 'General history of South America Chile', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '984', 'name' => 'General history of South America Bolivia', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '985', 'name' => 'General history of South America Peru', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '986', 'name' => 'General history of South America Colombia & Ecuador', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '987', 'name' => 'General history of South America Venezuela', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '988', 'name' => 'General history of South America Guiana', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '989', 'name' => 'General history of South America Paraguay & Uruguay', 'parent_id' => '981', 'level' => '3',],
+        ['code' => '990', 'name' => 'General history of other areas', 'parent_id' => '901', 'level' => '2',],
+        ['code' => '991', 'name' => 'Not assigned or no longer used', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '992', 'name' => 'Not assigned or no longer used', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '993', 'name' => 'General history of other areas New Zealand', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '994', 'name' => 'General history of other areas Australia', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '995', 'name' => 'General history of other areas Melanesia New Guinea', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '996', 'name' => 'General history of other areas Other parts of Pacific Polynesia', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '997', 'name' => 'General history of other areas Atlantic Ocean islands', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '998', 'name' => 'General history of other areas Arctic islands & Antarctica', 'parent_id' => '991', 'level' => '3',],
+        ['code' => '999', 'name' => 'Extraterrestrial worlds', 'parent_id' => '991', 'level' => '3',],
     ];
 
 
-    //test 
-    // protected $arr = [
-    //     [
-    //         'code' => '000',
-    //         'name' => 'Computer science, information & general works',
-    //     ], [
-    //         'code' => '001',
-    //         'name' => 'Knowledge',
-    //     ], [
-    //         'code' => '002',
-    //         'name' => 'The book',
-    //     ], [
-    //         'code' => '003',
-    //         'name' => 'Systems',
-    //     ], [
-    //         'code' => '004',
-    //         'name' => 'Data processing & computer science',
-    //     ], [
-    //         'code' => '005',
-    //         'name' => 'Computer programming, programs & data',
-    //     ], [
-    //         'code' => '006',
-    //         'name' => 'Special computer methods',
-    //     ], [
-    //         'code' => '007',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '008',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '009',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '010',
-    //         'name' => 'Bibliography',
-    //     ], [
-    //         'code' => '011',
-    //         'name' => 'Bibliographies',
-    //     ], [
-    //         'code' => '012',
-    //         'name' => 'Bibliographies of individuals',
-    //     ], [
-    //         'code' => '013',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '014',
-    //         'name' => 'Of anonymous & pseudonymous works',
-    //     ], [
-    //         'code' => '015',
-    //         'name' => 'Bibliographies of works from specific places',
-    //     ], [
-    //         'code' => '016',
-    //         'name' => 'Bibliographies of works on specific subjects',
-    //     ], [
-    //         'code' => '017',
-    //         'name' => 'General subject catalogs',
-    //     ], [
-    //         'code' => '018',
-    //         'name' => 'Catalogs arranged by author, date, etc.',
-    //     ], [
-    //         'code' => '019',
-    //         'name' => 'Dictionary catalogs',
-    //     ], [
-    //         'code' => '020',
-    //         'name' => 'Library & information sciences',
-    //     ], [
-    //         'code' => '021',
-    //         'name' => 'Library relationships',
-    //     ], [
-    //         'code' => '022',
-    //         'name' => 'Administration of physical plant',
-    //     ], [
-    //         'code' => '023',
-    //         'name' => 'Personnel management',
-    //     ], [
-    //         'code' => '024',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '025',
-    //         'name' => 'Library operations',
-    //     ], [
-    //         'code' => '026',
-    //         'name' => 'Libraries for specific subjects',
-    //     ], [
-    //         'code' => '027',
-    //         'name' => 'General libraries',
-    //     ], [
-    //         'code' => '028',
-    //         'name' => 'Reading & use of other information media',
-    //     ], [
-    //         'code' => '029',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '030',
-    //         'name' => 'General encyclopedic works',
-    //     ], [
-    //         'code' => '031',
-    //         'name' => 'Encyclopedias in American English',
-    //     ], [
-    //         'code' => '032',
-    //         'name' => 'Encyclopedias in English',
-    //     ], [
-    //         'code' => '033',
-    //         'name' => 'In other Germanic languages',
-    //     ], [
-    //         'code' => '034',
-    //         'name' => 'Encyclopedias in French, Occitan & Catalan',
-    //     ], [
-    //         'code' => '035',
-    //         'name' => 'In Italian, Romanian & related languages',
-    //     ], [
-    //         'code' => '036',
-    //         'name' => 'Encyclopedias in Spanish & Portuguese',
-    //     ], [
-    //         'code' => '037',
-    //         'name' => 'Encyclopedias in Slavic languages',
-    //     ], [
-    //         'code' => '038',
-    //         'name' => 'Encyclopedias in Scandinavian languages',
-    //     ], [
-    //         'code' => '039',
-    //         'name' => 'Encyclopedias in other languages',
-    //     ], [
-    //         'code' => '040',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '041',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '042',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '043',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '044',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '045',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '046',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '047',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '048',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '049',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '050',
-    //         'name' => 'General serial publications',
-    //     ], [
-    //         'code' => '051',
-    //         'name' => 'Serials in American English',
-    //     ], [
-    //         'code' => '052',
-    //         'name' => 'Serials in English',
-    //     ], [
-    //         'code' => '053',
-    //         'name' => 'Serials in other Germanic languages',
-    //     ], [
-    //         'code' => '054',
-    //         'name' => 'Serials in French, Occitan & Catalan',
-    //     ], [
-    //         'code' => '055',
-    //         'name' => 'In Italian, Romanian & related languages',
-    //     ], [
-    //         'code' => '056',
-    //         'name' => 'Serials in Spanish & Portuguese',
-    //     ], [
-    //         'code' => '057',
-    //         'name' => 'Serials in Slavic languages',
-    //     ], [
-    //         'code' => '058',
-    //         'name' => 'Serials in Scandinavian languages',
-    //     ], [
-    //         'code' => '059',
-    //         'name' => 'Serials in other languages',
-    //     ], [
-    //         'code' => '060',
-    //         'name' => 'General organizations & museum science',
-    //     ], [
-    //         'code' => '061',
-    //         'name' => 'Organizations in North America',
-    //     ], [
-    //         'code' => '062',
-    //         'name' => 'Organizations in British Isles; in England',
-    //     ], [
-    //         'code' => '063',
-    //         'name' => 'Organizations in central Europe; in Germany',
-    //     ], [
-    //         'code' => '064',
-    //         'name' => 'Organizations in France & Monaco',
-    //     ], [
-    //         'code' => '065',
-    //         'name' => 'Organizations in Italy & adjacent islands',
-    //     ], [
-    //         'code' => '066',
-    //         'name' => 'In Iberian Peninsula & adjacent islands',
-    //     ], [
-    //         'code' => '067',
-    //         'name' => 'Organizations in eastern Europe; in Russia',
-    //     ], [
-    //         'code' => '068',
-    //         'name' => 'Organizations in other geographic areas',
-    //     ], [
-    //         'code' => '069',
-    //         'name' => 'Museum science',
-    //     ], [
-    //         'code' => '070',
-    //         'name' => 'News media, journalism & publishing',
-    //     ], [
-    //         'code' => '071',
-    //         'name' => 'Newspapers in North America',
-    //     ], [
-    //         'code' => '072',
-    //         'name' => 'Newspapers in British Isles; in England',
-    //     ], [
-    //         'code' => '073',
-    //         'name' => 'Newspapers in central Europe; in Germany',
-    //     ], [
-    //         'code' => '074',
-    //         'name' => 'Newspapers in France & Monaco',
-    //     ], [
-    //         'code' => '075',
-    //         'name' => 'Newspapers in Italy & adjacent islands',
-    //     ], [
-    //         'code' => '076',
-    //         'name' => 'In Iberian Peninsula & adjacent islands',
-    //     ], [
-    //         'code' => '077',
-    //         'name' => 'Newspapers in eastern Europe; in Russia',
-    //     ], [
-    //         'code' => '078',
-    //         'name' => 'Newspapers in Scandinavia',
-    //     ], [
-    //         'code' => '079',
-    //         'name' => 'Newspapers in other geographic areas',
-    //     ], [
-    //         'code' => '080',
-    //         'name' => 'General collections',
-    //     ], [
-    //         'code' => '081',
-    //         'name' => 'Collections in American English',
-    //     ], [
-    //         'code' => '082',
-    //         'name' => 'Collections in English',
-    //     ], [
-    //         'code' => '083',
-    //         'name' => 'Collections in other Germanic languages',
-    //     ], [
-    //         'code' => '084',
-    //         'name' => 'Collections in French, Occitan & Catalan',
-    //     ], [
-    //         'code' => '085',
-    //         'name' => 'In Italian, Romanian & related languages',
-    //     ], [
-    //         'code' => '086',
-    //         'name' => 'Collections in Spanish & Portuguese',
-    //     ], [
-    //         'code' => '087',
-    //         'name' => 'Collections in Slavic languages',
-    //     ], [
-    //         'code' => '088',
-    //         'name' => 'Collections in Scandinavian languages',
-    //     ], [
-    //         'code' => '089',
-    //         'name' => 'Collections in other languages',
-    //     ], [
-    //         'code' => '090',
-    //         'name' => 'Manuscripts & rare books',
-    //     ], [
-    //         'code' => '091',
-    //         'name' => 'Manuscripts',
-    //     ], [
-    //         'code' => '092',
-    //         'name' => 'Block books',
-    //     ], [
-    //         'code' => '093',
-    //         'name' => 'Incunabula',
-    //     ], [
-    //         'code' => '094',
-    //         'name' => 'Printed books',
-    //     ], [
-    //         'code' => '095',
-    //         'name' => 'Books notable for bindings',
-    //     ], [
-    //         'code' => '096',
-    //         'name' => 'Books notable for illustrations',
-    //     ], [
-    //         'code' => '097',
-    //         'name' => 'Books notable for ownership or origin',
-    //     ], [
-    //         'code' => '098',
-    //         'name' => 'Prohibited works, forgeries & hoaxes',
-    //     ], [
-    //         'code' => '099',
-    //         'name' => 'Books notable for format',
-    //     ], [
-    //         'code' => '0',
-    //         'name' => 'Philosophy & psychology',
-    //     ], [
-    //         'code' => '1',
-    //         'name' => 'Theory of philosophy',
-    //     ], [
-    //         'code' => '2',
-    //         'name' => 'Miscellany',
-    //     ], [
-    //         'code' => '3',
-    //         'name' => 'Dictionaries & encyclopedias',
-    //     ], [
-    //         'code' => '4',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '5',
-    //         'name' => 'Serial publications',
-    //     ], [
-    //         'code' => '6',
-    //         'name' => 'Organizations & management',
-    //     ], [
-    //         'code' => '7',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '8',
-    //         'name' => 'Kinds of persons treatment',
-    //     ], [
-    //         'code' => '9',
-    //         'name' => 'Historical & collected persons treatment',
-    //     ], [
-    //         'code' => '10',
-    //         'name' => 'Metaphysics',
-    //     ], [
-    //         'code' => '11',
-    //         'name' => 'Ontology',
-    //     ], [
-    //         'code' => '12',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '13',
-    //         'name' => 'Cosmology',
-    //     ], [
-    //         'code' => '14',
-    //         'name' => 'Space',
-    //     ], [
-    //         'code' => '15',
-    //         'name' => 'Time',
-    //     ], [
-    //         'code' => '16',
-    //         'name' => 'Change',
-    //     ], [
-    //         'code' => '17',
-    //         'name' => 'Structure',
-    //     ], [
-    //         'code' => '18',
-    //         'name' => 'Force & energy',
-    //     ], [
-    //         'code' => '19',
-    //         'name' => 'Number & quantity',
-    //     ], [
-    //         'code' => '20',
-    //         'name' => 'Epistemology, causation & humankind',
-    //     ], [
-    //         'code' => '21',
-    //         'name' => 'Epistemology',
-    //     ], [
-    //         'code' => '22',
-    //         'name' => 'Causation',
-    //     ], [
-    //         'code' => '23',
-    //         'name' => 'Determinism & indeterminism',
-    //     ], [
-    //         'code' => '24',
-    //         'name' => 'Teleology',
-    //     ], [
-    //         'code' => '25',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '26',
-    //         'name' => 'The self',
-    //     ], [
-    //         'code' => '27',
-    //         'name' => 'The unconscious & the subconscious',
-    //     ], [
-    //         'code' => '28',
-    //         'name' => 'Humankind',
-    //     ], [
-    //         'code' => '29',
-    //         'name' => 'Origin & destiny of individual souls',
-    //     ], [
-    //         'code' => '30',
-    //         'name' => 'Parapsychology & occultism',
-    //     ], [
-    //         'code' => '31',
-    //         'name' => 'Parapsychological & occult methods',
-    //     ], [
-    //         'code' => '32',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '33',
-    //         'name' => 'Specific topics in parapsychology & occultism',
-    //     ], [
-    //         'code' => '34',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '35',
-    //         'name' => 'Dreams & mysteries',
-    //     ], [
-    //         'code' => '36',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '37',
-    //         'name' => 'Divinatory graphology',
-    //     ], [
-    //         'code' => '38',
-    //         'name' => 'Physiognomy',
-    //     ], [
-    //         'code' => '39',
-    //         'name' => 'Phrenology',
-    //     ], [
-    //         'code' => '40',
-    //         'name' => 'Specific philosophical schools',
-    //     ], [
-    //         'code' => '41',
-    //         'name' => 'Idealism & related systems',
-    //     ], [
-    //         'code' => '42',
-    //         'name' => 'Critical philosophy',
-    //     ], [
-    //         'code' => '43',
-    //         'name' => 'Bergsonism & intuitionism',
-    //     ], [
-    //         'code' => '44',
-    //         'name' => 'Humanism & related systems',
-    //     ], [
-    //         'code' => '45',
-    //         'name' => 'Sensationalism',
-    //     ], [
-    //         'code' => '46',
-    //         'name' => 'Naturalism & related systems',
-    //     ], [
-    //         'code' => '47',
-    //         'name' => 'Pantheism & related systems',
-    //     ], [
-    //         'code' => '48',
-    //         'name' => 'Eclecticism, liberalism & traditionalism',
-    //     ], [
-    //         'code' => '49',
-    //         'name' => 'Other philosophical systems',
-    //     ], [
-    //         'code' => '50',
-    //         'name' => 'Psychology',
-    //     ], [
-    //         'code' => '51',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '52',
-    //         'name' => 'Perception, movement, emotions & drives',
-    //     ], [
-    //         'code' => '53',
-    //         'name' => 'Mental processes & intelligence',
-    //     ], [
-    //         'code' => '54',
-    //         'name' => 'Subconscious & altered states',
-    //     ], [
-    //         'code' => '55',
-    //         'name' => 'Differential & developmental psychology',
-    //     ], [
-    //         'code' => '56',
-    //         'name' => 'Comparative psychology',
-    //     ], [
-    //         'code' => '57',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '58',
-    //         'name' => 'Applied psychology',
-    //     ], [
-    //         'code' => '59',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '60',
-    //         'name' => 'Logic',
-    //     ], [
-    //         'code' => '61',
-    //         'name' => 'Induction',
-    //     ], [
-    //         'code' => '62',
-    //         'name' => 'Deduction',
-    //     ], [
-    //         'code' => '63',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '64',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '65',
-    //         'name' => 'Fallacies & sources of error',
-    //     ], [
-    //         'code' => '66',
-    //         'name' => 'Syllogisms',
-    //     ], [
-    //         'code' => '67',
-    //         'name' => 'Hypotheses',
-    //     ], [
-    //         'code' => '68',
-    //         'name' => 'Argument & persuasion',
-    //     ], [
-    //         'code' => '69',
-    //         'name' => 'Analogy',
-    //     ], [
-    //         'code' => '70',
-    //         'name' => 'Ethics',
-    //     ], [
-    //         'code' => '71',
-    //         'name' => 'Ethical systems',
-    //     ], [
-    //         'code' => '72',
-    //         'name' => 'Political ethics',
-    //     ], [
-    //         'code' => '73',
-    //         'name' => 'Ethics of family relationships',
-    //     ], [
-    //         'code' => '74',
-    //         'name' => 'Occupational ethics',
-    //     ], [
-    //         'code' => '75',
-    //         'name' => 'Ethics of recreation & leisure',
-    //     ], [
-    //         'code' => '76',
-    //         'name' => 'Ethics of sex & reproduction',
-    //     ], [
-    //         'code' => '77',
-    //         'name' => 'Ethics of social relations',
-    //     ], [
-    //         'code' => '78',
-    //         'name' => 'Ethics of consumption',
-    //     ], [
-    //         'code' => '79',
-    //         'name' => 'Other ethical norms',
-    //     ], [
-    //         'code' => '80',
-    //         'name' => 'Ancient, medieval & eastern philosophy',
-    //     ], [
-    //         'code' => '81',
-    //         'name' => 'Eastern philosophy',
-    //     ], [
-    //         'code' => '82',
-    //         'name' => 'Pre-Socratic Greek philosophies',
-    //     ], [
-    //         'code' => '83',
-    //         'name' => 'Socratic & related philosophies',
-    //     ], [
-    //         'code' => '84',
-    //         'name' => 'Platonic philosophy',
-    //     ], [
-    //         'code' => '85',
-    //         'name' => 'Aristotelian philosophy',
-    //     ], [
-    //         'code' => '86',
-    //         'name' => 'Skeptic & Neoplatonic philosophies',
-    //     ], [
-    //         'code' => '87',
-    //         'name' => 'Epicurean philosophy',
-    //     ], [
-    //         'code' => '88',
-    //         'name' => 'Stoic philosophy',
-    //     ], [
-    //         'code' => '89',
-    //         'name' => 'Medieval western philosophy',
-    //     ], [
-    //         'code' => '90',
-    //         'name' => 'Modern western philosophy',
-    //     ], [
-    //         'code' => '91',
-    //         'name' => 'Philosophy of United States & Canada',
-    //     ], [
-    //         'code' => '92',
-    //         'name' => 'Philosophy of British Isles',
-    //     ], [
-    //         'code' => '93',
-    //         'name' => 'Philosophy of Germany & Austria',
-    //     ], [
-    //         'code' => '94',
-    //         'name' => 'Philosophy of France',
-    //     ], [
-    //         'code' => '95',
-    //         'name' => 'Philosophy of Italy',
-    //     ], [
-    //         'code' => '96',
-    //         'name' => 'Philosophy of Spain & Portugal',
-    //     ], [
-    //         'code' => '97',
-    //         'name' => 'Philosophy of former Soviet Union',
-    //     ], [
-    //         'code' => '98',
-    //         'name' => 'Philosophy of Scandinavia',
-    //     ], [
-    //         'code' => '99',
-    //         'name' => 'Philosophy in other geographic areas',
-    //     ], [
-    //         'code' => '100',
-    //         'name' => 'Religion',
-    //     ], [
-    //         'code' => '101',
-    //         'name' => 'Religious mythology & social theology',
-    //     ], [
-    //         'code' => '102',
-    //         'name' => 'Doctrines',
-    //     ], [
-    //         'code' => '103',
-    //         'name' => 'Public worship & other practices',
-    //     ], [
-    //         'code' => '104',
-    //         'name' => 'Religious experience, life & practice',
-    //     ], [
-    //         'code' => '105',
-    //         'name' => 'Religious ethics',
-    //     ], [
-    //         'code' => '106',
-    //         'name' => 'Leaders & organization',
-    //     ], [
-    //         'code' => '107',
-    //         'name' => 'Missions & religious education',
-    //     ], [
-    //         'code' => '108',
-    //         'name' => 'Sources',
-    //     ], [
-    //         'code' => '109',
-    //         'name' => 'Sects & reform movements',
-    //     ], [
-    //         'code' => '110',
-    //         'name' => 'Philosophy & theory of religion',
-    //     ], [
-    //         'code' => '111',
-    //         'name' => 'Concepts of God',
-    //     ], [
-    //         'code' => '112',
-    //         'name' => 'Existence, knowability & attributes of God',
-    //     ], [
-    //         'code' => '113',
-    //         'name' => 'Creation',
-    //     ], [
-    //         'code' => '114',
-    //         'name' => 'Theodicy',
-    //     ], [
-    //         'code' => '115',
-    //         'name' => 'Science & religion',
-    //     ], [
-    //         'code' => '116',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '117',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '118',
-    //         'name' => 'Humankind',
-    //     ], [
-    //         'code' => '119',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '120',
-    //         'name' => 'Bible',
-    //     ], [
-    //         'code' => '121',
-    //         'name' => 'Old Testament (Tanakh)',
-    //     ], [
-    //         'code' => '122',
-    //         'name' => 'Historical books of Old Testament',
-    //     ], [
-    //         'code' => '123',
-    //         'name' => 'Poetic books of Old Testament',
-    //     ], [
-    //         'code' => '124',
-    //         'name' => 'Prophetic books of Old Testament',
-    //     ], [
-    //         'code' => '125',
-    //         'name' => 'New Testament',
-    //     ], [
-    //         'code' => '126',
-    //         'name' => 'Gospels & Acts',
-    //     ], [
-    //         'code' => '127',
-    //         'name' => 'Epistles',
-    //     ], [
-    //         'code' => '128',
-    //         'name' => 'Revelation (Apocalypse)',
-    //     ], [
-    //         'code' => '129',
-    //         'name' => 'Apocrypha & pseudepigrapha',
-    //     ], [
-    //         'code' => '130',
-    //         'name' => 'Christianity & Christian theology',
-    //     ], [
-    //         'code' => '131',
-    //         'name' => 'God',
-    //     ], [
-    //         'code' => '132',
-    //         'name' => 'Jesus Christ & his family',
-    //     ], [
-    //         'code' => '133',
-    //         'name' => 'Humankind',
-    //     ], [
-    //         'code' => '134',
-    //         'name' => 'Salvation & grace',
-    //     ], [
-    //         'code' => '135',
-    //         'name' => 'Spiritual beings',
-    //     ], [
-    //         'code' => '136',
-    //         'name' => 'Eschatology',
-    //     ], [
-    //         'code' => '137',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '138',
-    //         'name' => 'Creeds & catechisms',
-    //     ], [
-    //         'code' => '139',
-    //         'name' => 'Apologetics & polemics',
-    //     ], [
-    //         'code' => '140',
-    //         'name' => 'Christian moral & devotional theology',
-    //     ], [
-    //         'code' => '141',
-    //         'name' => 'Christian ethics',
-    //     ], [
-    //         'code' => '142',
-    //         'name' => 'Devotional literature',
-    //     ], [
-    //         'code' => '143',
-    //         'name' => 'Evangelistic writings for individuals',
-    //     ], [
-    //         'code' => '144',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '145',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '146',
-    //         'name' => 'Use of art in Christianity',
-    //     ], [
-    //         'code' => '147',
-    //         'name' => 'Church furnishings & articles',
-    //     ], [
-    //         'code' => '148',
-    //         'name' => 'Christian experience, practice & life',
-    //     ], [
-    //         'code' => '149',
-    //         'name' => 'Christian observances in family life',
-    //     ], [
-    //         'code' => '150',
-    //         'name' => 'Christian orders & local church',
-    //     ], [
-    //         'code' => '151',
-    //         'name' => 'Preaching',
-    //     ], [
-    //         'code' => '152',
-    //         'name' => 'Texts of sermons',
-    //     ], [
-    //         'code' => '153',
-    //         'name' => 'Pastoral office & work',
-    //     ], [
-    //         'code' => '154',
-    //         'name' => 'Parish administration',
-    //     ], [
-    //         'code' => '155',
-    //         'name' => 'Religious congregations & orders',
-    //     ], [
-    //         'code' => '156',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '157',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '158',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '159',
-    //         'name' => 'Pastoral care of families & kinds of persons',
-    //     ], [
-    //         'code' => '160',
-    //         'name' => 'Social & ecclesiastical theology',
-    //     ], [
-    //         'code' => '161',
-    //         'name' => 'Social theology',
-    //     ], [
-    //         'code' => '162',
-    //         'name' => 'Ecclesiology',
-    //     ], [
-    //         'code' => '163',
-    //         'name' => 'Days, times & places of observance',
-    //     ], [
-    //         'code' => '164',
-    //         'name' => 'Public worship',
-    //     ], [
-    //         'code' => '165',
-    //         'name' => 'Sacraments, other rites & acts',
-    //     ], [
-    //         'code' => '166',
-    //         'name' => 'Missions',
-    //     ], [
-    //         'code' => '167',
-    //         'name' => 'Associations for religious work',
-    //     ], [
-    //         'code' => '168',
-    //         'name' => 'Religious education',
-    //     ], [
-    //         'code' => '169',
-    //         'name' => 'Spiritual renewal',
-    //     ], [
-    //         'code' => '170',
-    //         'name' => 'History of Christianity & Christian church',
-    //     ], [
-    //         'code' => '171',
-    //         'name' => 'Religious orders in church history',
-    //     ], [
-    //         'code' => '172',
-    //         'name' => 'Persecutions in church history',
-    //     ], [
-    //         'code' => '173',
-    //         'name' => 'Doctrinal controversies & heresies',
-    //     ], [
-    //         'code' => '174',
-    //         'name' => 'History of Christianity in Europe',
-    //     ], [
-    //         'code' => '175',
-    //         'name' => 'History of Christianity in Asia',
-    //     ], [
-    //         'code' => '176',
-    //         'name' => 'History of Christianity in Africa',
-    //     ], [
-    //         'code' => '177',
-    //         'name' => 'History of Christianity in North America',
-    //     ], [
-    //         'code' => '178',
-    //         'name' => 'History of Christianity in South America',
-    //     ], [
-    //         'code' => '179',
-    //         'name' => 'History of Christianity in other areas',
-    //     ], [
-    //         'code' => '180',
-    //         'name' => 'Christian denominations & sects',
-    //     ], [
-    //         'code' => '181',
-    //         'name' => 'Early church & Eastern churches',
-    //     ], [
-    //         'code' => '182',
-    //         'name' => 'Roman Catholic Church',
-    //     ], [
-    //         'code' => '183',
-    //         'name' => 'Anglican churches',
-    //     ], [
-    //         'code' => '184',
-    //         'name' => 'Protestants of Continental origin',
-    //     ], [
-    //         'code' => '185',
-    //         'name' => 'Presbyterian, Reformed & Congregational',
-    //     ], [
-    //         'code' => '186',
-    //         'name' => 'Baptist, Disciples of Christ & Adventist',
-    //     ], [
-    //         'code' => '187',
-    //         'name' => 'Methodist & related churches',
-    //     ], [
-    //         'code' => '188',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '189',
-    //         'name' => 'Other denominations & sects',
-    //     ], [
-    //         'code' => '190',
-    //         'name' => 'Other religions',
-    //     ], [
-    //         'code' => '191',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '192',
-    //         'name' => 'Greek & Roman religion',
-    //     ], [
-    //         'code' => '193',
-    //         'name' => 'Germanic religion',
-    //     ], [
-    //         'code' => '194',
-    //         'name' => 'Religions of Indic origin',
-    //     ], [
-    //         'code' => '195',
-    //         'name' => 'Zoroastrianism',
-    //     ], [
-    //         'code' => '196',
-    //         'name' => 'Judaism',
-    //     ], [
-    //         'code' => '197',
-    //         'name' => 'Islam, Babism & Bahai Faith',
-    //     ], [
-    //         'code' => '198',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '199',
-    //         'name' => 'Religions not provided for elsewhere',
-    //     ], [
-    //         'code' => '200',
-    //         'name' => 'Social sciences',
-    //     ], [
-    //         'code' => '201',
-    //         'name' => 'Sociology & anthropology',
-    //     ], [
-    //         'code' => '202',
-    //         'name' => 'Social interaction',
-    //     ], [
-    //         'code' => '203',
-    //         'name' => 'Social processes',
-    //     ], [
-    //         'code' => '204',
-    //         'name' => 'Factors affecting social behavior',
-    //     ], [
-    //         'code' => '205',
-    //         'name' => 'Social groups',
-    //     ], [
-    //         'code' => '206',
-    //         'name' => 'Culture & institutions',
-    //     ], [
-    //         'code' => '207',
-    //         'name' => 'Communities',
-    //     ], [
-    //         'code' => '208',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '209',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '210',
-    //         'name' => 'Collections of general statistics',
-    //     ], [
-    //         'code' => '211',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '212',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '213',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '214',
-    //         'name' => 'General statistics of Europe',
-    //     ], [
-    //         'code' => '215',
-    //         'name' => 'General statistics of Asia',
-    //     ], [
-    //         'code' => '216',
-    //         'name' => 'General statistics of Africa',
-    //     ], [
-    //         'code' => '217',
-    //         'name' => 'General statistics of North America',
-    //     ], [
-    //         'code' => '218',
-    //         'name' => 'General statistics of South America',
-    //     ], [
-    //         'code' => '219',
-    //         'name' => 'General statistics of other areas',
-    //     ], [
-    //         'code' => '220',
-    //         'name' => 'Political science',
-    //     ], [
-    //         'code' => '221',
-    //         'name' => 'Systems of governments & states',
-    //     ], [
-    //         'code' => '222',
-    //         'name' => 'Relation of state to organized groups',
-    //     ], [
-    //         'code' => '223',
-    //         'name' => 'Civil & political rights',
-    //     ], [
-    //         'code' => '224',
-    //         'name' => 'The political process',
-    //     ], [
-    //         'code' => '225',
-    //         'name' => 'International migration & colonization',
-    //     ], [
-    //         'code' => '226',
-    //         'name' => 'Slavery & emancipation',
-    //     ], [
-    //         'code' => '227',
-    //         'name' => 'International relations',
-    //     ], [
-    //         'code' => '228',
-    //         'name' => 'The legislative process',
-    //     ], [
-    //         'code' => '229',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '230',
-    //         'name' => 'Economics',
-    //     ], [
-    //         'code' => '231',
-    //         'name' => 'Labor economics',
-    //     ], [
-    //         'code' => '232',
-    //         'name' => 'Financial economics',
-    //     ], [
-    //         'code' => '233',
-    //         'name' => 'Economics of land & energy',
-    //     ], [
-    //         'code' => '234',
-    //         'name' => 'Cooperatives',
-    //     ], [
-    //         'code' => '235',
-    //         'name' => 'Socialism & related systems',
-    //     ], [
-    //         'code' => '236',
-    //         'name' => 'Public finance',
-    //     ], [
-    //         'code' => '237',
-    //         'name' => 'International economics',
-    //     ], [
-    //         'code' => '238',
-    //         'name' => 'Production',
-    //     ], [
-    //         'code' => '239',
-    //         'name' => 'Macroeconomics & related topics',
-    //     ], [
-    //         'code' => '240',
-    //         'name' => 'Law',
-    //     ], [
-    //         'code' => '241',
-    //         'name' => 'Law of nations',
-    //     ], [
-    //         'code' => '242',
-    //         'name' => 'Constitutional & administrative law',
-    //     ], [
-    //         'code' => '243',
-    //         'name' => 'Military, tax, trade & industrial law',
-    //     ], [
-    //         'code' => '244',
-    //         'name' => 'Labor, social, education & cultural law',
-    //     ], [
-    //         'code' => '245',
-    //         'name' => 'Criminal law',
-    //     ], [
-    //         'code' => '246',
-    //         'name' => 'Private law',
-    //     ], [
-    //         'code' => '247',
-    //         'name' => 'Civil procedure & courts',
-    //     ], [
-    //         'code' => '248',
-    //         'name' => 'Laws, regulations & cases',
-    //     ], [
-    //         'code' => '249',
-    //         'name' => 'Law of specific jurisdictions & areas',
-    //     ], [
-    //         'code' => '250',
-    //         'name' => 'Public administration & military science',
-    //     ], [
-    //         'code' => '251',
-    //         'name' => 'Public administration',
-    //     ], [
-    //         'code' => '252',
-    //         'name' => 'General considerations of public administration',
-    //     ], [
-    //         'code' => '253',
-    //         'name' => 'Specific fields of public administration',
-    //     ], [
-    //         'code' => '254',
-    //         'name' => 'Administration of economy & environment',
-    //     ], [
-    //         'code' => '255',
-    //         'name' => 'Military science',
-    //     ], [
-    //         'code' => '256',
-    //         'name' => 'Infantry forces & warfare',
-    //     ], [
-    //         'code' => '257',
-    //         'name' => 'Mounted forces & warfare',
-    //     ], [
-    //         'code' => '258',
-    //         'name' => 'Air & other specialized forces',
-    //     ], [
-    //         'code' => '259',
-    //         'name' => 'Sea forces & warfare',
-    //     ], [
-    //         'code' => '260',
-    //         'name' => 'Social problems & services; associations',
-    //     ], [
-    //         'code' => '261',
-    //         'name' => 'Social problems & social welfare in general',
-    //     ], [
-    //         'code' => '262',
-    //         'name' => 'Social welfare problems & services',
-    //     ], [
-    //         'code' => '263',
-    //         'name' => 'Other social problems & services',
-    //     ], [
-    //         'code' => '264',
-    //         'name' => 'Criminology',
-    //     ], [
-    //         'code' => '265',
-    //         'name' => 'Penal & related institutions',
-    //     ], [
-    //         'code' => '266',
-    //         'name' => 'Associations',
-    //     ], [
-    //         'code' => '267',
-    //         'name' => 'General clubs',
-    //     ], [
-    //         'code' => '268',
-    //         'name' => 'Insurance',
-    //     ], [
-    //         'code' => '269',
-    //         'name' => 'Miscellaneous kinds of associations',
-    //     ], [
-    //         'code' => '270',
-    //         'name' => 'Education',
-    //     ], [
-    //         'code' => '271',
-    //         'name' => 'Schools & their activities; special education',
-    //     ], [
-    //         'code' => '272',
-    //         'name' => 'Elementary education',
-    //     ], [
-    //         'code' => '273',
-    //         'name' => 'Secondary education',
-    //     ], [
-    //         'code' => '274',
-    //         'name' => 'Adult education',
-    //     ], [
-    //         'code' => '275',
-    //         'name' => 'Curricula',
-    //     ], [
-    //         'code' => '276',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '277',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '278',
-    //         'name' => 'Higher education',
-    //     ], [
-    //         'code' => '279',
-    //         'name' => 'Public policy issues in education',
-    //     ], [
-    //         'code' => '280',
-    //         'name' => 'Commerce, communications & transportation',
-    //     ], [
-    //         'code' => '281',
-    //         'name' => 'Commerce',
-    //     ], [
-    //         'code' => '282',
-    //         'name' => 'International commerce',
-    //     ], [
-    //         'code' => '283',
-    //         'name' => 'Postal communication',
-    //     ], [
-    //         'code' => '284',
-    //         'name' => 'Communications; telecommunication',
-    //     ], [
-    //         'code' => '285',
-    //         'name' => 'Railroad transportation',
-    //     ], [
-    //         'code' => '286',
-    //         'name' => 'Inland waterway & ferry transportation',
-    //     ], [
-    //         'code' => '287',
-    //         'name' => 'Water, air & space transportation',
-    //     ], [
-    //         'code' => '288',
-    //         'name' => 'Transportation; ground transportation',
-    //     ], [
-    //         'code' => '289',
-    //         'name' => 'Metrology & standardization',
-    //     ], [
-    //         'code' => '290',
-    //         'name' => 'Customs, etiquette & folklore',
-    //     ], [
-    //         'code' => '291',
-    //         'name' => 'Costume & personal appearance',
-    //     ], [
-    //         'code' => '292',
-    //         'name' => 'Customs of life cycle & domestic life',
-    //     ], [
-    //         'code' => '293',
-    //         'name' => 'Death customs',
-    //     ], [
-    //         'code' => '294',
-    //         'name' => 'General customs',
-    //     ], [
-    //         'code' => '295',
-    //         'name' => 'Etiquette (Manners)',
-    //     ], [
-    //         'code' => '296',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '297',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '298',
-    //         'name' => 'Folklore',
-    //     ], [
-    //         'code' => '299',
-    //         'name' => 'Customs of war & diplomacy',
-    //     ], [
-    //         'code' => '300',
-    //         'name' => 'Language',
-    //     ], [
-    //         'code' => '301',
-    //         'name' => 'Philosophy & theory',
-    //     ], [
-    //         'code' => '302',
-    //         'name' => 'Miscellany',
-    //     ], [
-    //         'code' => '303',
-    //         'name' => 'Dictionaries & encyclopedias',
-    //     ], [
-    //         'code' => '304',
-    //         'name' => 'Special topics',
-    //     ], [
-    //         'code' => '305',
-    //         'name' => 'Serial publications',
-    //     ], [
-    //         'code' => '306',
-    //         'name' => 'Organizations & management',
-    //     ], [
-    //         'code' => '307',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '308',
-    //         'name' => 'Kinds of persons treatment',
-    //     ], [
-    //         'code' => '309',
-    //         'name' => 'Geographic & persons treatment',
-    //     ], [
-    //         'code' => '310',
-    //         'name' => 'Linguistics',
-    //     ], [
-    //         'code' => '311',
-    //         'name' => 'Writing systems',
-    //     ], [
-    //         'code' => '312',
-    //         'name' => 'Etymology',
-    //     ], [
-    //         'code' => '313',
-    //         'name' => 'Dictionaries',
-    //     ], [
-    //         'code' => '314',
-    //         'name' => 'Phonology & phonetics',
-    //     ], [
-    //         'code' => '315',
-    //         'name' => 'Grammar',
-    //     ], [
-    //         'code' => '316',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '317',
-    //         'name' => 'Dialectology & historical linguistics',
-    //     ], [
-    //         'code' => '318',
-    //         'name' => 'Standard usage & applied linguistics',
-    //     ], [
-    //         'code' => '319',
-    //         'name' => 'Sign languages',
-    //     ], [
-    //         'code' => '320',
-    //         'name' => 'English & Old English',
-    //     ], [
-    //         'code' => '321',
-    //         'name' => 'English writing system & phonology',
-    //     ], [
-    //         'code' => '322',
-    //         'name' => 'English etymology',
-    //     ], [
-    //         'code' => '323',
-    //         'name' => 'English dictionaries',
-    //     ], [
-    //         'code' => '324',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '325',
-    //         'name' => 'English grammar',
-    //     ], [
-    //         'code' => '326',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '327',
-    //         'name' => 'English language variations',
-    //     ], [
-    //         'code' => '328',
-    //         'name' => 'Standard English usage',
-    //     ], [
-    //         'code' => '329',
-    //         'name' => 'Old English (Anglo-Saxon)',
-    //     ], [
-    //         'code' => '330',
-    //         'name' => 'Germanic languages; German',
-    //     ], [
-    //         'code' => '331',
-    //         'name' => 'German writing systems & phonology',
-    //     ], [
-    //         'code' => '332',
-    //         'name' => 'German etymology',
-    //     ], [
-    //         'code' => '333',
-    //         'name' => 'German dictionaries',
-    //     ], [
-    //         'code' => '334',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '335',
-    //         'name' => 'German grammar',
-    //     ], [
-    //         'code' => '336',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '337',
-    //         'name' => 'German language variations',
-    //     ], [
-    //         'code' => '338',
-    //         'name' => 'Standard German usage',
-    //     ], [
-    //         'code' => '339',
-    //         'name' => 'Other Germanic languages',
-    //     ], [
-    //         'code' => '340',
-    //         'name' => 'Romance languages; French',
-    //     ], [
-    //         'code' => '341',
-    //         'name' => 'French writing systems & phonology',
-    //     ], [
-    //         'code' => '342',
-    //         'name' => 'French etymology',
-    //     ], [
-    //         'code' => '343',
-    //         'name' => 'French dictionaries',
-    //     ], [
-    //         'code' => '344',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '345',
-    //         'name' => 'French grammar',
-    //     ], [
-    //         'code' => '346',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '347',
-    //         'name' => 'French language variations',
-    //     ], [
-    //         'code' => '348',
-    //         'name' => 'Standard French usage',
-    //     ], [
-    //         'code' => '349',
-    //         'name' => 'Occitan & Catalan',
-    //     ], [
-    //         'code' => '350',
-    //         'name' => 'Italian, Romanian & related languages',
-    //     ], [
-    //         'code' => '351',
-    //         'name' => 'Italian writing systems & phonology',
-    //     ], [
-    //         'code' => '352',
-    //         'name' => 'Italian etymology',
-    //     ], [
-    //         'code' => '353',
-    //         'name' => 'Italian dictionaries',
-    //     ], [
-    //         'code' => '354',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '355',
-    //         'name' => 'Italian grammar',
-    //     ], [
-    //         'code' => '356',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '357',
-    //         'name' => 'Italian language variations',
-    //     ], [
-    //         'code' => '358',
-    //         'name' => 'Standard Italian usage',
-    //     ], [
-    //         'code' => '359',
-    //         'name' => 'Romanian & related languages',
-    //     ], [
-    //         'code' => '360',
-    //         'name' => 'Spanish & Portuguese languages',
-    //     ], [
-    //         'code' => '361',
-    //         'name' => 'Spanish writing systems & phonology',
-    //     ], [
-    //         'code' => '362',
-    //         'name' => 'Spanish etymology',
-    //     ], [
-    //         'code' => '363',
-    //         'name' => 'Spanish dictionaries',
-    //     ], [
-    //         'code' => '364',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '365',
-    //         'name' => 'Spanish grammar',
-    //     ], [
-    //         'code' => '366',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '367',
-    //         'name' => 'Spanish language variations',
-    //     ], [
-    //         'code' => '368',
-    //         'name' => 'Standard Spanish usage',
-    //     ], [
-    //         'code' => '369',
-    //         'name' => 'Portuguese',
-    //     ], [
-    //         'code' => '370',
-    //         'name' => 'Italic languages; Latin',
-    //     ], [
-    //         'code' => '371',
-    //         'name' => 'Classical Latin writing & phonology',
-    //     ], [
-    //         'code' => '372',
-    //         'name' => 'Classical Latin etymology',
-    //     ], [
-    //         'code' => '373',
-    //         'name' => 'Classical Latin dictionaries',
-    //     ], [
-    //         'code' => '374',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '375',
-    //         'name' => 'Classical Latin grammar',
-    //     ], [
-    //         'code' => '376',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '377',
-    //         'name' => 'Old, postclassical & Vulgar Latin',
-    //     ], [
-    //         'code' => '378',
-    //         'name' => 'Classical Latin usage',
-    //     ], [
-    //         'code' => '379',
-    //         'name' => 'Other Italic languages',
-    //     ], [
-    //         'code' => '380',
-    //         'name' => 'Hellenic languages; classical Greek',
-    //     ], [
-    //         'code' => '381',
-    //         'name' => 'Classical Greek writing & phonology',
-    //     ], [
-    //         'code' => '382',
-    //         'name' => 'Classical Greek etymology',
-    //     ], [
-    //         'code' => '383',
-    //         'name' => 'Classical Greek dictionaries',
-    //     ], [
-    //         'code' => '384',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '385',
-    //         'name' => 'Classical Greek grammar',
-    //     ], [
-    //         'code' => '386',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '387',
-    //         'name' => 'Preclassical & postclassical Greek',
-    //     ], [
-    //         'code' => '388',
-    //         'name' => 'Classical Greek usage',
-    //     ], [
-    //         'code' => '389',
-    //         'name' => 'Other Hellenic languages',
-    //     ], [
-    //         'code' => '390',
-    //         'name' => 'Other languages',
-    //     ], [
-    //         'code' => '391',
-    //         'name' => 'East Indo-European & Celtic languages',
-    //     ], [
-    //         'code' => '392',
-    //         'name' => 'Afro-Asiatic languages; Semitic languages',
-    //     ], [
-    //         'code' => '393',
-    //         'name' => 'Non-Semitic Afro-Asiatic languages',
-    //     ], [
-    //         'code' => '394',
-    //         'name' => 'Altaic, Uralic, Hyperborean & Dravidian',
-    //     ], [
-    //         'code' => '395',
-    //         'name' => 'Languages of East & Southeast Asia',
-    //     ], [
-    //         'code' => '396',
-    //         'name' => 'African languages',
-    //     ], [
-    //         'code' => '397',
-    //         'name' => 'North American native languages',
-    //     ], [
-    //         'code' => '398',
-    //         'name' => 'South American native languages',
-    //     ], [
-    //         'code' => '399',
-    //         'name' => 'Austronesian & other languages',
-    //     ], [
-    //         'code' => '400',
-    //         'name' => 'Natural Sciences and Mathemetics',
-    //     ], [
-    //         'code' => '401',
-    //         'name' => 'Philosophy & theory',
-    //     ], [
-    //         'code' => '402',
-    //         'name' => 'Miscellany',
-    //     ], [
-    //         'code' => '403',
-    //         'name' => 'Dictionaries & encyclopedias',
-    //     ], [
-    //         'code' => '404',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '405',
-    //         'name' => 'Serial publications',
-    //     ], [
-    //         'code' => '406',
-    //         'name' => 'Organizations & management',
-    //     ], [
-    //         'code' => '407',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '408',
-    //         'name' => 'Natural history',
-    //     ], [
-    //         'code' => '409',
-    //         'name' => 'Historical, geographic & persons treatment',
-    //     ], [
-    //         'code' => '410',
-    //         'name' => 'Mathematics',
-    //     ], [
-    //         'code' => '411',
-    //         'name' => 'General principles of mathematics',
-    //     ], [
-    //         'code' => '412',
-    //         'name' => 'Algebra',
-    //     ], [
-    //         'code' => '413',
-    //         'name' => 'Arithmetic',
-    //     ], [
-    //         'code' => '414',
-    //         'name' => 'Topology',
-    //     ], [
-    //         'code' => '415',
-    //         'name' => 'Analysis',
-    //     ], [
-    //         'code' => '416',
-    //         'name' => 'Geometry',
-    //     ], [
-    //         'code' => '417',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '418',
-    //         'name' => 'Numerical analysis',
-    //     ], [
-    //         'code' => '419',
-    //         'name' => 'Probabilities & applied mathematics',
-    //     ], [
-    //         'code' => '420',
-    //         'name' => 'Astronomy & allied sciences',
-    //     ], [
-    //         'code' => '421',
-    //         'name' => 'Celestial mechanics',
-    //     ], [
-    //         'code' => '422',
-    //         'name' => 'Techniques, equipment & materials',
-    //     ], [
-    //         'code' => '423',
-    //         'name' => 'Specific celestial bodies & phenomena',
-    //     ], [
-    //         'code' => '424',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '425',
-    //         'name' => 'Earth (Astronomical geography)',
-    //     ], [
-    //         'code' => '426',
-    //         'name' => 'Mathematical geography',
-    //     ], [
-    //         'code' => '427',
-    //         'name' => 'Celestial navigation',
-    //     ], [
-    //         'code' => '428',
-    //         'name' => 'Ephemerides',
-    //     ], [
-    //         'code' => '429',
-    //         'name' => 'Chronology',
-    //     ], [
-    //         'code' => '430',
-    //         'name' => 'Physics',
-    //     ], [
-    //         'code' => '431',
-    //         'name' => 'Classical mechanics; solid mechanics',
-    //     ], [
-    //         'code' => '432',
-    //         'name' => 'Fluid mechanics; liquid mechanics',
-    //     ], [
-    //         'code' => '433',
-    //         'name' => 'Gas mechanics',
-    //     ], [
-    //         'code' => '434',
-    //         'name' => 'Sound & related vibrations',
-    //     ], [
-    //         'code' => '435',
-    //         'name' => 'Light & infrared & ultraviolet phenomena',
-    //     ], [
-    //         'code' => '436',
-    //         'name' => 'Heat',
-    //     ], [
-    //         'code' => '437',
-    //         'name' => 'Electricity & electronics',
-    //     ], [
-    //         'code' => '438',
-    //         'name' => 'Magnetism',
-    //     ], [
-    //         'code' => '439',
-    //         'name' => 'Modern physics',
-    //     ], [
-    //         'code' => '440',
-    //         'name' => 'Chemistry & allied sciences',
-    //     ], [
-    //         'code' => '441',
-    //         'name' => 'Physical chemistry',
-    //     ], [
-    //         'code' => '442',
-    //         'name' => 'Techniques, equipment & materials',
-    //     ], [
-    //         'code' => '443',
-    //         'name' => 'Analytical chemistry',
-    //     ], [
-    //         'code' => '444',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '445',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '446',
-    //         'name' => 'Inorganic chemistry',
-    //     ], [
-    //         'code' => '447',
-    //         'name' => 'Organic chemistry',
-    //     ], [
-    //         'code' => '448',
-    //         'name' => 'Crystallography',
-    //     ], [
-    //         'code' => '449',
-    //         'name' => 'Mineralogy',
-    //     ], [
-    //         'code' => '450',
-    //         'name' => 'Earth sciences',
-    //     ], [
-    //         'code' => '451',
-    //         'name' => 'Geology, hydrology & meteorology',
-    //     ], [
-    //         'code' => '452',
-    //         'name' => 'Petrology',
-    //     ], [
-    //         'code' => '453',
-    //         'name' => 'Economic geology',
-    //     ], [
-    //         'code' => '454',
-    //         'name' => 'Earth sciences of Europe',
-    //     ], [
-    //         'code' => '455',
-    //         'name' => 'Earth sciences of Asia',
-    //     ], [
-    //         'code' => '456',
-    //         'name' => 'Earth sciences of Africa',
-    //     ], [
-    //         'code' => '457',
-    //         'name' => 'Earth sciences of North America',
-    //     ], [
-    //         'code' => '458',
-    //         'name' => 'Earth sciences of South America',
-    //     ], [
-    //         'code' => '459',
-    //         'name' => 'Earth sciences of other areas',
-    //     ], [
-    //         'code' => '460',
-    //         'name' => 'Paleontology; paleozoology',
-    //     ], [
-    //         'code' => '461',
-    //         'name' => 'Paleobotany; fossil microorganisms',
-    //     ], [
-    //         'code' => '462',
-    //         'name' => 'Fossil invertebrates',
-    //     ], [
-    //         'code' => '463',
-    //         'name' => 'Fossil marine & seashore invertebrates',
-    //     ], [
-    //         'code' => '464',
-    //         'name' => 'Fossil mollusks & molluscoids',
-    //     ], [
-    //         'code' => '465',
-    //         'name' => 'Fossil arthropods',
-    //     ], [
-    //         'code' => '466',
-    //         'name' => 'Fossil chordates',
-    //     ], [
-    //         'code' => '467',
-    //         'name' => 'Fossil cold-blooded vertebrates; fossil fishes',
-    //     ], [
-    //         'code' => '468',
-    //         'name' => 'Fossil birds',
-    //     ], [
-    //         'code' => '469',
-    //         'name' => 'Fossil mammals',
-    //     ], [
-    //         'code' => '470',
-    //         'name' => 'Life sciences; biology',
-    //     ], [
-    //         'code' => '471',
-    //         'name' => 'Physiology & related subjects',
-    //     ], [
-    //         'code' => '472',
-    //         'name' => 'Biochemistry',
-    //     ], [
-    //         'code' => '473',
-    //         'name' => 'Specific physiological systems in animals',
-    //     ], [
-    //         'code' => '474',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '475',
-    //         'name' => 'Specific parts of & systems in plants',
-    //     ], [
-    //         'code' => '476',
-    //         'name' => 'Genetics & evolution',
-    //     ], [
-    //         'code' => '477',
-    //         'name' => 'Ecology',
-    //     ], [
-    //         'code' => '478',
-    //         'name' => 'Natural history of organisms',
-    //     ], [
-    //         'code' => '479',
-    //         'name' => 'Microorganisms, fungi & algae',
-    //     ], [
-    //         'code' => '480',
-    //         'name' => 'Plants (Botany)',
-    //     ], [
-    //         'code' => '481',
-    //         'name' => 'Specific topics in natural history',
-    //     ], [
-    //         'code' => '482',
-    //         'name' => 'Plants noted for characteristics & flowers',
-    //     ], [
-    //         'code' => '483',
-    //         'name' => 'Dicotyledons',
-    //     ], [
-    //         'code' => '484',
-    //         'name' => 'Monocotyledons',
-    //     ], [
-    //         'code' => '485',
-    //         'name' => 'Gymnosperms; conifers',
-    //     ], [
-    //         'code' => '486',
-    //         'name' => 'Seedless plants',
-    //     ], [
-    //         'code' => '487',
-    //         'name' => 'Vascular seedless plants',
-    //     ], [
-    //         'code' => '488',
-    //         'name' => 'Bryophytes',
-    //     ], [
-    //         'code' => '489',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '490',
-    //         'name' => 'Animals (Zoology)',
-    //     ], [
-    //         'code' => '491',
-    //         'name' => 'Specific topics in natural history',
-    //     ], [
-    //         'code' => '492',
-    //         'name' => 'Invertebrates',
-    //     ], [
-    //         'code' => '493',
-    //         'name' => 'Marine & seashore invertebrates',
-    //     ], [
-    //         'code' => '494',
-    //         'name' => 'Mollusks & molluscoids',
-    //     ], [
-    //         'code' => '495',
-    //         'name' => 'Arthropods',
-    //     ], [
-    //         'code' => '496',
-    //         'name' => 'Chordates',
-    //     ], [
-    //         'code' => '497',
-    //         'name' => 'Cold-blooded vertebrates; fishes',
-    //     ], [
-    //         'code' => '498',
-    //         'name' => 'Birds',
-    //     ], [
-    //         'code' => '499',
-    //         'name' => 'Mammals',
-    //     ], [
-    //         'code' => '500',
-    //         'name' => 'Technology',
-    //     ], [
-    //         'code' => '501',
-    //         'name' => 'Philosophy & theory',
-    //     ], [
-    //         'code' => '502',
-    //         'name' => 'Miscellany',
-    //     ], [
-    //         'code' => '503',
-    //         'name' => 'Dictionaries & encyclopedias',
-    //     ], [
-    //         'code' => '504',
-    //         'name' => 'Special topics',
-    //     ], [
-    //         'code' => '505',
-    //         'name' => 'Serial publications',
-    //     ], [
-    //         'code' => '506',
-    //         'name' => 'Organizations',
-    //     ], [
-    //         'code' => '507',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '508',
-    //         'name' => 'Inventions & patents',
-    //     ], [
-    //         'code' => '509',
-    //         'name' => 'Historical, geographic & persons treatment',
-    //     ], [
-    //         'code' => '510',
-    //         'name' => 'Medicine & health',
-    //     ], [
-    //         'code' => '511',
-    //         'name' => 'Human anatomy, cytology & histology',
-    //     ], [
-    //         'code' => '512',
-    //         'name' => 'Human physiology',
-    //     ], [
-    //         'code' => '513',
-    //         'name' => 'Personal health & safety',
-    //     ], [
-    //         'code' => '514',
-    //         'name' => 'Incidence & prevention of disease',
-    //     ], [
-    //         'code' => '515',
-    //         'name' => 'Pharmacology & therapeutics',
-    //     ], [
-    //         'code' => '516',
-    //         'name' => 'Diseases',
-    //     ], [
-    //         'code' => '517',
-    //         'name' => 'Surgery & related medical specialties',
-    //     ], [
-    //         'code' => '518',
-    //         'name' => 'Gynecology, obstetrics, pediatrics & geriatrics',
-    //     ], [
-    //         'code' => '519',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '520',
-    //         'name' => 'Engineering & allied operations',
-    //     ], [
-    //         'code' => '521',
-    //         'name' => 'Applied physics',
-    //     ], [
-    //         'code' => '522',
-    //         'name' => 'Mining & related operations',
-    //     ], [
-    //         'code' => '523',
-    //         'name' => 'Military & nautical engineering',
-    //     ], [
-    //         'code' => '524',
-    //         'name' => 'Civil engineering',
-    //     ], [
-    //         'code' => '525',
-    //         'name' => 'Engineering of railroads & roads',
-    //     ], [
-    //         'code' => '526',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '527',
-    //         'name' => 'Hydraulic engineering',
-    //     ], [
-    //         'code' => '528',
-    //         'name' => 'Sanitary & municipal engineering',
-    //     ], [
-    //         'code' => '529',
-    //         'name' => 'Other branches of engineering',
-    //     ], [
-    //         'code' => '530',
-    //         'name' => 'Agriculture & related technologies',
-    //     ], [
-    //         'code' => '531',
-    //         'name' => 'Techniques, equipment & materials',
-    //     ], [
-    //         'code' => '532',
-    //         'name' => 'Plant injuries, diseases & pests',
-    //     ], [
-    //         'code' => '533',
-    //         'name' => 'Field & plantation crops',
-    //     ], [
-    //         'code' => '534',
-    //         'name' => 'Orchards, fruits & forestry',
-    //     ], [
-    //         'code' => '535',
-    //         'name' => 'Garden crops (Horticulture)',
-    //     ], [
-    //         'code' => '536',
-    //         'name' => 'Animal husbandry',
-    //     ], [
-    //         'code' => '537',
-    //         'name' => 'Processing dairy & related products',
-    //     ], [
-    //         'code' => '538',
-    //         'name' => 'Insect culture',
-    //     ], [
-    //         'code' => '539',
-    //         'name' => 'Hunting, fishing & conservation',
-    //     ], [
-    //         'code' => '540',
-    //         'name' => 'Home & family management',
-    //     ], [
-    //         'code' => '541',
-    //         'name' => 'Food & drink',
-    //     ], [
-    //         'code' => '542',
-    //         'name' => 'Meals & table service',
-    //     ], [
-    //         'code' => '543',
-    //         'name' => 'Housing & household equipment',
-    //     ], [
-    //         'code' => '544',
-    //         'name' => 'Household utilities',
-    //     ], [
-    //         'code' => '545',
-    //         'name' => 'Household furnishings',
-    //     ], [
-    //         'code' => '546',
-    //         'name' => 'Sewing, clothing & personal living',
-    //     ], [
-    //         'code' => '547',
-    //         'name' => 'Management of public households',
-    //     ], [
-    //         'code' => '548',
-    //         'name' => 'Housekeeping',
-    //     ], [
-    //         'code' => '549',
-    //         'name' => 'Child rearing & home care of persons',
-    //     ], [
-    //         'code' => '550',
-    //         'name' => 'Management & auxiliary services',
-    //     ], [
-    //         'code' => '551',
-    //         'name' => 'Office services',
-    //     ], [
-    //         'code' => '552',
-    //         'name' => 'Processes of written communication',
-    //     ], [
-    //         'code' => '553',
-    //         'name' => 'Shorthand',
-    //     ], [
-    //         'code' => '554',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '555',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '556',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '557',
-    //         'name' => 'Accounting',
-    //     ], [
-    //         'code' => '558',
-    //         'name' => 'General management',
-    //     ], [
-    //         'code' => '559',
-    //         'name' => 'Advertising & public relations',
-    //     ], [
-    //         'code' => '560',
-    //         'name' => 'Chemical engineering',
-    //     ], [
-    //         'code' => '561',
-    //         'name' => 'Industrial chemicals',
-    //     ], [
-    //         'code' => '562',
-    //         'name' => 'Explosives, fuels & related products',
-    //     ], [
-    //         'code' => '563',
-    //         'name' => 'Beverage technology',
-    //     ], [
-    //         'code' => '564',
-    //         'name' => 'Food technology',
-    //     ], [
-    //         'code' => '565',
-    //         'name' => 'Industrial oils, fats, waxes & gases',
-    //     ], [
-    //         'code' => '566',
-    //         'name' => 'Ceramic & allied technologies',
-    //     ], [
-    //         'code' => '567',
-    //         'name' => 'Cleaning, color & coating technologies',
-    //     ], [
-    //         'code' => '568',
-    //         'name' => 'Technology of other organic products',
-    //     ], [
-    //         'code' => '569',
-    //         'name' => 'Metallurgy',
-    //     ], [
-    //         'code' => '570',
-    //         'name' => 'Manufacturing',
-    //     ], [
-    //         'code' => '571',
-    //         'name' => 'Metalworking & primary metal products',
-    //     ], [
-    //         'code' => '572',
-    //         'name' => 'Iron, steel & other iron alloys',
-    //     ], [
-    //         'code' => '573',
-    //         'name' => 'Nonferrous metals',
-    //     ], [
-    //         'code' => '574',
-    //         'name' => 'Lumber processing, wood products & cork',
-    //     ], [
-    //         'code' => '575',
-    //         'name' => 'Leather & fur processing',
-    //     ], [
-    //         'code' => '576',
-    //         'name' => 'Pulp & paper technology',
-    //     ], [
-    //         'code' => '577',
-    //         'name' => 'Textiles',
-    //     ], [
-    //         'code' => '578',
-    //         'name' => 'Elastomers & elastomer products',
-    //     ], [
-    //         'code' => '579',
-    //         'name' => 'Other products of specific materials',
-    //     ], [
-    //         'code' => '580',
-    //         'name' => 'Manufacture for specific uses',
-    //     ], [
-    //         'code' => '581',
-    //         'name' => 'Precision instruments & other devices',
-    //     ], [
-    //         'code' => '582',
-    //         'name' => 'Small forge work (Blacksmithing)',
-    //     ], [
-    //         'code' => '583',
-    //         'name' => 'Hardware & household appliances',
-    //     ], [
-    //         'code' => '584',
-    //         'name' => 'Furnishings & home workshops',
-    //     ], [
-    //         'code' => '585',
-    //         'name' => 'Leather, fur goods & related products',
-    //     ], [
-    //         'code' => '586',
-    //         'name' => 'Printing & related activities',
-    //     ], [
-    //         'code' => '587',
-    //         'name' => 'Clothing & accessories',
-    //     ], [
-    //         'code' => '588',
-    //         'name' => 'Other final products & packaging',
-    //     ], [
-    //         'code' => '589',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '590',
-    //         'name' => 'Buildings',
-    //     ], [
-    //         'code' => '591',
-    //         'name' => 'Building materials',
-    //     ], [
-    //         'code' => '592',
-    //         'name' => 'Auxiliary construction practices',
-    //     ], [
-    //         'code' => '593',
-    //         'name' => 'Specific materials & purposes',
-    //     ], [
-    //         'code' => '594',
-    //         'name' => 'Wood construction & carpentry',
-    //     ], [
-    //         'code' => '595',
-    //         'name' => 'Roof covering',
-    //     ], [
-    //         'code' => '596',
-    //         'name' => 'Utilities',
-    //     ], [
-    //         'code' => '597',
-    //         'name' => 'Heating, ventilating & air-conditioning',
-    //     ], [
-    //         'code' => '598',
-    //         'name' => 'Detail finishing',
-    //     ], [
-    //         'code' => '599',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '600',
-    //         'name' => 'The arts; fine & decorative arts',
-    //     ], [
-    //         'code' => '601',
-    //         'name' => 'Philosophy of fine & decorative arts',
-    //     ], [
-    //         'code' => '602',
-    //         'name' => 'Miscellany of fine & decorative arts',
-    //     ], [
-    //         'code' => '603',
-    //         'name' => 'Dictionaries of fine & decorative arts',
-    //     ], [
-    //         'code' => '604',
-    //         'name' => 'Special topics in fine & decorative arts',
-    //     ], [
-    //         'code' => '605',
-    //         'name' => 'Serial publications of fine & decorative arts',
-    //     ], [
-    //         'code' => '606',
-    //         'name' => 'Organizations & management',
-    //     ], [
-    //         'code' => '607',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '608',
-    //         'name' => 'Galleries, museums & private collections',
-    //     ], [
-    //         'code' => '609',
-    //         'name' => 'Historical, geographic & persons treatment',
-    //     ], [
-    //         'code' => '610',
-    //         'name' => 'Civic & landscape art',
-    //     ], [
-    //         'code' => '611',
-    //         'name' => 'Area planning',
-    //     ], [
-    //         'code' => '612',
-    //         'name' => 'Landscape architecture',
-    //     ], [
-    //         'code' => '613',
-    //         'name' => 'Landscape architecture of trafficways',
-    //     ], [
-    //         'code' => '614',
-    //         'name' => 'Water features',
-    //     ], [
-    //         'code' => '615',
-    //         'name' => 'Woody plants',
-    //     ], [
-    //         'code' => '616',
-    //         'name' => 'Herbaceous plants',
-    //     ], [
-    //         'code' => '617',
-    //         'name' => 'Structures in landscape architecture',
-    //     ], [
-    //         'code' => '618',
-    //         'name' => 'Landscape design of cemeteries',
-    //     ], [
-    //         'code' => '619',
-    //         'name' => 'Natural landscapes',
-    //     ], [
-    //         'code' => '620',
-    //         'name' => 'Architecture',
-    //     ], [
-    //         'code' => '621',
-    //         'name' => 'Architectural structure',
-    //     ], [
-    //         'code' => '622',
-    //         'name' => 'Architecture to ca. 300',
-    //     ], [
-    //         'code' => '623',
-    //         'name' => 'Architecture from ca. 300 to 1399',
-    //     ], [
-    //         'code' => '624',
-    //         'name' => 'Architecture from 1400',
-    //     ], [
-    //         'code' => '625',
-    //         'name' => 'Public structures',
-    //     ], [
-    //         'code' => '626',
-    //         'name' => 'Buildings for religious purposes',
-    //     ], [
-    //         'code' => '627',
-    //         'name' => 'Buildings for education & research',
-    //     ], [
-    //         'code' => '628',
-    //         'name' => 'Residential & related buildings',
-    //     ], [
-    //         'code' => '629',
-    //         'name' => 'Design & decoration',
-    //     ], [
-    //         'code' => '630',
-    //         'name' => 'Plastic arts; sculpture',
-    //     ], [
-    //         'code' => '631',
-    //         'name' => 'Processes, forms & subjects of sculpture',
-    //     ], [
-    //         'code' => '632',
-    //         'name' => 'Sculpture to ca. 500',
-    //     ], [
-    //         'code' => '633',
-    //         'name' => 'Greek, Etruscan & Roman sculpture',
-    //     ], [
-    //         'code' => '634',
-    //         'name' => 'Sculpture from ca. 500 to 1399',
-    //     ], [
-    //         'code' => '635',
-    //         'name' => 'Sculpture from 1400',
-    //     ], [
-    //         'code' => '636',
-    //         'name' => 'Carving & carvings',
-    //     ], [
-    //         'code' => '637',
-    //         'name' => 'Numismatics & sigillography',
-    //     ], [
-    //         'code' => '638',
-    //         'name' => 'Ceramic arts',
-    //     ], [
-    //         'code' => '639',
-    //         'name' => 'Art metalwork',
-    //     ], [
-    //         'code' => '640',
-    //         'name' => 'Drawing & decorative arts',
-    //     ], [
-    //         'code' => '641',
-    //         'name' => 'Drawing & drawings',
-    //     ], [
-    //         'code' => '642',
-    //         'name' => 'Perspective',
-    //     ], [
-    //         'code' => '643',
-    //         'name' => 'Drawing & drawings by subject',
-    //     ], [
-    //         'code' => '644',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '645',
-    //         'name' => 'Decorative arts',
-    //     ], [
-    //         'code' => '646',
-    //         'name' => 'Textile arts',
-    //     ], [
-    //         'code' => '647',
-    //         'name' => 'Interior decoration',
-    //     ], [
-    //         'code' => '648',
-    //         'name' => 'Glass',
-    //     ], [
-    //         'code' => '649',
-    //         'name' => 'Furniture & accessories',
-    //     ], [
-    //         'code' => '650',
-    //         'name' => 'Painting & paintings',
-    //     ], [
-    //         'code' => '651',
-    //         'name' => 'Techniques, equipment, materials & forms',
-    //     ], [
-    //         'code' => '652',
-    //         'name' => 'Color',
-    //     ], [
-    //         'code' => '653',
-    //         'name' => 'Symbolism, allegory, mythology & legend',
-    //     ], [
-    //         'code' => '654',
-    //         'name' => 'Genre paintings',
-    //     ], [
-    //         'code' => '655',
-    //         'name' => 'Religion',
-    //     ], [
-    //         'code' => '656',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '657',
-    //         'name' => 'Human figures',
-    //     ], [
-    //         'code' => '658',
-    //         'name' => 'Other subjects',
-    //     ], [
-    //         'code' => '659',
-    //         'name' => 'Historical, geographic & persons treatment',
-    //     ], [
-    //         'code' => '660',
-    //         'name' => 'Graphic arts; printmaking & prints',
-    //     ], [
-    //         'code' => '661',
-    //         'name' => 'Relief processes (Block printing)',
-    //     ], [
-    //         'code' => '662',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '663',
-    //         'name' => 'Lithographic processes',
-    //     ], [
-    //         'code' => '664',
-    //         'name' => 'Chromolithography & serigraphy',
-    //     ], [
-    //         'code' => '665',
-    //         'name' => 'Metal engraving',
-    //     ], [
-    //         'code' => '666',
-    //         'name' => 'Mezzotinting, aquatinting & related processes',
-    //     ], [
-    //         'code' => '667',
-    //         'name' => 'Etching & drypoint',
-    //     ], [
-    //         'code' => '668',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '669',
-    //         'name' => 'Prints',
-    //     ], [
-    //         'code' => '670',
-    //         'name' => 'Photography, photographs & computer art',
-    //     ], [
-    //         'code' => '671',
-    //         'name' => 'Techniques, equipment & materials',
-    //     ], [
-    //         'code' => '672',
-    //         'name' => 'Metallic salt processes',
-    //     ], [
-    //         'code' => '673',
-    //         'name' => 'Pigment processes of printing',
-    //     ], [
-    //         'code' => '674',
-    //         'name' => 'Holography',
-    //     ], [
-    //         'code' => '675',
-    //         'name' => 'Digital photography',
-    //     ], [
-    //         'code' => '676',
-    //         'name' => 'Computer art (Digital art)',
-    //     ], [
-    //         'code' => '677',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '678',
-    //         'name' => 'Fields & kinds of photography',
-    //     ], [
-    //         'code' => '679',
-    //         'name' => 'Photographs',
-    //     ], [
-    //         'code' => '680',
-    //         'name' => 'Music',
-    //     ], [
-    //         'code' => '681',
-    //         'name' => 'General principles & musical forms',
-    //     ], [
-    //         'code' => '682',
-    //         'name' => 'Vocal music',
-    //     ], [
-    //         'code' => '683',
-    //         'name' => 'Music for single voices; the voice',
-    //     ], [
-    //         'code' => '684',
-    //         'name' => 'Instruments & instrumental ensembles',
-    //     ], [
-    //         'code' => '685',
-    //         'name' => 'Ensembles with one instrument per part',
-    //     ], [
-    //         'code' => '686',
-    //         'name' => 'Keyboard & other instruments',
-    //     ], [
-    //         'code' => '687',
-    //         'name' => 'Stringed instruments',
-    //     ], [
-    //         'code' => '688',
-    //         'name' => 'Wind instruments',
-    //     ], [
-    //         'code' => '689',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '690',
-    //         'name' => 'Recreational & performing arts',
-    //     ], [
-    //         'code' => '691',
-    //         'name' => 'Public performances',
-    //     ], [
-    //         'code' => '692',
-    //         'name' => 'Stage presentations',
-    //     ], [
-    //         'code' => '693',
-    //         'name' => 'Indoor games & amusements',
-    //     ], [
-    //         'code' => '694',
-    //         'name' => 'Indoor games of skill',
-    //     ], [
-    //         'code' => '695',
-    //         'name' => 'Games of chance',
-    //     ], [
-    //         'code' => '696',
-    //         'name' => 'Athletic & outdoor sports & games',
-    //     ], [
-    //         'code' => '697',
-    //         'name' => 'Aquatic & air sports',
-    //     ], [
-    //         'code' => '698',
-    //         'name' => 'Equestrian sports & animal racing',
-    //     ], [
-    //         'code' => '699',
-    //         'name' => 'Fishing, hunting & shooting',
-    //     ], [
-    //         'code' => '700',
-    //         'name' => 'Literature & rhetoric',
-    //     ], [
-    //         'code' => '701',
-    //         'name' => 'Philosophy & theory',
-    //     ], [
-    //         'code' => '702',
-    //         'name' => 'Miscellany',
-    //     ], [
-    //         'code' => '703',
-    //         'name' => 'Dictionaries & encyclopedias',
-    //     ], [
-    //         'code' => '704',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '705',
-    //         'name' => 'Serial publications',
-    //     ], [
-    //         'code' => '706',
-    //         'name' => 'Organizations & management',
-    //     ], [
-    //         'code' => '707',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '708',
-    //         'name' => 'Rhetoric & collections of literature',
-    //     ], [
-    //         'code' => '709',
-    //         'name' => 'History, description & criticism',
-    //     ], [
-    //         'code' => '710',
-    //         'name' => 'American literature in English',
-    //     ], [
-    //         'code' => '711',
-    //         'name' => 'American poetry in English',
-    //     ], [
-    //         'code' => '712',
-    //         'name' => 'American drama in English',
-    //     ], [
-    //         'code' => '713',
-    //         'name' => 'American fiction in English',
-    //     ], [
-    //         'code' => '714',
-    //         'name' => 'American essays in English',
-    //     ], [
-    //         'code' => '715',
-    //         'name' => 'American speeches in English',
-    //     ], [
-    //         'code' => '716',
-    //         'name' => 'American letters in English',
-    //     ], [
-    //         'code' => '717',
-    //         'name' => 'American humor & satire in English',
-    //     ], [
-    //         'code' => '718',
-    //         'name' => 'American miscellaneous writings',
-    //     ], [
-    //         'code' => '719',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '720',
-    //         'name' => 'English & Old English literatures',
-    //     ], [
-    //         'code' => '721',
-    //         'name' => 'English poetry',
-    //     ], [
-    //         'code' => '722',
-    //         'name' => 'English drama',
-    //     ], [
-    //         'code' => '723',
-    //         'name' => 'English fiction',
-    //     ], [
-    //         'code' => '724',
-    //         'name' => 'English essays',
-    //     ], [
-    //         'code' => '725',
-    //         'name' => 'English speeches',
-    //     ], [
-    //         'code' => '726',
-    //         'name' => 'English letters',
-    //     ], [
-    //         'code' => '727',
-    //         'name' => 'English humor & satire',
-    //     ], [
-    //         'code' => '728',
-    //         'name' => 'English miscellaneous writings',
-    //     ], [
-    //         'code' => '729',
-    //         'name' => 'Old English (Anglo-Saxon)',
-    //     ], [
-    //         'code' => '730',
-    //         'name' => 'Literatures of Germanic languages',
-    //     ], [
-    //         'code' => '731',
-    //         'name' => 'German poetry',
-    //     ], [
-    //         'code' => '732',
-    //         'name' => 'German drama',
-    //     ], [
-    //         'code' => '733',
-    //         'name' => 'German fiction',
-    //     ], [
-    //         'code' => '734',
-    //         'name' => 'German essays',
-    //     ], [
-    //         'code' => '735',
-    //         'name' => 'German speeches',
-    //     ], [
-    //         'code' => '736',
-    //         'name' => 'German letters',
-    //     ], [
-    //         'code' => '737',
-    //         'name' => 'German humor & satire',
-    //     ], [
-    //         'code' => '738',
-    //         'name' => 'German miscellaneous writings',
-    //     ], [
-    //         'code' => '739',
-    //         'name' => 'Other Germanic literatures',
-    //     ], [
-    //         'code' => '740',
-    //         'name' => 'Literatures of Romance languages',
-    //     ], [
-    //         'code' => '741',
-    //         'name' => 'French poetry',
-    //     ], [
-    //         'code' => '742',
-    //         'name' => 'French drama',
-    //     ], [
-    //         'code' => '743',
-    //         'name' => 'French fiction',
-    //     ], [
-    //         'code' => '744',
-    //         'name' => 'French essays',
-    //     ], [
-    //         'code' => '745',
-    //         'name' => 'French speeches',
-    //     ], [
-    //         'code' => '746',
-    //         'name' => 'French letters',
-    //     ], [
-    //         'code' => '747',
-    //         'name' => 'French humor & satire',
-    //     ], [
-    //         'code' => '748',
-    //         'name' => 'French miscellaneous writings',
-    //     ], [
-    //         'code' => '749',
-    //         'name' => 'Occitan & Catalan literatures',
-    //     ], [
-    //         'code' => '750',
-    //         'name' => 'Italian, Romanian & related literatures',
-    //     ], [
-    //         'code' => '751',
-    //         'name' => 'Italian poetry',
-    //     ], [
-    //         'code' => '752',
-    //         'name' => 'Italian drama',
-    //     ], [
-    //         'code' => '753',
-    //         'name' => 'Italian fiction',
-    //     ], [
-    //         'code' => '754',
-    //         'name' => 'Italian essays',
-    //     ], [
-    //         'code' => '755',
-    //         'name' => 'Italian speeches',
-    //     ], [
-    //         'code' => '756',
-    //         'name' => 'Italian letters',
-    //     ], [
-    //         'code' => '757',
-    //         'name' => 'Italian humor & satire',
-    //     ], [
-    //         'code' => '758',
-    //         'name' => 'Italian miscellaneous writings',
-    //     ], [
-    //         'code' => '759',
-    //         'name' => 'Romanian & related literatures',
-    //     ], [
-    //         'code' => '760',
-    //         'name' => 'Spanish & Portuguese literatures',
-    //     ], [
-    //         'code' => '761',
-    //         'name' => 'Spanish poetry',
-    //     ], [
-    //         'code' => '762',
-    //         'name' => 'Spanish drama',
-    //     ], [
-    //         'code' => '763',
-    //         'name' => 'Spanish fiction',
-    //     ], [
-    //         'code' => '764',
-    //         'name' => 'Spanish essays',
-    //     ], [
-    //         'code' => '765',
-    //         'name' => 'Spanish speeches',
-    //     ], [
-    //         'code' => '766',
-    //         'name' => 'Spanish letters',
-    //     ], [
-    //         'code' => '767',
-    //         'name' => 'Spanish humor & satire',
-    //     ], [
-    //         'code' => '768',
-    //         'name' => 'Spanish miscellaneous writings',
-    //     ], [
-    //         'code' => '769',
-    //         'name' => 'Portuguese literature',
-    //     ], [
-    //         'code' => '770',
-    //         'name' => 'Italic literatures; Latin literature',
-    //     ], [
-    //         'code' => '771',
-    //         'name' => 'Latin poetry',
-    //     ], [
-    //         'code' => '772',
-    //         'name' => 'Latin dramatic poetry & drama',
-    //     ], [
-    //         'code' => '773',
-    //         'name' => 'Latin epic poetry & fiction',
-    //     ], [
-    //         'code' => '774',
-    //         'name' => 'Latin lyric poetry',
-    //     ], [
-    //         'code' => '775',
-    //         'name' => 'Latin speeches',
-    //     ], [
-    //         'code' => '776',
-    //         'name' => 'Latin letters',
-    //     ], [
-    //         'code' => '777',
-    //         'name' => 'Latin humor & satire',
-    //     ], [
-    //         'code' => '778',
-    //         'name' => 'Latin miscellaneous writings',
-    //     ], [
-    //         'code' => '779',
-    //         'name' => 'Literatures of other Italic languages',
-    //     ], [
-    //         'code' => '780',
-    //         'name' => 'Hellenic literatures; classical Greek',
-    //     ], [
-    //         'code' => '781',
-    //         'name' => 'Classical Greek poetry',
-    //     ], [
-    //         'code' => '782',
-    //         'name' => 'Classical Greek dramatic poetry & drama',
-    //     ], [
-    //         'code' => '783',
-    //         'name' => 'Classical Greek epic poetry & fiction',
-    //     ], [
-    //         'code' => '784',
-    //         'name' => 'Classical Greek lyric poetry',
-    //     ], [
-    //         'code' => '785',
-    //         'name' => 'Classical Greek speeches',
-    //     ], [
-    //         'code' => '786',
-    //         'name' => 'Classical Greek letters',
-    //     ], [
-    //         'code' => '787',
-    //         'name' => 'Classical Greek humor & satire',
-    //     ], [
-    //         'code' => '788',
-    //         'name' => 'Classical Greek miscellaneous writings',
-    //     ], [
-    //         'code' => '789',
-    //         'name' => 'Modern Greek literature',
-    //     ], [
-    //         'code' => '790',
-    //         'name' => 'Literatures of other languages',
-    //     ], [
-    //         'code' => '791',
-    //         'name' => 'East Indo-European & Celtic literatures',
-    //     ], [
-    //         'code' => '792',
-    //         'name' => 'Afro-Asiatic literatures; Semitic literatures',
-    //     ], [
-    //         'code' => '793',
-    //         'name' => 'Non-Semitic Afro-Asiatic literatures',
-    //     ], [
-    //         'code' => '794',
-    //         'name' => 'Altaic, Uralic, Hyperborean & Dravidian',
-    //     ], [
-    //         'code' => '795',
-    //         'name' => 'Literatures of East & Southeast Asia',
-    //     ], [
-    //         'code' => '796',
-    //         'name' => 'African literatures',
-    //     ], [
-    //         'code' => '797',
-    //         'name' => 'North American native literatures',
-    //     ], [
-    //         'code' => '798',
-    //         'name' => 'South American native literatures',
-    //     ], [
-    //         'code' => '799',
-    //         'name' => 'Austronesian & other literatures',
-    //     ], [
-    //         'code' => '800',
-    //         'name' => 'History & geography',
-    //     ], [
-    //         'code' => '801',
-    //         'name' => 'Philosophy & theory',
-    //     ], [
-    //         'code' => '802',
-    //         'name' => 'Miscellany',
-    //     ], [
-    //         'code' => '803',
-    //         'name' => 'Dictionaries & encyclopedias',
-    //     ], [
-    //         'code' => '804',
-    //         'name' => 'Collected accounts of events',
-    //     ], [
-    //         'code' => '805',
-    //         'name' => 'Serial publications',
-    //     ], [
-    //         'code' => '806',
-    //         'name' => 'Organizations & management',
-    //     ], [
-    //         'code' => '807',
-    //         'name' => 'Education, research & related topics',
-    //     ], [
-    //         'code' => '808',
-    //         'name' => 'Kinds of persons treatment',
-    //     ], [
-    //         'code' => '809',
-    //         'name' => 'World history',
-    //     ], [
-    //         'code' => '810',
-    //         'name' => 'Geography & travel',
-    //     ], [
-    //         'code' => '811',
-    //         'name' => 'Historical geography',
-    //     ], [
-    //         'code' => '812',
-    //         'name' => 'Atlases, maps, charts & plans',
-    //     ], [
-    //         'code' => '813',
-    //         'name' => 'Geography of & travel in ancient world',
-    //     ], [
-    //         'code' => '814',
-    //         'name' => 'Geography of & travel in Europe',
-    //     ], [
-    //         'code' => '815',
-    //         'name' => 'Geography of & travel in Asia',
-    //     ], [
-    //         'code' => '816',
-    //         'name' => 'Geography of & travel in Africa',
-    //     ], [
-    //         'code' => '817',
-    //         'name' => 'Geography of & travel in North America',
-    //     ], [
-    //         'code' => '818',
-    //         'name' => 'Geography of & travel in South America',
-    //     ], [
-    //         'code' => '819',
-    //         'name' => 'Geography of & travel in other areas',
-    //     ], [
-    //         'code' => '820',
-    //         'name' => 'Biography, genealogy & insignia',
-    //     ], [
-    //         'code' => '821',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '822',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '823',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '824',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '825',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '826',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '827',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '828',
-    //         'name' => '(Optional number)',
-    //     ], [
-    //         'code' => '829',
-    //         'name' => 'Genealogy, names & insignia',
-    //     ], [
-    //         'code' => '830',
-    //         'name' => 'History of ancient world to ca. 499',
-    //     ], [
-    //         'code' => '831',
-    //         'name' => 'China to 420',
-    //     ], [
-    //         'code' => '832',
-    //         'name' => 'Egypt to 640',
-    //     ], [
-    //         'code' => '833',
-    //         'name' => 'Palestine to 70',
-    //     ], [
-    //         'code' => '834',
-    //         'name' => 'India to 647',
-    //     ], [
-    //         'code' => '835',
-    //         'name' => 'Mesopotamia & Iranian Plateau to 637',
-    //     ], [
-    //         'code' => '836',
-    //         'name' => 'Europe north & west of Italy to ca. 499',
-    //     ], [
-    //         'code' => '837',
-    //         'name' => 'Italy & adjacent territories to 476',
-    //     ], [
-    //         'code' => '838',
-    //         'name' => 'Greece to 323',
-    //     ], [
-    //         'code' => '839',
-    //         'name' => 'Other parts of ancient world to ca. 640',
-    //     ], [
-    //         'code' => '840',
-    //         'name' => 'History of Europe',
-    //     ], [
-    //         'code' => '841',
-    //         'name' => 'British Isles',
-    //     ], [
-    //         'code' => '842',
-    //         'name' => 'England & Wales',
-    //     ], [
-    //         'code' => '843',
-    //         'name' => 'Central Europe; Germany',
-    //     ], [
-    //         'code' => '844',
-    //         'name' => 'France & Monaco',
-    //     ], [
-    //         'code' => '845',
-    //         'name' => 'Italian Peninsula & adjacent islands',
-    //     ], [
-    //         'code' => '846',
-    //         'name' => 'Iberian Peninsula & adjacent islands',
-    //     ], [
-    //         'code' => '847',
-    //         'name' => 'Eastern Europe; Russia',
-    //     ], [
-    //         'code' => '848',
-    //         'name' => 'Scandinavia',
-    //     ], [
-    //         'code' => '849',
-    //         'name' => 'Other parts of Europe',
-    //     ], [
-    //         'code' => '850',
-    //         'name' => 'History of Asia; Far East',
-    //     ], [
-    //         'code' => '851',
-    //         'name' => 'China & adjacent areas',
-    //     ], [
-    //         'code' => '852',
-    //         'name' => 'Japan',
-    //     ], [
-    //         'code' => '853',
-    //         'name' => 'Arabian Peninsula & adjacent areas',
-    //     ], [
-    //         'code' => '854',
-    //         'name' => 'South Asia; India',
-    //     ], [
-    //         'code' => '855',
-    //         'name' => 'Iran',
-    //     ], [
-    //         'code' => '856',
-    //         'name' => 'Middle East (Near East)',
-    //     ], [
-    //         'code' => '857',
-    //         'name' => 'Siberia (Asiatic Russia)',
-    //     ], [
-    //         'code' => '858',
-    //         'name' => 'Central Asia',
-    //     ], [
-    //         'code' => '859',
-    //         'name' => 'Southeast Asia',
-    //     ], [
-    //         'code' => '860',
-    //         'name' => 'History of Africa',
-    //     ], [
-    //         'code' => '861',
-    //         'name' => 'Tunisia & Libya',
-    //     ], [
-    //         'code' => '862',
-    //         'name' => 'Egypt & Sudan',
-    //     ], [
-    //         'code' => '863',
-    //         'name' => 'Ethiopia & Eritrea',
-    //     ], [
-    //         'code' => '864',
-    //         'name' => 'Northwest African coast & offshore islands',
-    //     ], [
-    //         'code' => '865',
-    //         'name' => 'Algeria',
-    //     ], [
-    //         'code' => '866',
-    //         'name' => 'West Africa & offshore islands',
-    //     ], [
-    //         'code' => '867',
-    //         'name' => 'Central Africa & offshore islands',
-    //     ], [
-    //         'code' => '868',
-    //         'name' => 'Southern Africa; Republic of South Africa',
-    //     ], [
-    //         'code' => '869',
-    //         'name' => 'South Indian Ocean islands',
-    //     ], [
-    //         'code' => '870',
-    //         'name' => 'History of North America',
-    //     ], [
-    //         'code' => '871',
-    //         'name' => 'Canada',
-    //     ], [
-    //         'code' => '872',
-    //         'name' => 'Middle America; Mexico',
-    //     ], [
-    //         'code' => '873',
-    //         'name' => 'United States',
-    //     ], [
-    //         'code' => '874',
-    //         'name' => 'Northeastern United States',
-    //     ], [
-    //         'code' => '875',
-    //         'name' => 'Southeastern United States',
-    //     ], [
-    //         'code' => '876',
-    //         'name' => 'South central United States',
-    //     ], [
-    //         'code' => '877',
-    //         'name' => 'North central United States',
-    //     ], [
-    //         'code' => '878',
-    //         'name' => 'Western United States',
-    //     ], [
-    //         'code' => '879',
-    //         'name' => 'Great Basin & Pacific Slope region',
-    //     ], [
-    //         'code' => '880',
-    //         'name' => 'History of South America',
-    //     ], [
-    //         'code' => '881',
-    //         'name' => 'Brazil',
-    //     ], [
-    //         'code' => '882',
-    //         'name' => 'Argentina',
-    //     ], [
-    //         'code' => '883',
-    //         'name' => 'Chile',
-    //     ], [
-    //         'code' => '884',
-    //         'name' => 'Bolivia',
-    //     ], [
-    //         'code' => '885',
-    //         'name' => 'Peru',
-    //     ], [
-    //         'code' => '886',
-    //         'name' => 'Colombia & Ecuador',
-    //     ], [
-    //         'code' => '887',
-    //         'name' => 'Venezuela',
-    //     ], [
-    //         'code' => '888',
-    //         'name' => 'Guiana',
-    //     ], [
-    //         'code' => '889',
-    //         'name' => 'Paraguay & Uruguay',
-    //     ], [
-    //         'code' => '890',
-    //         'name' => 'History of other areas',
-    //     ], [
-    //         'code' => '891',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '892',
-    //         'name' => '[Unassigned]',
-    //     ], [
-    //         'code' => '893',
-    //         'name' => 'New Zealand',
-    //     ], [
-    //         'code' => '894',
-    //         'name' => 'Australia',
-    //     ], [
-    //         'code' => '895',
-    //         'name' => 'Melanesia; New Guinea',
-    //     ], [
-    //         'code' => '896',
-    //         'name' => 'Other parts of Pacific; Polynesia',
-    //     ], [
-    //         'code' => '897',
-    //         'name' => 'Atlantic Ocean islands',
-    //     ], [
-    //         'code' => '898',
-    //         'name' => 'Arctic islands & Antarctica',
-    //     ], [
-    //         'code' => '899',
-    //         'name' => 'Extraterrestrial worlds',
-    //     ],
-    // ];
 
     /**
      * Run the database seeds.
@@ -3064,12 +1022,14 @@ class TypeSeeder extends Seeder
     public function run()
     {
         foreach ($this->arr as  $value) {
-            DB::table('types')->insert([
+            // DB::table('types')->insert([
 
-                "name" => $value["name"],
-                'code' => $value["code"],
+            //     "name" => $value["name"],
+            //     'code' => $value["code"],
 
-            ]);
+            // ]);
+
+            Type::create($value);
         }
     }
 }

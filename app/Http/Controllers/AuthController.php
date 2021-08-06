@@ -36,22 +36,23 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
+        $emailRequest = mb_strtolower($request->get('email'), 'UTF-8');
+        if (User::where('email', $emailRequest)->count() == 0) {
+            return response()->json([
+                'errors' => 
+                    ['email' => ['email không tồn tại']]
+                
+            ], 401);
+        }
+
         if (!$token = auth()->attempt($request->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['errors' => ['Tài khoản hoặc mật khẩu không chính xác']], 401);
         }
 
         $newToken = $this->createNewToken($token);
-        // $payload = auth()->payload();
         return response()->json($newToken);
-
-        // return 'ok';
     }
 
-    /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function register(RegisterUserRequest $request)
     {
         $user = User::create(array_merge(
@@ -61,7 +62,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'message' => 'User successfully registered',
+            'message' => 'Đăng ký tài khoản thành công',
             'data' => $user
         ], 201);
     }
@@ -113,7 +114,7 @@ class AuthController extends Controller
         if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
             return response()->json([
                 'status' => 'error',
-                'old_password' => 'mật khẩu hiện tại không đúng',
+                'old_password' => 'mật khẩu hiện tại không chính xác',
             ], 401);
         }
 

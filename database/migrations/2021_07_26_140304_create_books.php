@@ -25,6 +25,7 @@ class CreateBooks extends Migration
             // $table->unsignedSmallInteger('language_id')->nullable();
             $table->decimal('price', $precision = 18, $scale = 4)->nullable();
             $table->string('isbn', 20)->nullable();
+            $table->unsignedInteger('country_id')->nullable();
             $table->string('review', 1000)->nullable();
             $table->string('book_image', 100)->nullable();
             $table->timestamps();

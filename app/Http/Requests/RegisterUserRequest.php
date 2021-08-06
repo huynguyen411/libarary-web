@@ -45,6 +45,8 @@ class RegisterUserRequest extends FormRequest
             'name.required' => __('Chưa nhập tên người dùng.'),
             'address.required' => __('Chưa nhập địa chỉ.'),
             'email.required' => __('Chưa nhập email.'),
+            'password.confirmed' =>__('Nhập lại mật khẩu không giống không trùng nhau'),
+            'email.unique'=>__('Email đã tồn tại'),
         ];
     }
 
