@@ -18,4 +18,7 @@ class ManageUserController extends Controller
     {   
         return BorrowingBook::filter($request->all())->get();
     }
+
 }
+
+

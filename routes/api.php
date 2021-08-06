@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BorrowingBookController;
 
+// use App\Http\Controllers\CommentController;
+
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\TypeController;
 
@@ -70,7 +72,6 @@ Route::prefix('v1')->group(function () {
     Route::prefix('borrowing-book')->group(function () {
         Route::get('check-borrowing/{id}', [BorrowingBookController::class, 'checkBorrowing']);
     });
-
 
 
     //admin

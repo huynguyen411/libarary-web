@@ -40,4 +40,8 @@ class UserFilter extends ModelFilter
     public function createdAt($createdAt){
         return $this->whereBetween('created_at', [$createdAt[0], $createdAt[1]]);
     }
+
 }
+
+
+

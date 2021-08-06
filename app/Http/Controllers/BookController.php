@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\File;
 use mysqli;
 use SplQueue;
 use GuzzleHttp\Client;
+use mysqli;
+use SplQueue;
 
+use function GuzzleHttp\Promise\queue;
 
 class BookController extends Controller
 {
@@ -26,7 +29,7 @@ class BookController extends Controller
 
     }
 
-    public function index(Request $request)
+    public function index(BookRequest $request)
     {
         $limit = 10;
         $books = Book::filter($request->all());
@@ -41,6 +44,7 @@ class BookController extends Controller
         return response()->json([
             'book' => $books,
         ]);
+
 
     }
 
@@ -280,29 +284,34 @@ class BookController extends Controller
 
 
 
+
     public function filterByType(BookRequest $Request)
     {
+
         $_type = Type::where('type_id', $Request->type_id);
         $types = Type::all();
         $queue = new SplQueue();
         $arr = [];
         array_push($arr, $_type);
         $queue->enqueue($_type->type_id);
-        while ($queue != null) {
+        while($queue != null){
             $_type = $queue->dequeue();
-            foreach ($types as $type) {
-                if ($type->parent_id == $_type->id) {
+            foreach($types as $type){
+                if ($type->parent_id == $_type->id){
                     $queue->enqueue($type);
                     array_push($arr, $type);
-                }
+                }    
             }
         }
         $result = [];
-        foreach ($arr as $element) {
-            if ($element->level == 3) {
+        foreach($arr as $element){
+            if ($element->level == 3){
                 array_push($result, $element);
             }
         }
         return $result;
     }
 }
+
+
+

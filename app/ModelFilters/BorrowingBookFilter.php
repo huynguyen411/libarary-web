@@ -41,4 +41,7 @@ class BorrowingBookFilter extends ModelFilter
     public function statusId($status_id){
         return $this->where('status_id', $status_id);
     }
+
 }
+
+
