@@ -29,12 +29,14 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
-        $books = Book::filter($request->all());
-        $books = $books->get();
+        $typeIds = $this->filterByType($request);
+        $request->type_id = $typeIds;
+        $books = Book::filter((array_merge($request->except('type_id'), ['type_id' => $typeIds])))->get();
 
         return response()->json([
             'books' => $books,
         ]);
+        
     }
 
     public function store(BookRequest $request)
@@ -279,20 +281,19 @@ class BookController extends Controller
 
 
 
-    public function filterByType(BookRequest $Request)
+    public function filterByType(Request $request)
     {
-
-        $_type = Type::where('type_id', $Request->type_id);
+        $Type = Type::where('type_id', $request->type_id)->first();
         $types = Type::all();
-        $queue = new SplQueue();
+        $queue = [];
         $arr = [];
-        array_push($arr, $_type);
-        $queue->enqueue($_type->type_id);
+        array_push($arr, $Type);
+        array_push($queue, $Type);
         while ($queue != null) {
-            $_type = $queue->dequeue();
+            $Type = array_shift($queue);
             foreach ($types as $type) {
-                if ($type->parent_id == $_type->id) {
-                    $queue->enqueue($type);
+                if ($type->parent_id == $Type->type_id) {
+                    array_push($queue, $type);;
                     array_push($arr, $type);
                 }
             }
@@ -300,7 +301,7 @@ class BookController extends Controller
         $result = [];
         foreach ($arr as $element) {
             if ($element->level == 3) {
-                array_push($result, $element);
+                array_push($result, $element->type_id);
             }
         }
         return $result;

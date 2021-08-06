@@ -14,7 +14,9 @@ class TypeController extends Controller
      */
     public function index(Request $request)
     {
-        $types = Type::filter($request->all());
+        $types = Type::filter($request->all())->get();
+        
+        return $types;
     }
 
     /**

@@ -25,9 +25,9 @@ class BookFilter extends ModelFilter
         return $this->where('name_book', 'LIKE', "%$name_book%");
     }
 
-    public function typeId($typeId)
+    public function typeId($typeIds)
     {
-        return $this->where('books.type_id', $typeId);
+        return $this->whereIn('type_id', $typeIds);
     }
 
     public function nameType($name_type)

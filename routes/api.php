@@ -61,6 +61,7 @@ Route::prefix('v1')->group(function () {
     //route book
     Route::prefix('book')->group(function () {
         Route::post('/{book}', [App\Http\Controllers\BookController::class, 'update']);
+        Route::post('/filter-by-type', [App\Http\Controllers\BookController::class, 'filterByType']);
         Route::get('/top-borrowing', [App\Http\Controllers\BookController::class, 'topBorrowing']);
         Route::get('/get-latest-books', [App\Http\Controllers\BookController::class, 'getLatestBooks']);
     });
@@ -95,4 +96,3 @@ Route::prefix('v1')->group(function () {
     });
 
 });
-
