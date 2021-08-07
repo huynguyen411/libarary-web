@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BorrowingBookController;
-
+use App\Http\Controllers\CountryController;
 // use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\ManageUserController;
@@ -89,11 +89,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('type', [TypeController::class, 'index']);
-    route::get('country', function() {
-        $countries = Country::all();
-        return response()->json([
-            'countries' => $countries
-        ]);
-    });
+
+    Route::get('country', [CountryController::class, 'index']);
 
 });
