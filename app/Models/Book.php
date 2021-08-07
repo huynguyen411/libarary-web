@@ -14,16 +14,6 @@ class Book extends Model
     protected $primaryKey = 'book_id';
     protected $fillable = ['name_book', 'type_id', 'author', 'translator', 'publisher', 'publication_date', 'price', 'isbn', 'review','countries', 'book_image'];
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'book_id', 'book_id');
-    }
-
-    public function book_content()
-    {
-        return $this->hasMany(BookContent::class, 'book_id', 'book_id');
-    }
-
     public function borrowing_book()
     {
         return $this->hasMany(BorrowingBook::class, 'book_id', 'book_id');
@@ -39,14 +29,14 @@ class Book extends Model
         return $this->belongsToMany(User::class, 'comments');
     }
 
-    public function language_book()
-    {
-        return $this->hasMany(LanguageBook::class, 'book_id','book_id');
-    }
-
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id', 'country_id');
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'book_id', 'book_id');
     }
 
 

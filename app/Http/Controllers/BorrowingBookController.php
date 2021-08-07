@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\BorrowingBook;
+use App\Models\BorrowingStatus;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\BorrowingBookRequest;
+use CreateBorrowingStatus;
 
 class BorrowingBookController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['store', 'checkBorrowing', 'returnBook', 'index']]);
+        $this->middleware('auth:api', ['only' => ['store', 'returnBook', 'index']]);
     }
 
     //user
@@ -30,8 +33,16 @@ class BorrowingBookController extends Controller
     }
 
     //admin
-    public function store(BorrowingBookRequest $request) 
+    public function store(BorrowingBookRequest $request)
     {
+        $check = $this->checkBorrowing($request->get('book_id'))->getData()->borrowing;
+
+        if ($check) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Hiện tại sách đang được mượn',
+            ], 422);
+        }
         $create_bb = BorrowingBook::create(array_merge(
             $request->only('book_id', 'from_date', 'promissory_date', 'borrower_id'),
             ['status_id' => 1]
@@ -52,37 +63,45 @@ class BorrowingBookController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'borrowing' => $checkBorrowing,
+            'borrowing' => $checkBorrowing > 0,
         ]);
     }
 
     public function returnBook($borrowing_book_id)
     {
+
+        if (BorrowingBook::where([
+            ['borrowing_book_id', '=', $borrowing_book_id], ['status_id', 2]
+        ])->count() == 1) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Trả sách thất bại'
+            ], 422);
+        }
+
         $check = BorrowingBook::where([
             ['borrowing_book_id', '=', $borrowing_book_id]
-        ])->update(['status_id' => 2, 'to_date' =>date('Y/m/d h:i:s', time())]);
+        ])->update(['status_id' => 2, 'to_date' => date('Y/m/d h:i:s', time())]);
 
         if (!$check) {
             return response()->json([
                 'status' => 'error',
                 'messenger' => 'Trả sách thất bại'
-            ],400);
+            ], 422);
         }
 
         return response()->json([
             'status' => 'ok',
             'messenger' => 'Trả sách thành công'
-        ],200);
+        ], 200);
     }
 
     // danh sách ng mượn
     public function getBorrower(Request $request)
     {
         $list = BorrowingBook::filter($request->all());
-
         return response()->json([
-            'data' => $list,
+            $list,
         ]);
     }
-
 }

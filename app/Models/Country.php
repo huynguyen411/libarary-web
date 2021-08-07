@@ -9,6 +9,11 @@ use EloquentFilter\Filterable;
 class Country extends Model
 {
     use HasFactory, Filterable;
+    
+    protected $table = "countries";
+    protected $primaryKey = 'country_id';
+    protected $fillable = ['country_id', 'country_name'];
+
 
     public function book()
     {

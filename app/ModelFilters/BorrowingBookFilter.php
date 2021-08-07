@@ -42,6 +42,12 @@ class BorrowingBookFilter extends ModelFilter
         return $this->where('status_id', $status_id);
     }
 
+    public function nameBook($name_book){
+        return $this->related('book', 'name_book', 'like', "%$name_book%");
+    }
+
+    // (array_meger($request->except('type_id'), ['type_id' => $typeIds]))
+
 }
 
 
