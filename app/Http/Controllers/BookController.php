@@ -38,6 +38,11 @@ class BookController extends Controller
         else {
             $books = Book::filter($request->all())->get();
         }
+        $types = Type::all();
+        foreach ($books as $book) {
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
 
         return response()->json([
             'books' => $books,
@@ -64,14 +69,11 @@ class BookController extends Controller
             $request->except('book_image'),
             ['book_image' => $urlBookImage]
         ));
-        // $book = Book::firstOrCreate($request->all());
-        // $db = $book->push;
-        // Book::filter($request->input('isbn'))->get();
-        // $types = Type::all();
-        // foreach ($books as $book) {
-        //     $type = $this->getTypeOfBook($book, $types);
-        //     $book->type = $type;
-        // }
+        $types = Type::all();
+        foreach ($books as $book) {
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
         return response()->json([
             'book' => $books,
             // 're' => $request->all()
@@ -142,6 +144,10 @@ class BookController extends Controller
                 );
         }
 
+        $types = Type::all();
+        $type = $this->getTypeOfBook($book, $types);
+        $book->type = $type;
+        
         if (!$book) {
             return response()->json([
                 'status' => 'error',
@@ -188,6 +194,11 @@ class BookController extends Controller
         }
 
         $books = Book::filter($request->all())->orderBy('publication_date', 'desc')->limit($limit)->get();
+        $types = Type::all();
+        foreach ($books as $book) {
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
         return response()->json(
             [
                 'orderBy' => 'desc',
@@ -209,6 +220,12 @@ class BookController extends Controller
             ->groupBy('borrowing_books.book_id')
             ->orderByDesc('count')
             ->limit($limit)->get();
+            
+        $types = Type::all();
+        foreach ($books as $book) {
+            $type = $this->getTypeOfBook($book, $types);
+            $book->type = $type;
+        }
 
 
         // $book1 = BorrowingBook::groupBy('book_id')
@@ -224,14 +241,12 @@ class BookController extends Controller
     public function getTypeOfBook($book, $types)
     {
         $type3 = $types->find($book->type_id);
-        $type2 = $types->where('code', intdiv($type3->code, 10) * 10)->first();
-        $type1 = $types->where(intdiv($type3->code, 100) * 100)->first();
+        $type2 = $types->where('type_id', $type3->parent_id)->first();
+        $type1 = $types->where('type_id', $type2->parent_id)->first();
         $type = (object) [];
-        if ($type3->code % 100 == 0) {
-            $type->level_1 = $type3;
-        } elseif ($type3->code % 10 == 0) {
+        if ($type3->code % 100 < 10) {
+            $type->level_3 = $type3;
             $type->level_1 = $type2;
-            $type->level_2 = $type3;
         } else {
             $type->level_1 = $type1;
             $type->level_2 = $type2;
