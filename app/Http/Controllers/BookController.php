@@ -29,9 +29,14 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
-        $typeIds = $this->filterByType($request);
-        $request->type_id = $typeIds;
-        $books = Book::filter((array_merge($request->except('type_id'), ['type_id' => $typeIds])))->get();
+        if ($request->has('type_id')) {
+            $typeIds = $this->filterByType($request);
+            $request->type_id = $typeIds;
+            $books = Book::filter((array_merge($request->except('type_id'), ['type_id' => $typeIds])))->get();
+        } 
+        else {
+            $books = Book::filter($request->all())->get();
+        }
 
         return response()->json([
             'books' => $books,
