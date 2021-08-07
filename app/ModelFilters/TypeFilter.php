@@ -13,6 +13,7 @@ class TypeFilter extends ModelFilter
     * @var array
     */
     public $relations = [];
+    protected $drop_id = false;
     public function typeId($typeId){
         return $this->where('type_id', $typeId);
     }
