@@ -25,9 +25,11 @@ class BookFilter extends ModelFilter
         return $this->where('name_book', 'LIKE', "%$name_book%");
     }
 
-    public function typeId($typeIds)
+    public function typeId($type_id)
     {
-        return $this->whereIn('type_id', $typeIds);
+        $arrTypeId = $this->filterByType($type_id);
+
+        return $this->whereIn('type_id', $arrTypeId);
     }
 
     public function nameType($name_type)
@@ -73,39 +75,31 @@ class BookFilter extends ModelFilter
     public function codeDDC($codeDDC)
     {
         $type = Type::where('code', $codeDDC)->first();
-        if ($type->level == 3) {
-            return $this->related('type', 'code', $codeDDC)->get('name_book');
-        }
-
-        if ($type->level == 2) {
-            $typeId = $type->parent_id;
-            $arrId = [];
-            $arr1 = $this->related('type', 'type_id', $typeId)->select('type_id');
-            foreach($arr1 as $item) {
-                array_push($arrID,$item->type_id);
+        return $this->typeId($type->type_id);
+    }
+    protected function filterByType($type_id)
+    {
+        $Type = Type::where('type_id', $type_id)->first();
+        $types = Type::all();
+        $queue = [];
+        $arr = [];
+        array_push($arr, $Type);
+        array_push($queue, $Type);
+        while ($queue != null) {
+            $Type = array_shift($queue);
+            foreach ($types as $type) {
+                if ($type->parent_id == $Type->type_id) {
+                    array_push($queue, $type);;
+                    array_push($arr, $type);
+                }
             }
-            // array_push($arr, $this->related('type', 'type_id', $typeId)->type_id);
-            // array_push($arr, $this->related('type', 'type_id', $typeId->type_id)->type_id);
-
-            $this->related('type', function ($query) use ($arrId) {
-                global $typeIdLv1;
-                return $query->whereIn('type_id', $arrId);
-            });
         }
-
-        if ($type->level == 1) {
-            $arrID = [];
-            $typeIdLv1 = $type->type_id;
-
-            $arrTypeLv2 = Type::where([['parent_id', $typeIdLv1], ['level', 2]])->get();
-            foreach ($arrTypeLv2 as $key => $value) {
-                array_push($arrID, $value->type_id);
+        $result = [];
+        foreach ($arr as $element) {
+            if ($element->level == 3) {
+                array_push($result, $element->type_id);
             }
-
-            $this->related('type', function ($query) use ($arrID) {
-                global $typeIdLv1;
-                return $query->where([['parent_id', $arrID]]);
-            });
         }
+        return $result;
     }
 }
