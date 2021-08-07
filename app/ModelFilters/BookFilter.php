@@ -72,6 +72,11 @@ class BookFilter extends ModelFilter
         return $this->related('country', 'country_name', 'like', "%$countryName%");
     }
 
+    public function countryId($countryId)
+    {
+        return $this->related('country', 'country_id', $countryId);
+    }
+
     public function codeDDC($codeDDC)
     {
         $type = Type::where('code', $codeDDC)->first();

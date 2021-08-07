@@ -40,7 +40,6 @@ class BookController extends Controller
         return response()->json([
             'books' => $books,
         ]);
-        
     }
 
     public function store(BookRequest $request)
@@ -58,24 +57,30 @@ class BookController extends Controller
             // echo 'loi';
         }
 
-        $books = Book::create(array_merge(
+        $book = Book::create(array_merge(
             $request->except('book_image'),
             ['book_image' => $urlBookImage]
         ));
+
         $types = Type::all();
-        foreach ($books as $book) {
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
-        }
+
+        $type = $this->getTypeOfBook($book, $types);
+        $book->type = $type;
         return response()->json([
-            'book' => $books,
-            // 're' => $request->all()
+            'book' => $book,
         ], 200);
     }
 
 
     public function show($id)
     {
+        if (Book::where('book_id', $id)->count() == 0) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Sách không tồn tại'
+            ], 422);
+        }
+
         $book = Book::where('book_id', $id)->first();
         $types = Type::all();
         $type = $this->getTypeOfBook($book, $types);
@@ -91,7 +96,7 @@ class BookController extends Controller
             return response()->json([
                 'status' => 'error',
                 'messenger' => 'Sách không tồn tại'
-            ],422);
+            ], 422);
         }
         $book = false;
         if ($request->hasFile('book_image')) {
@@ -140,7 +145,7 @@ class BookController extends Controller
         $types = Type::all();
         $type = $this->getTypeOfBook($book, $types);
         $book->type = $type;
-        
+
         if (!$book) {
             return response()->json([
                 'status' => 'error',
@@ -213,7 +218,7 @@ class BookController extends Controller
             ->groupBy('borrowing_books.book_id')
             ->orderByDesc('count')
             ->limit($limit)->get();
-            
+
         $types = Type::all();
         foreach ($books as $book) {
             $type = $this->getTypeOfBook($book, $types);
@@ -233,6 +238,8 @@ class BookController extends Controller
 
     public function getTypeOfBook($book, $types)
     {
+
+
         $type3 = $types->find($book->type_id);
         $type2 = $types->where('type_id', $type3->parent_id)->first();
         $type1 = $types->where('type_id', $type2->parent_id)->first();
