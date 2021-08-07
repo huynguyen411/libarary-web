@@ -69,10 +69,11 @@ class BorrowingBookController extends Controller
 
     public function returnBook($borrowing_book_id)
     {
-
-        if (BorrowingBook::where([
+        $checkBorrowing = BorrowingBook::where([
             ['borrowing_book_id', '=', $borrowing_book_id], ['status_id', 2]
-        ])->count() == 1) {
+        ])->count();
+
+        if ($checkBorrowing == 1) {
             return response()->json([
                 'status' => 'error',
                 'messenger' => 'Trả sách thất bại'

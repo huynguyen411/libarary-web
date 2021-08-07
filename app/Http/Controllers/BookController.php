@@ -48,7 +48,8 @@ class BookController extends Controller
         if ($request->hasFile('book_image')) {
             $file = $request->book_image;
             $urlFile = $file->getRealPath();
-            $arrImage = $this->uploadImage($urlFile);
+            $nameFile = $file->getClientOriginalName();
+            $arrImage = $this->uploadImage($urlFile, $nameFile);
 
             if ($arrImage['status'] == 'ok') {
                 $urlBookImage = $arrImage['url'];
@@ -98,11 +99,14 @@ class BookController extends Controller
                 'messenger' => 'Sách không tồn tại'
             ], 422);
         }
+
         $book = false;
         if ($request->hasFile('book_image')) {
             $file = $request->book_image;
             $urlFile = $file->getRealPath();
-            $arrImage = $this->uploadImage($urlFile);
+            $nameFile = $file->getClientOriginalName();
+
+            $arrImage = $this->uploadImage($urlFile, $nameFile);
             // echo $urlFile;
             if ($arrImage['status'] == 'ok') {
                 $urlBookImage = $arrImage['url'];
@@ -142,21 +146,26 @@ class BookController extends Controller
                 );
         }
 
-        $types = Type::all();
-        $type = $this->getTypeOfBook($book, $types);
-        $book->type = $type;
+
 
         if (!$book) {
             return response()->json([
                 'status' => 'error',
                 'messenger' => "Cập nhật sách thất bại",
-                // 'request' =>$request->all()
             ], 400);
         }
+
+        $bookinfo = Book::where('book_id', $id)->first();
+
+        $types = Type::all();
+        $type = $this->getTypeOfBook($bookinfo, $types);
+        $bookinfo->type = $type;
+
+
         return response()->json([
             'status' => 'ok',
             'messenger' => "Cập nhật sách thành công",
-            // 'request' => $request->all()
+            'book' => $bookinfo,
         ], 200);
     }
 
@@ -219,14 +228,16 @@ class BookController extends Controller
             ->orderByDesc('count')
             ->limit($limit)->get();
 
-        $types = Type::all();
+
+        // $types = Type::all();
         foreach ($books as $book) {
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
+            $bookinfo = Book::where('book_id', $book->book_id)->first();
+
+            // $type = $this->getTypeOfBook($bookinfo, $types);
+            // $bookinfo->type = $type;
+            $book->book = $bookinfo;
         }
 
-
-        // $book1 = BorrowingBook::groupBy('book_id')
         return response()->json(
             [
                 'orderBy' => 'desc',
@@ -255,34 +266,32 @@ class BookController extends Controller
         return $type;
     }
 
-    public function uploadImage($urlFile)
+    public function uploadImage($urlFile, $nameFile)
     {
-        //....Clases and functions ...
+        $nameFile = substr($nameFile, 0, 100);
 
-        $url = "https://api.imgbb.com/1/upload";
-        // $file = file_get_contents('C:\Users\Truongnam\Downloads\_MCR0003.jpg');
+        $url = "https://api.imgbb.com/1/upload?key=ba4b149d644934850a218ea3aa6ede0b";
         $file = file_get_contents($urlFile);
 
-        $filebase64 =  base64_encode($file);
+        // $filebase64 =  base64_encode($file);
 
         $client = new Client();
         $res = $client->request('POST', $url, [
-            'header' => ['user', 'pass'],
-            'form_params' => [
-                'key' => 'ba4b149d644934850a218ea3aa6ede0b',
-                'image' => $filebase64,
-            ]
+            'multipart' => [
+                [
+                    'name'     => 'image',
+                    'filename' => $nameFile,
+                    'Mime-Type' => 'multipart/form-data',
+                    'contents' => $file,
+                ],
+            ],
         ]);
-        // echo $res->getStatusCode();
-        // "200"
-        // echo $res->getHeader('content-type')[0];
-        // 'application/json; charset=utf8'
+
+        if (File::exists($urlFile)) {
+            File::delete($urlFile);
+        }
+
         if ($res->getStatusCode() == 200) {
-            if (File::exists($urlFile)) {
-                File::delete($urlFile);
-            } else {
-                // dd('File does not exists.');
-            }
             return [
                 'status' => 'ok',
                 'url' => json_decode($res->getBody())->data->url,
@@ -291,7 +300,6 @@ class BookController extends Controller
         }
 
         return ['status' => 'error'];
-
 
         // echo json_encode($json);
         // {"type":"User"...'

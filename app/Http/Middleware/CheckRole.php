@@ -17,21 +17,13 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        // $payload = auth()->payload();
-        // $codeRole = $payload->get('code_role');
-        // if($codeRole[0] == 'U') {
-        //     return response()->json([
-        //         ['error' => 'Unauthorized'],
-        //     ], 401);
-        // }
-
         $payload = auth()->payload();
         $roleId = $payload->get('role_id');
         $codeRole = Role::where('role_id', $roleId)->value('code');
         if ($codeRole[0] == 'U') {
             return response()->json([
                 [
-                    'error' => 'Unauthorized',
+                    'error' => 'Chỉ có admin có thể truy cập tài nguyên này',
                     // 'code' => $payload,
                     // 'role_id' => $roleId,
                     // 'codeRole' => $codeRole

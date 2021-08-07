@@ -5,6 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
 use App\Models\Book;
+use App\Rules\CheckIdBook;
+use App\Rules\CheckIdUser;
+
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
+
 class BorrowingBookRequest extends FormRequest
 {
     /**
@@ -25,25 +32,32 @@ class BorrowingBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'book_id' => 'required|integer|min:1',
+            'book_id' => [new CheckIdBook],
             'from_date' => 'required|date',
             'promissory_date' => 'required|date|after_or_equal:from_date',
-            'borrower_id' => 'required'
+            'borrower_id' => ['required', new CheckIdUser]
         ];
     }
 
     public function messages()
     {
         return [
-            
-            'book_id.required' => __('Chưa nhập sách mượn.'),
-            'from_date.required' => __('Chưa nhập ngày mượn.'),
-            'from_date.date' => __('Kiểu dữ liệu phải là datetime.'),
-            'to_date.date' => __('Kiểu dữ liệu phải là datetime.'),
-            'to_date.after_or_equal' => __('Ngày trả không được nhỏ hơn ngày mượn.'),
-            'promissory_date.required' => __('Chưa nhập ngày hẹn trả.'),
-            'promissory_date.date' => __('Kiểu dữ liệu phải là datetime.'),
-            'promissory_date.after_or_equal' => __('Ngày hẹn trả không được nhỏ hơn ngày mượn.'),
+            'from_date.required' => "Ngày mượn không được để trống",
+            'from_date.date' => "Ngày mượn có kiểu dữ liệu datetime",
+            'promissory_date.required' => "Ngày trả không được để trống",
+            'promissory_date.date' => "Ngày hứa trả có kiểu dữ liệu datetime",
+            'promissory_date.after_or_equal' => "Ngày hứa trả phải lớn hơn hoặc bằng ngày mượn",
+            'borrower_id.required' => 'Id người mượn không được để trống',
+
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors();
+
+        throw new HttpResponseException(response()->json([
+            'errors' => $errors
+        ], Response::HTTP_UNPROCESSABLE_ENTITY));
     }
 }

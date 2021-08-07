@@ -52,15 +52,17 @@ class BookUpdateRequest extends FormRequest
     {
         return [
             'name_book.max' => "tên sách nên dài tối đa :max ký tự",
-            'publication_date.date' => __('Kiểu dữ liệu phải là datetime.'),
+            'publication_date.date' => __('Kiểu dữ liệu phải là date.'),
             'price.gt' => __('Giá sách phải lớn hơn 0.'),
             'author.max' => "Tên tác giả dài tối đa :max ký tự",
             'translator.max' => "Tên dịch giả dài tối đa :max ký tự",
             'author.max' => "Tên tác giả dài tối đa :max ký tự",
             'publisher.max' => "Tên nhà xuất bản dài tối đa :max ký tự",
             'review.max' => "Giới thiệu sách dài tối đa :max ký tự",
-
-
+            'isbn.max' => "ISBN daif tối đa 20 ký tự",
+            'book_image.image' => 'File phải là ảnh',
+            'book_image.mimes' => 'File phải thuộc 1 trong các kiểu jpeg, png, jpg',
+            'book_image.max' => 'Kiacsh thước tối đa của file là :max kb',
         ];
     }
 
