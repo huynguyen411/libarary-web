@@ -14,8 +14,15 @@ class TypeController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->has('depth')) {
+           if ($request->get('depth') == 1) {
+               return response()->json([
+                   'types' => Type::where('level', 1)->get()
+               ]);
+           }
+        }
         $types = Type::filter($request->all())->get();
-        
+
         return $types;
     }
 

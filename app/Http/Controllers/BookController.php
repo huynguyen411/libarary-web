@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\BorrowingBook;
 use App\Models\Type;
+use App\Models\Country;
 use App\Http\Requests\BookRequest;
 use App\Http\Requests\BookUpdateRequest;
 
@@ -29,10 +30,16 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
-        $typeIds = $this->filterByType($request);
-        $request->type_id = $typeIds;
-        $books = Book::filter((array_merge($request->except('type_id'), ['type_id' => $typeIds])))->get();
-
+        // $typeIds = $this->filterByType($request);
+        // $request->type_id = $typeIds;
+        // $books = Book::filter((array_merge($request->except('type_id'), ['type_id' => $typeIds])))->get();
+        
+        $books = Book::filter($request->all())->get();
+        // foreach ($books as $key => $book) {
+        //     $country = Country::where('country_id', $book->country_id)->get();
+        //     $book[$key]->country = $country;
+        
+        // }
         return response()->json([
             'books' => $books,
         ]);
@@ -86,6 +93,12 @@ class BookController extends Controller
     public function update(BookUpdateRequest $request, $id)
     {
 
+        if (Book::where('book_id', $id)->count() == 0) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Sách không tồn tại'
+            ],422);
+        }
         $book = false;
         if ($request->hasFile('book_image')) {
             $file = $request->book_image;
@@ -175,18 +188,10 @@ class BookController extends Controller
             $limit = $request->get('limit');
         }
 
-        $books = Book::filter($request->all())->get();
-        $books = $books->sortByDesc('created_at')->splice($limit);
-
-        // $types = Type::all();
-        // foreach ($books as $book) {
-        //     $type = $this->getTypeOfBook($book, $types);
-        //     $book->type = $type;
-        // }
-
+        $books = Book::filter($request->all())->orderBy('publication_date', 'desc')->limit($limit)->get();
         return response()->json(
             [
-                'orderBy' =>'desc',
+                'orderBy' => 'desc',
                 'books' => $books
             ],
             200
@@ -203,8 +208,8 @@ class BookController extends Controller
         }
         $books = BorrowingBook::select(BorrowingBook::raw('COUNT(borrowing_books.book_id) as count, borrowing_books.book_id'))
             ->groupBy('borrowing_books.book_id')
-            ->orderByDesc('count')->get();
-            // ->limit($limit);
+            ->orderByDesc('count')
+            ->limit($limit)->get();
 
 
         // $book1 = BorrowingBook::groupBy('book_id')

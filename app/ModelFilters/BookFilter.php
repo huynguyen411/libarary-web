@@ -74,13 +74,25 @@ class BookFilter extends ModelFilter
     {
         $type = Type::where('code', $codeDDC)->first();
         if ($type->level == 3) {
-            return $this->related('type', 'code', $codeDDC);
+            return $this->related('type', 'code', $codeDDC)->get('name_book');
         }
 
         if ($type->level == 2) {
-            $typeId = $type->type_id;
-            return $this->related('type', 'parent_id', $typeId);
+            $typeId = $type->parent_id;
+            $arrId = [];
+            $arr1 = $this->related('type', 'type_id', $typeId)->select('type_id');
+            foreach($arr1 as $item) {
+                array_push($arrID,$item->type_id);
+            }
+            // array_push($arr, $this->related('type', 'type_id', $typeId)->type_id);
+            // array_push($arr, $this->related('type', 'type_id', $typeId->type_id)->type_id);
+
+            $this->related('type', function ($query) use ($arrId) {
+                global $typeIdLv1;
+                return $query->whereIn('type_id', $arrId);
+            });
         }
+
         if ($type->level == 1) {
             $arrID = [];
             $typeIdLv1 = $type->type_id;

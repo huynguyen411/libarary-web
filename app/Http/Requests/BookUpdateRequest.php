@@ -7,6 +7,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
+use App\Rules\CheckIdBook;
+use App\Rules\CheckIdType;
+use App\Rules\CheckIdCountry;
+
+
 
 class BookUpdateRequest extends FormRequest
 {
@@ -29,14 +34,14 @@ class BookUpdateRequest extends FormRequest
     {
 
         return [
-            'type_id' => 'integer|min:1|max:1000',
+            'type_id' => [new CheckIdType],
             'name_book' => 'max:100',
             'author' => 'max:100',
             'translator' => 'max:100',
             'publisher' => 'max:100',
             'publication_date' => 'date',
             'price' => 'gt:0',
-            'country_id' => 'integer|min:1|max:195',
+            'country_id' => [new CheckIdCountry],
             'isbn' => 'max:20',
             'book_image' => 'image|mimes:jpeg,png|max:2048',
             'review' => 'max:1000'
@@ -46,13 +51,16 @@ class BookUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'type_id.required' => __('Chưa nhập thể loại.'),
-            'type_id.min' => __('Thể loại sách không tồn tại.'),
-            'type_id.max' => __('Thể loại sách không tồn tại.'),
-            'name_book.required' => __('Chưa nhập tên sách.'),
-            'author.required' => __('Chưa nhập tên tác giả.'),
+            'name_book.max' => "tên sách nên dài tối đa :max ký tự",
             'publication_date.date' => __('Kiểu dữ liệu phải là datetime.'),
-            'price.gt' => __('Giá sách phải lớn hơn 0.')
+            'price.gt' => __('Giá sách phải lớn hơn 0.'),
+            'author.max' => "Tên tác giả dài tối đa :max ký tự",
+            'translator.max' => "Tên dịch giả dài tối đa :max ký tự",
+            'author.max' => "Tên tác giả dài tối đa :max ký tự",
+            'publisher.max' => "Tên nhà xuất bản dài tối đa :max ký tự",
+            'review.max' => "Giới thiệu sách dài tối đa :max ký tự",
+
+
         ];
     }
 

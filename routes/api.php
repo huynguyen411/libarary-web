@@ -71,17 +71,18 @@ Route::prefix('v1')->group(function () {
 
     //borrowing-book
     Route::prefix('borrowing-book')->group(function () {
-        Route::get('check-borrowing/{id}', [BorrowingBookController::class, 'checkBorrowing']);
+        Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);// sách đang được mượn hay k
+        Route::get('/', [BorrowingBookController::class, 'index']); // danh sách mượn dành cho user
     });
 
 
     //admin
     Route::middleware(['auth', 'check-role'])->prefix('manage')->group(function () {
-        Route::get('get-user', [ManageUserController::class, 'getUser']);
-        Route::get('get-borrowing', [ManageUserController::class, 'getBorrowing']);
+        Route::get('get-user', [ManageUserController::class, 'getUser']); // danh sách user
+        Route::get('get-borrowing', [ManageUserController::class, 'getBorrowing']); // danh sách mượn
         
         Route::prefix('borrowing-book')->group(function () {
-            Route::get('/', [BorrowingBookController::class, 'index']);
+
             Route::post('/', [BorrowingBookController::class, 'store']);
             Route::get('return-book/{borrowing_book_id}', [BorrowingBookController::class, 'returnBook']);
         });
