@@ -38,7 +38,7 @@ class BookRequest extends FormRequest
             'translator' => 'max:100',
             'publisher' => 'max:100',
             'publication_date' => 'date',
-            'price' => 'gt:0',
+            'price' => 'gte:0',
             'book_image' => 'image|mimes:jpeg,png,jpg|max:2048',
             'country_id' => 'integer|min:1|max:195'
                       
@@ -52,13 +52,12 @@ class BookRequest extends FormRequest
             'type_id.min' => __('Thể loại sách không tồn tại.'),
             'type_id.max' => __('Thể loại sách không tồn tại.'),
             'name_book.required' => __('Chưa nhập tên sách.'),
-            'price.gt' => __('Giá sách phải lớn hơn 0.'),
+            'price.gte' => __('Giá sách phải lớn hơn hoặc bằng 0.'),
             'author.required' => __('Chưa nhập tên tác giả.'),
             'publication_date.date' => __('Kiểu dữ liệu phải là date.'),
-            'price.gt' => __('Giá sách phải lớn hơn 0.'),
             'book_image.image' => 'File phải là ảnh',
             'book_image.mimes' => 'File phải thuộc 1 trong các kiểu jpeg, png, jpg',
-            'book_image.max' => 'Kiacsh thước tối đa của file là :max kb',
+            'book_image.max' => 'Kích thước tối đa của file là :max kb',
 
 
         ];

@@ -61,7 +61,7 @@ Route::prefix('v1')->group(function () {
     //route book
     Route::prefix('book')->group(function () {
         Route::post('/{book}', [App\Http\Controllers\BookController::class, 'update']);
-        Route::post('/filter-by-type', [App\Http\Controllers\BookController::class, 'filterByType']);
+        // Route::post('/filter-by-type', [App\Http\Controllers\BookController::class, 'filterByType']);
         Route::get('/top-borrowing', [App\Http\Controllers\BookController::class, 'topBorrowing']);
         Route::get('/get-latest-books', [App\Http\Controllers\BookController::class, 'getLatestBooks']);
     });
@@ -80,10 +80,12 @@ Route::prefix('v1')->group(function () {
     Route::middleware(['auth', 'check-role'])->prefix('manage')->group(function () {
         Route::get('get-user', [ManageUserController::class, 'getUser']); // danh sách user
         Route::get('get-borrowing', [ManageUserController::class, 'getBorrowing']); // danh sách mượn
+        Route::get('statistics-borrowing-book', [ManageUserController::class, 'statisticsBorrowingBook']);
         
         Route::prefix('borrowing-book')->group(function () {
-
+            
             Route::post('/', [BorrowingBookController::class, 'store']);
+            Route::delete('/{id}', [BorrowingBookController::class, 'destroy']);
             Route::get('return-book/{borrowing_book_id}', [BorrowingBookController::class, 'returnBook']);
         });
     });

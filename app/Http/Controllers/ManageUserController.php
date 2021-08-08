@@ -12,12 +12,13 @@ use DateTime;
 class ManageUserController extends Controller
 {
     public function getUser(Request $request)
-    {   
-        return User::filter($request->all())->get();    
+    {
+        return User::filter($request->all())->get();
     }
 
     public function getBorrowing(Request $request)
-    {   $list = BorrowingBook::filter($request->all())->get();
+    {
+        $list = BorrowingBook::filter($request->all())->get();
 
 
         foreach ($list as $key => $user) {
@@ -27,13 +28,22 @@ class ManageUserController extends Controller
             $list[$key]->status = $stt;
             $list[$key]->book = $book;
             $list[$key]->user = $userinfo;
-
         }
         return response()->json([
             'borrowing' => $list,
         ]);
     }
 
+    public function statisticsBorrowingBook()
+    {
+        $totalBorrowingBook = BorrowingBook::all()->count();
+        $countBorrowingBook = BorrowingBook::where('status_id', 1)->count();
+        $countReturnBook = BorrowingBook::where('status_id', 2)->count();
+
+        return response()->json([
+            'totalBorrowingBook' => $totalBorrowingBook,
+            'countBorrowingBook' => $countBorrowingBook,
+            'countReturnBook' => $countReturnBook,
+        ]);
+    }
 }
-
-

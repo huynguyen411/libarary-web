@@ -53,6 +53,32 @@ class BorrowingBookController extends Controller
         ]);
     }
 
+    public function destroy($borrowing_book_id)
+    {
+        $check = BorrowingBook::where('borrowing_book_id', $borrowing_book_id)->count();
+        if ($check == 0 ) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Id mượn sách không tồn tại'
+            ], 400);
+        }
+
+        $check_borrowing_book_delete = BorrowingBook::where('borrowing_book_id', $borrowing_book_id)->delete();
+        if ($check_borrowing_book_delete == 0 ) {
+            return response()->json([
+                'status' => 'error',
+                'messenger' => 'Xoá lượt mượn sách thất bại'
+            ], 400);
+        }
+        
+        return response()->json([
+            'status' => 'ok',
+            'messenger' => 'Xoá lượt mượn sách thành công'
+        ], 200);
+
+    }
+
+
     // user,admin
     public function checkBorrowing($book_id)
     {
