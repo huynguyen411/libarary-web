@@ -35,8 +35,8 @@ class BookController extends Controller
         $books = Book::filter($request->all())->get();
         $types = Type::all();
         foreach ($books as $book) {
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
+            // $type = $this->getTypeOfBook($book, $types);
+            // $book->type = $type;
             $book->borrowing = BorrowingBook::where([['book_id', $book->book_id], ['status_id', 1]])->count() != 0;
         }
 
@@ -68,8 +68,8 @@ class BookController extends Controller
 
         $types = Type::all();
 
-        $type = $this->getTypeOfBook($book, $types);
-        $book->type = $type;
+        // $type = $this->getTypeOfBook($book, $types);
+        // $book->type = $type;
         return response()->json([
             'book' => $book,
         ], 200);
@@ -87,8 +87,8 @@ class BookController extends Controller
 
         $book = Book::where('book_id', $id)->first();
         $types = Type::all();
-        $type = $this->getTypeOfBook($book, $types);
-        $book->type = $type;
+        // $type = $this->getTypeOfBook($book, $types);
+        // $book->type = $type;
 
         return $book;
     }
@@ -161,8 +161,8 @@ class BookController extends Controller
         $bookinfo = Book::where('book_id', $id)->first();
 
         $types = Type::all();
-        $type = $this->getTypeOfBook($bookinfo, $types);
-        $bookinfo->type = $type;
+        // $type = $this->getTypeOfBook($bookinfo, $types);
+        // $bookinfo->type = $type;
 
 
         return response()->json([
@@ -207,8 +207,8 @@ class BookController extends Controller
         $books = Book::filter($request->all())->orderBy('publication_date', 'desc')->limit($limit)->get();
         $types = Type::all();
         foreach ($books as $book) {
-            $type = $this->getTypeOfBook($book, $types);
-            $book->type = $type;
+            // $type = $this->getTypeOfBook($book, $types);
+            // $book->type = $type;
             $book->borrowing = BorrowingBook::where([['book_id', $book->book_id], ['status_id', 1]])->count() != 0;
         }
         return response()->json(
