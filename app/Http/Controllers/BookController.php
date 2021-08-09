@@ -208,6 +208,8 @@ class BookController extends Controller
         foreach ($books as $book) {
             $type = $this->getTypeOfBook($book, $types);
             $book->type = $type;
+            $book->borrowing = BorrowingBook::where([['book_id', $book->book_id],['status_id', 1]])->count() != 0;
+
         }
         return response()->json(
             [
@@ -235,6 +237,7 @@ class BookController extends Controller
         // $types = Type::all();
         foreach ($books as $book) {
             $bookinfo = Book::where('book_id', $book->book_id)->first();
+            $bookinfo->borrowing = BorrowingBook::where([['book_id', $book->book_id],['status_id', 1]])->count() != 0;
 
             // $type = $this->getTypeOfBook($bookinfo, $types);
             // $bookinfo->type = $type;
