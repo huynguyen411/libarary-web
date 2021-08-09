@@ -30,11 +30,14 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
+
+        
         $books = Book::filter($request->all())->get();
         $types = Type::all();
         foreach ($books as $book) {
             $type = $this->getTypeOfBook($book, $types);
             $book->type = $type;
+            $book->borrowing = BorrowingBook::where([['book_id', $book->book_id],['status_id', 1]])->count() != 0;
         }
 
         return response()->json([

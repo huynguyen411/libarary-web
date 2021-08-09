@@ -12,7 +12,7 @@ class Book extends Model
 
     protected $table = "books";
     protected $primaryKey = 'book_id';
-    protected $fillable = ['name_book', 'type_id', 'author', 'translator', 'publisher', 'publication_date', 'price', 'isbn', 'review','countries', 'book_image'];
+    protected $fillable = ['name_book', 'type_id', 'author', 'translator', 'publisher', 'publication_date', 'price', 'isbn', 'review','country_id', 'book_image'];
 
     public function borrowing_book()
     {
