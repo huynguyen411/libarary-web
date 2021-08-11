@@ -1,10 +1,24 @@
 <?php
+
 use App\Models;
 use App\Models\Book;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Country;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BorrowingBookController;
+use App\Http\Controllers\CountryController;
+// use App\Http\Controllers\CommentController;
+
+use App\Http\Controllers\ManageUserController;
+use App\Http\Controllers\TypeController;
+
+// use App\Http\Controllers\BookController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,28 +38,60 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
-    Route::resource('user', UsersController::class);
-    Route::resource('type', TypeController::class);
-    Route::resource('book', BookController::class);
-});
+    Route::group([
+        'middleware' => 'api',
+        'prefix' => 'auth'
 
-Route::get('test', function (Request $request) {
-    // return $request->get;
-    // return dd($request);
-    return $request->all();
-});
+    ], function ($router) {
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('login', function () {
+            return response()->json(
+                ['error' => 'Unauthorized'],
+                401
+            );
+        });
 
-
-Route::prefix('test2')->group(function () {
-    Route::get('model1', function () {
-        $book = Book::find(1)->book_content;
-    
-        // print_r($book);
-        return $book;
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/refresh-token', [AuthController::class, 'refresh']);
+        Route::get('/user-profile', [AuthController::class, 'userProfile']);
+        Route::post('/change-password', [AuthController::class, 'changePassword']);
     });
-    Route::get('model2', function () {
-        // $type = Type::find(8);
-        $books = Type::find(8)->books;
-        return $books;
+
+    //route book
+    Route::prefix('book')->group(function () {
+        Route::post('/{book}', [App\Http\Controllers\BookController::class, 'update']);
+        // Route::post('/filter-by-type', [App\Http\Controllers\BookController::class, 'filterByType']);
+        Route::get('/top-borrowing', [App\Http\Controllers\BookController::class, 'topBorrowing']);
+        Route::get('/get-latest-books', [App\Http\Controllers\BookController::class, 'getLatestBooks']);
     });
+    Route::apiResource('book', BookController::class);
+
+
+
+    //borrowing-book
+    Route::prefix('borrowing-book')->group(function () {
+        Route::get('check/{id}', [BorrowingBookController::class, 'checkBorrowing']);// sách đang được mượn hay k
+        Route::get('/', [BorrowingBookController::class, 'index']); // danh sách mượn dành cho user
+    });
+
+
+    //admin
+    Route::middleware(['auth', 'check-role'])->prefix('manage')->group(function () {
+        Route::get('get-user', [ManageUserController::class, 'getUser']); // danh sách user
+        Route::get('get-borrowing', [ManageUserController::class, 'getBorrowing']); // danh sách mượn
+        Route::get('statistics-borrowing-book', [ManageUserController::class, 'statisticsBorrowingBook']);
+        
+        Route::prefix('borrowing-book')->group(function () {
+            
+            Route::post('/', [BorrowingBookController::class, 'store']);
+            Route::delete('/{id}', [BorrowingBookController::class, 'destroy']);
+            Route::get('return-book/{borrowing_book_id}', [BorrowingBookController::class, 'returnBook']);
+        });
+    });
+
+    Route::get('type', [TypeController::class, 'index']);
+
+    Route::get('country', [CountryController::class, 'index']);
+
 });

@@ -12,10 +12,18 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
-        return response()->json(Type::all());
+        // if ($request->has('depth')) {
+        //    if ($request->get('depth') == 1) {
+        //        return response()->json([
+        //            'types' => Type::where('level', 1)->get()
+        //        ]);
+        //    }
+        // }
+        $types = Type::filter($request->all())->get();
+
+        return $types;
     }
 
     /**
@@ -36,7 +44,8 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = Type::create($request);
+        $type->save();
     }
 
     /**

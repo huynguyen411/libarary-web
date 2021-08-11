@@ -4,22 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use EloquentFilter\Filterable;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
+
     protected $table = "books";
     protected $primaryKey = 'book_id';
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'book_id', 'book_id');
-    }
-
-    public function book_content()
-    {
-        return $this->hasMany(BookContent::class, 'book_id', 'book_id');
-    }
+    protected $fillable = ['name_book', 'type_id', 'author', 'translator', 'publisher', 'publication_date', 'price', 'isbn', 'review','country_id', 'book_image'];
 
     public function borrowing_book()
     {
@@ -35,5 +28,16 @@ class Book extends Model
     {
         return $this->belongsToMany(User::class, 'comments');
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'country_id');
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'book_id', 'book_id');
+    }
+
 
 }

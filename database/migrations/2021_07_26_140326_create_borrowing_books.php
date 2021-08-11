@@ -14,11 +14,14 @@ class CreateBorrowingBooks extends Migration
     public function up()
     {
         Schema::create('borrowing_books', function (Blueprint $table) {
-            $table->increments('borrowing_book_id');
-            $table->integer('book_id');
-            $table->integer('borrower_id');
-            $table->dateTime('form_date');
-            $table->dateTime('to_date');
+            $table->bigIncrements('borrowing_book_id');
+            $table->unsignedBigInteger('book_id');
+            // $table->unsignedSmallInteger('quality');
+            $table->unsignedBigInteger('borrower_id');
+            $table->dateTime('from_date');
+            $table->dateTime('to_date')->nullable();
+            $table->dateTime('promissory_date');
+            $table->unsignedTinyInteger('status_id');
 
             // $table->timestamps();
         });
